@@ -1,0 +1,11 @@
+clear all;
+y = [-3:0.1:3];
+radius = 1;
+const = 1 / (4 * pi * 8.8542e-12);
+charge = 1;
+a1 = ((1 / radius) - 2.*y) ./ (((3 / (4 * radius^2))^2 + ((1 / (2 * radius)) + y).^2).^(3/2));
+a2 = (radius + y) ./ (((radius + y).^2).^(3/2));
+Ey = -1 * const * charge * (a1 - a2);
+plot(y, Ey);
+xlabel("Radii");
+ylabel("Electric Field Strength (N/C)");

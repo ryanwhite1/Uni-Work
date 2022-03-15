@@ -1,0 +1,3 @@
+value = input("Enter one of")
+if value in "abcd":
+    print("Yes")

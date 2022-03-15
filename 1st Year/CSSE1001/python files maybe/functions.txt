@@ -1,0 +1,3 @@
+def square(x) :
+def add(x, y) :
+def get_0() :

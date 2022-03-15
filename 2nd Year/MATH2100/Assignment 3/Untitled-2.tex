@@ -1,0 +1,49 @@
+%% AMS-LaTeX Created with the Wolfram Language for Students - Personal Use Only : www.wolfram.com
+
+\documentclass{article}
+\usepackage{amsmath, amssymb, graphics, setspace}
+
+\newcommand{\mathsym}[1]{{}}
+\newcommand{\unicode}[1]{{}}
+
+\newcounter{mathematicapage}
+\begin{document}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{equas}=\{f'[t]==3 f[t]+5 g[t]-\text{Sin}[t],g'[t]==2 f[t]-g[t]+\text{Cos}[t]\};}\\
+\pmb{\text{conds}=\{f[0] \text{-$>$}0,g[0]\text{-$>$}1\};}\\
+\pmb{\text{LaplaceTransform}[\text{equas}, t, s] \text{/.} \text{conds}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{s \text{LaplaceTransform}[f[t],t,s]==-\frac{1}{1+s^2}+3 \text{LaplaceTransform}[f[t],t,s]+5 \text{LaplaceTransform}[g[t],t,s],-1+s
+\text{LaplaceTransform}[g[t],t,s]==\frac{s}{1+s^2}+2 \text{LaplaceTransform}[f[t],t,s]-\text{LaplaceTransform}[g[t],t,s]\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{reduced} = \% \text{/.} \{\text{LaplaceTransform}[f[t], t, s] \to  F[s], \text{LaplaceTransform}[g[t],t,s] \to G[s]\}}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{s F[s]==-\frac{1}{1+s^2}+3 F[s]+5 G[s],-1+s G[s]==\frac{s}{1+s^2}+2 F[s]-G[s]\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{sols}= \{F[s], G[s]\} \text{/.} \text{First}@\text{Solve}[\%, \{F[s],G[s]\}]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{-\frac{-4-4 s-5 s^2}{\left(1+s^2\right) \left(-13-2 s+s^2\right)},-\frac{5+2 s+2 s^2-s^3}{\left(1+s^2\right) \left(-13-2 s+s^2\right)}\right\}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\pmb{\text{InverseLaplaceTransform}[\text{sols},s,t]}\)
+\end{doublespace}
+
+\begin{doublespace}
+\noindent\(\left\{\frac{203 e^{\left(1-\sqrt{14}\right) t}-234 \sqrt{14} e^{\left(1-\sqrt{14}\right) t}+203 e^{\left(1+\sqrt{14}\right) t}+234 \sqrt{14}
+e^{\left(1+\sqrt{14}\right) t}-406 \text{Cos}[t]+42 \text{Sin}[t]}{1400},\frac{574 e^{\left(1-\sqrt{14}\right) t}+53 \sqrt{14} e^{\left(1-\sqrt{14}\right)
+t}+574 e^{\left(1+\sqrt{14}\right) t}-53 \sqrt{14} e^{\left(1+\sqrt{14}\right) t}+252 \text{Cos}[t]+336 \text{Sin}[t]}{1400}\right\}\)
+\end{doublespace}
+
+\end{document}

@@ -1,0 +1,30 @@
+def add(operand1, operand2):
+    #Add the two operands and return the result
+    result = operand1 + operand2
+    return result
+
+def multiply(operand1,operand2):
+    #Multiply two operands together and retunr the result
+    #Users add() function
+    #This is not efficient but enforces arithmetic multiplication
+    result = 0
+    while operand1>0:
+        result = add(result,operand2)
+        operand1 -= 1
+    return result
+
+def is_float(test_value):
+    """Determines if test_value represents a floating point value."""
+    try:
+        float(test_value)
+        valid_float = True
+    except ValueError:
+        valid_float = False
+    return valid_float
+
+def factorial(n):
+    result = 1
+    while n>= 1:
+
+
+        
