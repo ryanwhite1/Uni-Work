@@ -1,0 +1,42 @@
+Note: before doing anything here, you must connect to the UQ VPN. 
+Also, don't forget to log out of everything when exiting; don't just close applications!
+
+## Connecting to UQ VPN
+	1. Open "Cisco AnyConnect Secure Mobility Client". If not installed, go to https://my.uq.edu.au/information-and-services/information-technology/working-remotely/vpn-virtual-private-network/
+	2. In the address box, type vpn.uq.edu.au, then click 'Connect'.
+	3. Log in with your UQ username and password on the UQ Authenticate screen.
+	
+## Connecting to Teaching Server
+	1. Open VS Code
+	2. Click the 4 square symbol in the left panel
+	3. Type ssh in the search window
+	4. Install Remote-SSH and SSH FS in Visual Studio
+	5. Click the green symbol in the bottom left corner that should now show up
+	6. Choose ‘Open SSH config file’
+	7. Select a configuration file
+	8. Add the following three lines (in this order) into this file:
+		Host smp-teaching
+		HostName smp-teaching.smp.uq.edu.au
+		User Student ID (where Student ID is your student ID)
+	9. Once done, click the black circle next to the file name at the top to save the changes
+	10. After saving, click the green symbol again and select ‘Connect to Host’. Select smp-teaching
+	11. In order to edit and compile C++ programs you need to:
+		– Click New file
+		– Use the editor and create a C++ program
+		– Click the black circle to save the file. Name the file helloworld.cpp
+		– Select View → Terminal to get a command prompt. This should give you a command prompt at
+		the bottom of the Visual Studio window
+		– In the command prompt window type: g++ helloworld.cpp -o helloworld which should compile your program.
+		– If compilation was successful, type: ./helloworld to start your program
+
+## Connecting to Submission Server
+	1. Go to the folder "My PC"
+	2. Computer -> Map Network Drive. A new window should pop up.
+	3. Tick "Connect using different credentials". 
+	4. In the folder input section, type in: 
+		\\smp-assignment.smp.uq.edu.au\phys3071\
+		and press "Finish".
+	5. A new window should pop up. Enter your UQ login, with username:
+		uq\{UQUSERNAME}
+		and the usual password.
+		Voila!
