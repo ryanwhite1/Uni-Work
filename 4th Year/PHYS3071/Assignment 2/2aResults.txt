@@ -1,0 +1,6 @@
+MSD = 48.395
+Mean X = 0
+Mean Y = 0
+Std Dev X = 3.47487
+Std Dev Y = 3.5554
+Average speed of walkers across all 400 runs is 0.122795 units / step
