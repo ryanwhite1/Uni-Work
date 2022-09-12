@@ -321,7 +321,7 @@ def Q2c(trials=3):
         c = np.zeros(trials)
         m = np.zeros(trials)
         numbers = [20, 50, 100]
-        flips = [2 * 10**4, 2 * 10**5, 2 * 10**6]
+        flips = [5 * 10**4, 5 * 10**5, 5 * 10**6]
         for n, N in enumerate(numbers):
             for i in range(trials):
                 a = gen_init_Ising2d(N)
@@ -370,9 +370,63 @@ def Q2c(trials=3):
         Sfig.savefig("Q2c-Entropy" + extension, dpi=400, bbox_inches="tight")
         cfig.savefig("Q2c-HeatCapacity" + extension, dpi=400, bbox_inches="tight")
         Mfig.savefig("Q2c-ReducedMagnet" + extension, dpi=400, bbox_inches="tight")
+        
+def Q2d(trials=100):
+    temps = np.linspace(0.02, 5, 10)
+    fig, (ax1, ax2) = plt.subplots(2, 1, sharex=True)
+    fig.subplots_adjust(hspace=0)
+    # ax2 = ax.twinx()
+    numbers = np.array([5, 10, 20])
+    flips = numbers**2 * 1000
+    colours = ['r', "tab:purple", "tab:green", "tab:blue", "tab:olive", "tab:brown"]
+    # negColours = ["tab:blue", "tab:olive", "tab:brown"]
+    
+    ax2.set_xlabel("Temperature $(\epsilon / k)$")
+    ax1.set_ylabel("Ave. Pos. Mag. ($s = 1$)")
+    ax2.set_ylabel("Ave. Neg. Mag. ($s = -1$)")
+    
+    for t, temp in enumerate(temps):
+        for n, N in enumerate(numbers):
+            posMag = np.zeros(trials)
+            negMag = np.zeros(trials)
+            for i in range(trials):
+                a = gen_init_Ising2d(N)
+                b = metropolis2d(a.copy(), flips[n], temp)
+                
+                # runnPos, runnNeg = 0, 0
+                
+                # for q in range(N):
+                #     for r in range(N):
+                #         if b[q, r] == 1:
+                #             runnPos += 1
+                #         else:
+                #             runnNeg += -1
+                unique, counts = np.unique(b, return_counts=True)
+                dic = dict(zip(unique, counts))
+                
+                posMag[i] = dic[1] / N**2
+                negMag[i] = - dic[-1] / N**2
+                # posMag[i] = np.sum([[1 if x == 1 else 0 for x in b[j, :]] for j in range(N)]) / N**2
+                # negMag[i] = np.sum([[-1 if x == -1 else 0 for x in b[j, :]] for j in range(N)]) / N**2
+                
+            plottemp = temp + 0.05 * (n - len(numbers) / 2)
+            colour = colours[n]
+            # negcolour = colours[n + 3]
+            lab = f"N={N}" if t == 1 else None
+            ax1.errorbar(plottemp, np.mean(posMag), yerr=np.std(posMag), fmt='.', label=lab, c=colour)
+            ax2.errorbar(plottemp, np.mean(negMag), yerr=np.std(negMag), fmt='.', label=lab, c=colour)
+                
+    ax1.set_ylim(ymin=0); ax2.set_ylim(ymax=0)
+    ax1.legend()
+    ax1.grid(); ax2.grid()
+    
+    fig.savefig("Q2d-magnetisation.png", dpi=400, bbox_inches="tight")
+    fig.savefig("Q2d-magnetisation.pdf", dpi=400, bbox_inches="tight")
+    
 
 # Q1a()
 # Q1c(trials=20)
 # Q1e()
 # Q2a()
-Q2c(trials=6)
+# Q2c(trials=10)
+Q2d(trials=100)
