@@ -1,0 +1,31 @@
+Once connected to UQ vpn, in Windows powershell, run:
+
+ssh uqrwhi13@getafix.smp.uq.edu.au
+
+then enter UQ staff password when prompted. This will put you in the /home/ directory. 
+
+
+### Move file from Local Machine to Getafix ###
+In powershell, as an example, I ran the following code (on a powershell prompt on the local machine, in the directory "C:\Users\ryanw")
+
+scp -3 "Desktop/Uni-Work/4th Year/PHYS3900/test.txt" uqrwhi13@getafix.smp.uq.edu.au:/home/uqrwhi13/PHYS3900
+
+To merge the local directory with the getafix directory, run (in the same directory as before):
+
+scp -3 "Desktop/Uni-Work/4th Year/PHYS3900/Getafix Resources/" uqrwhi13@getafix.smp.uq.edu.au:/home/uqrwhi13/PHYS3900
+
+Since it's going from a Windows to Unix machine, need to run the following on any bash script:
+
+cat DIHerTestBash.sh | dos2unix >DIHerTestBashRun.sh
+
+as an example
+
+
+
+### First Time Setup ###
+To install anaconda, I ran (in the home/uqrwhi13/ directory),
+
+wget https://repo.anaconda.com/archive/Anaconda3-2022.05-Linux-x86_64.sh
+bash Anaconda3-2022.05-Linux-x86_64.sh
+
+Then followed the prompts to install.

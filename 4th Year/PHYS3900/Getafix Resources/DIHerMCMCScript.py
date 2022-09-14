@@ -262,13 +262,13 @@ fig.savefig('Residuals Lomb-Scargle (ydeg=4, gdark prior).pdf', dpi=400, bbox_in
 
 
 
-with model:
-    trace = pmx.sample(tune=1000, draws=20000, start=dict(map_soln), chains=4, cores=None, target_accept=0.95)
+# with model:
+#     trace = pmx.sample(tune=1000, draws=20000, start=dict(map_soln), chains=4, cores=None, target_accept=0.95)
     
     
-fig = plt.figure(figsize=(12, 12))
-samples = pm.trace_to_dataframe(trace)
-corner.corner(samples, fig=fig)
+# fig = plt.figure(figsize=(12, 12))
+# samples = pm.trace_to_dataframe(trace)
+# corner.corner(samples, fig=fig)
 
-fig.savefig('corner.png', dpi=400, bbox_inches='tight')
-fig.savefig('corner.pdf', dpi=400, bbox_inches='tight')
+# fig.savefig('corner.png', dpi=400, bbox_inches='tight')
+# fig.savefig('corner.pdf', dpi=400, bbox_inches='tight')
