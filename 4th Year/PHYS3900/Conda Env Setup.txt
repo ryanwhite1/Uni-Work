@@ -4,6 +4,6 @@ conda install nb_conda_kernels jupyter
 conda install -c conda-forge aesara exoplanet ffmpeg
 pip install lightkurve --upgrade
 pip install -U starry
-python -m pip install corner
+pip install corner
 
 
