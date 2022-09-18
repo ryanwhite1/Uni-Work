@@ -1,3 +1,7 @@
+### Removing conda env: ###
+conda env remove -n StarryEnv
+
+### On Windows 10/11: ###
 conda create -n StarryEnv python=3.8
 conda activate StarryEnv
 conda install nb_conda_kernels jupyter
@@ -7,3 +11,27 @@ pip install -U starry
 python -m pip install corner
 
 
+### On getafix (linux): ###
+conda create -c conda-forge -n StarryEnv pymc3 theano-pymc mkl mkl-service
+source activate StarryEnv
+pip3 install -U numpy==1.21.6
+pip3 install starry
+pip3 install tqdm
+
+### On getafix (linux) [WIP]: ###
+conda create -n StarryEnv python=3.8
+source activate StarryEnv
+pip3 install aesara
+conda install -c conda-forge pymc3 theano-pymc mkl mkl-service
+pip3 install -U numpy==1.21.6
+pip3 install starry
+pip3 install tqdm
+pip3 install corner
+
+### On getafix (linux) [WIP]: ###
+conda create -n StarryEnv python=3.8 mkl mkl-service
+source activate StarryEnv
+pip3 install aesara
+conda install -c conda-forge theano-pymc exoplanet
+pip3 install -U numpy==1.21.6
+pip3 install starry tqdm corner

@@ -23,10 +23,10 @@ plt.rcParams['font.family'] = 'Serif'
 starry.config.quiet = True
 starry.config.lazy = True
 
-search_result = lk.search.search_tesscut(target='DI Her')[0:2]
+# search_result = lk.search.search_tesscut(target='DI Her')[0:2]
 
-lcflist = lk.search_lightcurve('DI Her')
-spoc = lcflist[0].download()
+# lcflist = lk.search_lightcurve('DI Her')
+# spoc = lcflist[0].download()
 
 #create spherical star system presented in Gaudi et al. 2017
 pri_map1 = starry.Map(udeg=2, gdeg=4, oblate=True, normalized=True) #ydeg = 2*order_approx udeg=2
@@ -57,8 +57,19 @@ sec1 = starry.kepler.Secondary(map=sec_map1,
 )
 sys1 = starry.System(pri1, sec1)
 
-(spoc/np.median(spoc.flux.value)).plot()
-time = spoc.time.value
+time = []; flux = []; ferr = []
+with open("timedata.txt", 'r') as timedata:
+    for t in timedata:
+        time.append(float(t))
+with open("fluxdata.txt", 'r') as fluxdata:
+    for f in fluxdata:
+        flux.append(float(f))
+with open("ferrdata.txt", 'r') as ferrdata:
+    for err in ferrdata:
+        ferr.append(float(err))
+
+time = np.array(time); flux = np.array(flux); ferr = np.array(ferr)
+
 model_flux = sys1.flux(time).eval()
 
 grav_map = pri1.map._f.eval()
@@ -115,10 +126,6 @@ Rsun = 6.95700e8
 
 
 
-
-time = spoc.time.value
-flux = spoc.flux.value/np.median(spoc.flux.value)
-ferr = spoc.flux_err.value/np.median(spoc.flux.value)
 
 with pm.Model() as model:
 
