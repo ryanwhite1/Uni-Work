@@ -113,7 +113,7 @@ fig2.savefig("Emissivity Curves.pdf", dpi=400, bbox_inches='tight')
 fig, ax = plt.subplots()
 ax.scatter(bestTemps, np.log((1 / 0.329814) - meanemiss))
 ax.set_xlabel("Temperature (K)")
-ax.set_ylabel("uhhhhhhhh")
+ax.set_ylabel("Log Emissivity Difference")
 ax.grid()
 fig.savefig("Log Emiss.png", dpi=400, bbox_inches='tight')
 fig.savefig("Log Emiss.pdf", dpi=400, bbox_inches='tight')
@@ -121,8 +121,8 @@ fig.savefig("Log Emiss.pdf", dpi=400, bbox_inches='tight')
 def meanemissCurve(temp, metal, c):
     return c * (1 - np.exp(-metal * temp))
 
-fig, ax = plt.subplots()
-ax.scatter(bestTemps, meanemiss)
+# fig, ax = plt.subplots()
+# ax.scatter(bestTemps, meanemiss)
 # tungsten, tungUnc = sciop.curve_fit(meanemissCurve, xdata=bestTemps, ydata=meanemiss, p0=[1.5*10**-4, 0.5])
 # tungUnc = np.sqrt(tungUnc)
 # print(tungsten)
@@ -167,5 +167,9 @@ fig.savefig("Peak Wavelength vs Temp.png", dpi=400, bbox_inches='tight')
 fig.savefig("Peak Wavelength vs Temp.pdf", dpi=400, bbox_inches='tight')
 
 with open('Results.txt', "w") as output:
-    output.write(f"Boltzmann Constant = {boltz} \pm {boltzUnc}")
+    output.write(f"Boltzmann Constant = {boltz} \pm {boltzUnc} \n")
+    output.write("Best Temps/Mean emissivities: \n")
+    for i, emis in enumerate(meanemiss):
+        output.write(f"V = {voltages[i]};  T = {bestTemps[i]}K;  Scale = {1 / scales[i]};  meanemiss = {emis}\n")
+    
     
