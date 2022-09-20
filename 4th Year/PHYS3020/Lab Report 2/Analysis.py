@@ -39,6 +39,8 @@ for voltage in voltages:
             i += 1
         voltData[f'{voltage[:1]}'] = np.array([wavs, flux])
 
+
+
 bestTemps = np.zeros(len(voltages))
 bestTempUnc = np.zeros(len(voltages))
 scales = np.zeros(len(voltages))
@@ -110,11 +112,27 @@ ax2.grid(); ax2.legend()
 fig2.savefig("Emissivity Curves.png", dpi=400, bbox_inches='tight')
 fig2.savefig("Emissivity Curves.pdf", dpi=400, bbox_inches='tight')
 
+CurrVoltData = pd.read_csv("Data/I-V Data.txt", delimiter=' ')
+volts = CurrVoltData["Voltage"].to_numpy()[:-1]; currs = CurrVoltData["Current"].to_numpy()[:-1]
+resisTemps = np.zeros(len(volts))
+for i in range(len(volts)):
+    resisTemps[i] = max(np.roots([2.84*10**-7, 0.00466, 
+                                               -0.524 - ((volts[len(volts)-1-i]/currs[len(volts)-1-i]) / 0.84)]))
+
 fig, ax = plt.subplots()
-ax.scatter(bestTemps, np.log((1 / 0.329814) - meanemiss))
+# ax.scatter(bestTemps, np.log((1 / 0.329814) - meanemiss))
+# ax.scatter(resisTemps, np.log((1 / 0.329814) - meanemiss), c='r')
+
+ax.errorbar(bestTemps, np.log((1 / 0.329814) - meanemiss), xerr=bestTempUnc, fmt='.', markersize=10, label="Best Fit Temps")
+ax.errorbar(resisTemps, np.log((1 / 0.329814) - meanemiss), xerr=0.001 * resisTemps, c='r', fmt='.', markersize=10, label="Calc. Temps")
+bounds = np.array(ax.get_xlim())# np.array([min(bestTemps), max(bestTemps)])
+ax.plot(bounds, -1.5 * 10**-4 * bounds - np.log(0.329814), label='Black Body', c='tab:orange')
+ax.fill_between(bounds, -1.45 * 10**-4 * bounds - np.log(0.329814), -1.55 * 10**-4 * bounds - np.log(0.329814), 
+                color='tab:orange', alpha=0.3)
 ax.set_xlabel("Temperature (K)")
 ax.set_ylabel("Log Emissivity Difference")
-ax.grid()
+ax.set_xlim(bounds)
+ax.grid(); ax.legend(loc="lower left")
 fig.savefig("Log Emiss.png", dpi=400, bbox_inches='tight')
 fig.savefig("Log Emiss.pdf", dpi=400, bbox_inches='tight')
 
@@ -170,6 +188,7 @@ with open('Results.txt', "w") as output:
     output.write(f"Boltzmann Constant = {boltz} \pm {boltzUnc} \n")
     output.write("Best Temps/Mean emissivities: \n")
     for i, emis in enumerate(meanemiss):
-        output.write(f"V = {voltages[i]};  T = {bestTemps[i]}K;  Scale = {1 / scales[i]};  meanemiss = {emis}\n")
+        output.write(f"V = {voltages[i]};  T = {bestTemps[i]} \pm {bestTempUnc[i]};  \n")
+        output.write(f"Scale = {1 / scales[i]};  meanemiss = {emis}\n\n")
     
     

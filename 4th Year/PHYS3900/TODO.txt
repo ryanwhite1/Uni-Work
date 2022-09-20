@@ -1,0 +1,16 @@
+Report plan:
+- chemically peculiar stars
+- map EB uniquely 
+- what is starry how does it work
+- the fitted maps have residuals
+ - what do they tell us? 
+- future efforts: mcmc
+
+Coding:
+ - add axvlines of harmonics of rotation period to the fourier of residuals. i.e. plot an axvline for each integer multiple of the rotational period frequency
+ - generate a nice pdf of the surface map
+
+Presentation: 
+ - create the slide!
+ - generate diagrams for slide
+ 	- visual diagrams of eclipses overlaid on flux curve
