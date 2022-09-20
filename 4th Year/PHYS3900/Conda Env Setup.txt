@@ -35,3 +35,25 @@ pip3 install aesara
 conda install -c conda-forge theano-pymc exoplanet
 pip3 install -U numpy==1.21.6
 pip3 install starry tqdm corner
+
+
+
+
+conda create -c conda-forge -n StarryEnv python=3.8 gcc gxx theano-pymc mkl mkl-service
+source activate StarryEnv
+pip3 install -U starry tqdm corner numpy==1.21.6
+pip3 install aesara
+conda install -c conda-forge glib
+
+conda create -c conda-forge -n StarryEnv python=3.8 glib gcc gxx mkl mkl-service
+source activate StarryEnv
+pip3 install -U starry tqdm corner
+then: .conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py
+on line 2621 change:
+"blas_info = numpy.distutils.__config__.blas_opt_info"
+to
+"blas_info = numpy.distutils.__config__.blas_ilp64_opt_info"
+
+conda create -c conda-forge -n StarryEnv python=3.8 glib gcc gxx mkl mkl-service
+source activate StarryEnv
+pip3 install -U starry tqdm corner numpy==1.21.6
