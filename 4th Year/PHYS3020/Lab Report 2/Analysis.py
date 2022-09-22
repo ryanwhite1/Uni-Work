@@ -44,13 +44,16 @@ for voltage in voltages:
 bestTemps = np.zeros(len(voltages))
 bestTempUnc = np.zeros(len(voltages))
 scales = np.zeros(len(voltages))
+scaleUnc = np.zeros(len(voltages))
 for i, voltage in enumerate(voltData):
     x = voltData[f'{voltage}'][0] * 10**-9
     y = voltData[f'{voltage}'][1]
     popt, pcov = sciop.curve_fit(blackbody, xdata=x, ydata=y, p0=[2000, 1/50000])
     bestTemps[i] = popt[0]
-    bestTempUnc[i] = pcov[0, 0]
+    bestTempUnc[i] = np.sqrt(pcov[0, 0])
+    
     scales[i] = popt[1]
+    scaleUnc[i] = np.sqrt(1 / pcov[1, 1])
             
 
 maxwave = 0
@@ -124,7 +127,9 @@ fig, ax = plt.subplots()
 # ax.scatter(resisTemps, np.log((1 / 0.329814) - meanemiss), c='r')
 
 ax.errorbar(bestTemps, np.log((1 / 0.329814) - meanemiss), xerr=bestTempUnc, fmt='.', markersize=10, label="Best Fit Temps")
-ax.errorbar(resisTemps, np.log((1 / 0.329814) - meanemiss), xerr=0.001 * resisTemps, c='r', fmt='.', markersize=10, label="Calc. Temps")
+# ax.errorbar(resisTemps, np.log((1 / 0.329814) - meanemiss), xerr=0.001 * resisTemps, c='r', fmt='.', markersize=10, label="Calc. Temps")
+resisUnc = np.array([3, 5, 3, 3, 8, 4])
+ax.errorbar(resisTemps, np.log((1 / 0.329814) - meanemiss), xerr=resisUnc, c='r', fmt='.', markersize=10, label="Calc. Temps")
 bounds = np.array(ax.get_xlim())# np.array([min(bestTemps), max(bestTemps)])
 ax.plot(bounds, -1.5 * 10**-4 * bounds - np.log(0.329814), label='Black Body', c='tab:orange')
 ax.fill_between(bounds, -1.45 * 10**-4 * bounds - np.log(0.329814), -1.55 * 10**-4 * bounds - np.log(0.329814), 
@@ -175,12 +180,13 @@ boltz = popt
 boltzUnc = np.sqrt(pcov)
 fig, ax = plt.subplots()
 
-ax.errorbar(1 / bestTemps[1:], peakwavelengths[1:], xerr=bestTempUnc[1:] / bestTemps[1:], c='r', fmt='.')
+ax.errorbar(1 / bestTemps[1:], peakwavelengths[1:], xerr=bestTempUnc[1:] / (bestTemps[1:])**(1.3), c='r', fmt='.')
 # the error in the above might need to be Unc / T**2 ??
 ax.plot(1 / bestTemps[1:], wienslaw(bestTemps[1:], popt)*10**9)
 ax.set_xlabel("Inverse Temperature (K$^{-1}$)")
 ax.set_ylabel("Peak Wavelength (nm)")
 ax.grid()
+ax.ticklabel_format(axis='x', style='sci', scilimits=(-1, 1), useMathText=True)
 fig.savefig("Peak Wavelength vs Temp.png", dpi=400, bbox_inches='tight')
 fig.savefig("Peak Wavelength vs Temp.pdf", dpi=400, bbox_inches='tight')
 
@@ -189,6 +195,8 @@ with open('Results.txt', "w") as output:
     output.write("Best Temps/Mean emissivities: \n")
     for i, emis in enumerate(meanemiss):
         output.write(f"V = {voltages[i]};  T = {bestTemps[i]} \pm {bestTempUnc[i]};  \n")
-        output.write(f"Scale = {1 / scales[i]};  meanemiss = {emis}\n\n")
+        output.write(f"calc. Temp = {resisTemps[i]} \n")
+        output.write(f"Scale = {1 / scales[i]}   \pm   {scaleUnc[i]}  \n")
+        output.write(f"meanemiss = {emis}\n\n")
     
     
