@@ -178,6 +178,11 @@ def wienslaw(temp, boltzmann):
 popt, pcov = sciop.curve_fit(wienslaw, xdata=bestTemps[1:]*10**-9, ydata=peakwavelengths[1:], p0=1.28*10**-23)
 boltz = popt
 boltzUnc = np.sqrt(pcov)
+
+popt2, pcov2 = sciop.curve_fit(wienslaw, xdata=bestTemps[2:]*10**-9, ydata=peakwavelengths[2:], p0=1.28*10**-23)
+altBoltz = popt2
+altBoltzUnc = np.sqrt(pcov2)
+
 fig, ax = plt.subplots()
 
 ax.errorbar(1 / bestTemps[1:], peakwavelengths[1:], xerr=bestTempUnc[1:] / (bestTemps[1:])**(1.3), c='r', fmt='.')
@@ -192,6 +197,7 @@ fig.savefig("Peak Wavelength vs Temp.pdf", dpi=400, bbox_inches='tight')
 
 with open('Results.txt', "w") as output:
     output.write(f"Boltzmann Constant = {boltz} \pm {boltzUnc} \n")
+    output.write(f"Boltzmann Constant (without low temp val) = {altBoltz} \pm {altBoltzUnc} \n")
     output.write("Best Temps/Mean emissivities: \n")
     for i, emis in enumerate(meanemiss):
         output.write(f"V = {voltages[i]};  T = {bestTemps[i]} \pm {bestTempUnc[i]};  \n")

@@ -1,4 +1,5 @@
 Boltzmann Constant = [1.38770213e-23] \pm [[5.85627124e-26]] 
+Boltzmann Constant (without low temp val) = [1.38081481e-23] \pm [[1.93870616e-26]] 
 Best Temps/Mean emissivities: 
 V = 2Vb;  T = 1724.4921025669823 \pm 0.35916958061542065;  
 calc. Temp = 1698.4748228353885 
