@@ -4,11 +4,11 @@ Report plan:
 - what is starry how does it work
 - the fitted maps have residuals
  - what do they tell us? 
-- future efforts: mcmc
+- future efforts: mcmc, spot evolution (linear interpolation between a start and end map)
 
 Coding:
- - add axvlines of harmonics of rotation period to the fourier of residuals. i.e. plot an axvline for each integer multiple of the rotational period frequency
  - generate a nice pdf of the surface map
+ - zoomed in of the eclipse residuals
 
 Presentation: 
  - create the slide!
