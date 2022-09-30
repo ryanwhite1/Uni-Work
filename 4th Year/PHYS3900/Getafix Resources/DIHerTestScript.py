@@ -1,9 +1,6 @@
-import lightkurve as lk
 import matplotlib.pyplot as plt
-import scipy
 import numpy as np
 import astropy.units as u
-from lightkurve import search_targetpixelfile
 
 import starry
 
@@ -23,10 +20,7 @@ plt.rcParams['font.family'] = 'Serif'
 starry.config.quiet = True
 starry.config.lazy = True
 
-# search_result = lk.search.search_tesscut(target='DI Her')[0:2]
-
-# lcflist = lk.search_lightcurve('DI Her')
-# spoc = lcflist[0].download()
+print("Import good.")
 
 #create spherical star system presented in Gaudi et al. 2017
 pri_map1 = starry.Map(udeg=2, gdeg=4, oblate=True, normalized=True) #ydeg = 2*order_approx udeg=2
@@ -68,11 +62,15 @@ with open("ferrdata.txt", 'r') as ferrdata:
     for err in ferrdata:
         ferr.append(float(err))
 
+print("Data read good.")
+
 time = np.array(time); flux = np.array(flux); ferr = np.array(ferr)
 
 model_flux = sys1.flux(time).eval()
 
 grav_map = pri1.map._f.eval()
+
+print("Init system good.")
 
 
 
@@ -182,7 +180,7 @@ with pm.Model() as model:
     # the true model. This line effectively defines our
     # likelihood function.
     #pm.Normal("obs", flux_model, sd=tt.sqrt(tt.exp(log_sigma_lc)**2), observed=flux)
-
+print("Model initialisation good.")
 
 with model:
     system.set_data(flux, C=ferr**2)
@@ -204,7 +202,7 @@ with model:
     secondary.map.set_prior(mu=sec_mu, L=sec_L)
     
     pm.Potential("marginal", system.lnlike(t=time))
-
+print("Model set data good.")
 with model:
     map_soln = pmx.optimize()
     

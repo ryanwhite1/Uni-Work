@@ -7,8 +7,7 @@ Report plan:
 - future efforts: mcmc, spot evolution (linear interpolation between a start and end map)
 
 Coding:
- - generate a nice pdf of the surface map
- - zoomed in of the eclipse residuals
+ - mcmc? 
 
 Presentation: 
  - create the slide!

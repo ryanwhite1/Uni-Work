@@ -1,0 +1,638 @@
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpbwgsde76/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpbwgsde76/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpbwgsde76/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpfl63rf__/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpfl63rf__/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpfl63rf__/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpno4wya8t/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpno4wya8t/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpno4wya8t/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp55209dz4/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp55209dz4/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp55209dz4/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp53h0fqsx/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp53h0fqsx/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp53h0fqsx/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpfv2f959l/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpfv2f959l/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpfv2f959l/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpmav22kcr/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpmav22kcr/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpmav22kcr/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpmmh04izq/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpmmh04izq/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpmmh04izq/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp3cri70ev/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp3cri70ev/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp3cri70ev/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpre43mp1y/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpre43mp1y/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpre43mp1y/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpdg1tyvq_/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpdg1tyvq_/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpdg1tyvq_/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmphdxbqo43/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmphdxbqo43/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmphdxbqo43/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpianfkvyo/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpianfkvyo/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpianfkvyo/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpvt5475x0/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpvt5475x0/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpvt5475x0/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpq21cbmbh/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpq21cbmbh/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpq21cbmbh/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmphwgt8t3k/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmphwgt8t3k/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmphwgt8t3k/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpxt1sx4rr/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpxt1sx4rr/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmpxt1sx4rr/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp_v65vtxf/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp_v65vtxf/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp_v65vtxf/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp6i3simbd/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp6i3simbd/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp6i3simbd/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')
+
+ERROR (theano.graph.opt): Optimization failure due to: constant_folding
+ERROR (theano.graph.opt): node: LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]})
+ERROR (theano.graph.opt): TRACEBACK:
+ERROR (theano.graph.opt): Traceback (most recent call last):
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 2017, in process_node
+    replacements = lopt.transform(fgraph, node)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/opt.py", line 1209, in transform
+    return self.fn(*args, **kwargs)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/tensor/opt.py", line 7006, in constant_folding
+    thunk = node.op.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmps5ih2u70/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmps5ih2u70/mod.cpp:132:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmps5ih2u70/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[2.0662062...07423305]}, TensorConstant{(381,) of ..4168756636}, TensorConstant{[10.800020...4111863 ]}), *1::1, *1::2, *1::3)')
+
+Import good.
+Data read good.
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_4adp1us6
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_mwd8bipt
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_at8xxi32
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_ghaw28yk
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_ktglrsvo
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_mu7xe4g1
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_wqb0kddj
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_59yx7k56
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_kumoydf6
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_4x2j_slg
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_9uwhpemr
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_2oucryiz
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_1njsfx0z
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_hubnq_gu
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_60_ura5n
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_5qilaxyr
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_pmjgvdob
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_b8klj4xr
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_1z0ylbxc
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_szdc0sf4
+
+You can find the C code in this temporary file: /tmp/theano_compilation_error_m3kaqg9v
+Traceback (most recent call last):
+  File "DIHerTestScript.py", line 69, in <module>
+    model_flux = sys1.flux(time).eval()
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/basic.py", line 554, in eval
+    self._fn_cache[inputs] = theano.function(inputs, self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/compile/function/__init__.py", line 337, in function
+    fn = pfunc(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/compile/function/pfunc.py", line 524, in pfunc
+    return orig_function(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/compile/function/types.py", line 1981, in orig_function
+    fn = m.create(defaults)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/compile/function/types.py", line 1836, in create
+    _fn, _i, _o = self.linker.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/basic.py", line 266, in make_thunk
+    return self.make_all(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/vm.py", line 1131, in make_all
+    node.op.make_thunk(node, storage_map, compute_map, [], impl=impl)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 634, in make_thunk
+    return self.make_c_thunk(node, storage_map, compute_map, no_recycling)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/graph/op.py", line 600, in make_c_thunk
+    outputs = cl.make_thunk(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1203, in make_thunk
+    cthunk, module, in_storage, out_storage, error_storage = self.__compile__(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1138, in __compile__
+    thunk, module = self.cthunk_factory(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1634, in cthunk_factory
+    module = get_module_cache().module_from_key(key=key, lnk=self)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 1191, in module_from_key
+    module = lnk.compile_cmodule(location)
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/basic.py", line 1543, in compile_cmodule
+    module = c_compiler.compile_str(
+  File "/home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/theano/link/c/cmodule.py", line 2546, in compile_str
+    raise Exception(
+Exception: ('The following error happened while compiling the node', LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), '\n', 'Compilation failed (return status=1): In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp7kzfsdkr/mod.cpp:9:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h: In instantiation of \'void starry::limbdark::GreensLimbDark<T>::downwardM() [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:654:5:   required from \'void starry::limbdark::GreensLimbDark<T>::compute(const T&, const T&) [with bool GRADIENT = true; T = double]\'. /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp7kzfsdkr/mod.cpp:130:57:   required from here. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/limbdark.h:369:68: error: exception handling disabled, use \'-fexceptions\' to enable.   369 |         "Downward recursion in `M` not implemented for `k^2` >= 1.");.       |                                                                    ^. In file included from /home/uqrwhi13/.theano/compiledir_Linux-3.10-el7.x86_64-x86_64-with-glibc2.10-x86_64-3.8.13-64/tmp7kzfsdkr/mod.cpp:8:. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h: In function \'T starry::ellip::CEL(T, T, T, T, T) [with T = double]\':. /home/uqrwhi13/.conda/envs/StarryEnv/lib/python3.8/site-packages/starry/_core/ops/lib/include/ellip.h:104:1: warning: control reaches end of non-void function [-Wreturn-type].   104 | }.       | ^. At global scope:. cc1plus: warning: unrecognized command line option \'-Wno-c++11-narrowing\'. ', 'FunctionGraph(*1 -> LimbDarkOp(TensorConstant{[ 0.222913...01339956]}, TensorConstant{[]}, TensorConstant{[]}, TensorConstant{[]}), *1::1, *1::2, *1::3)')

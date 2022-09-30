@@ -5,11 +5,11 @@
 #SBATCH --ntasks=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
-#SBATCH --mem-per-cpu=4G  # memory (MB)
+#SBATCH --mem-per-cpu=20G  # memory (MB)
 #SBATCH --time=0-00:45      # time (D-HH:MM)
 
-module load anaconda3
+module load starry
 
-source activate StarryEnv
+# source activate StarryEnv
 
 python "DIHerTestScript.py"

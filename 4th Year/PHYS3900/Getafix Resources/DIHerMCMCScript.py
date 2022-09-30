@@ -104,8 +104,12 @@ B_vsini_m = 100
 B_vsini_e = 30
 
 #orbital parameters
-orb_inc_m = 89.02
+orb_inc_m = 88.90036698
 orb_inc_e = 1.0
+orb_period = 10.54980498
+orb_ecc = 0.50002396
+long_periastron = 327.28588277
+long_ascend = 90 #106
 
 
 G_mks = 6.67e-11

@@ -1,0 +1,107 @@
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: <starry._core.ops.rotation.tensordotRzGradientOp object at 0x2b6a045f7e80>.1
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: <starry._core.ops.rotation.tensordotRzGradientOp object at 0x2b6a045f7e80>.1
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+optimizing logp for variables: [t0, long periastron, ecc, inc orb, period, B_R, u2, u1, A_prot, A inc, A_R, A_M]
+Import good.
+Data read good.
+Init system good.
+Model initialisation good.
+Model set data good.
+█Traceback (most recent call last):
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/compile/function/types.py", line 974, in __call__
+    self.fn()
+ValueError: some matrix has no unit stride
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/optim.py", line 213, in __call__
+    res = self.func(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/compile/function/types.py", line 987, in __call__
+    raise_with_op(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/link/utils.py", line 508, in raise_with_op
+    raise exc_value.with_traceback(exc_trace)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/compile/function/types.py", line 974, in __call__
+    self.fn()
+ValueError: some matrix has no unit stride
+Apply node that caused the error: Dot22(TensorConstant{[]}, SparseDot.0)
+Toposort index: 176
+Inputs types: [TensorType(float64, matrix), TensorType(float64, matrix)]
+Inputs shapes: [(0, 49), (49, 25)]
+Inputs strides: [(0, 0), (8, 392)]
+Inputs values: [array([], shape=(0, 49), dtype=float64), 'not shown']
+Outputs clients: [[<starry._core.ops.rotation.dotROp object at 0x2b6a042de1f0>(Dot22.0, TensorConstant{-1.0}, TensorConstant{0.0}, TensorConstant{0.0}, Elemwise{Composite{(-(i0 - i1))}}.0), <starry._core.ops.rotation.dotRGradientOp object at 0x2b6a042debe0>(Dot22.0, TensorConstant{-1.0}, TensorConstant{0.0}, TensorConstant{0.0}, Elemwise{Composite{(-(i0 - i1))}}.0, <starry._core.ops.rotation.dotRGradientOp object at 0x2b6a042debe0>.0)]]
+
+Backtrace when the node is created(use Theano flag traceback__limit=N to make it longer):
+  File "/home/uqrwhi13/PHYS3900/Getafix Resources/DIHerTestScript.py", line 204, in <module>
+    pm.Potential("marginal", system.lnlike(t=time))
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/kepler.py", line 1535, in lnlike
+    design_matrix = self.design_matrix(t)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/kepler.py", line 914, in design_matrix
+    return self.ops.X(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/utils.py", line 141, in wrapper
+    return func(instance, *args)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/core.py", line 2455, in X
+    phase_pri = pri_amp * self.primary.map.ops.X(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/utils.py", line 141, in wrapper
+    return func(instance, *args)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/core.py", line 230, in X
+    sTAR = tt.dot(sTAR, A1InvFA1)
+
+HINT: Use the Theano flag 'exception_verbosity=high' for a debugprint and storage map footprint of this apply node.
+array: [ 1.13686838e-12  3.63965377e-01  0.00000000e+00 -1.87180218e+00
+  2.35612965e+00  9.16290732e-01 -1.34323487e+00 -2.07944154e+00
+  6.76586485e-02  0.00000000e+00  1.00000000e+00  8.75468737e-01
+  1.62924054e+00]
+point: {'A_M_lowerbound__': array(1.62924054), 'A_R_lowerbound__': array(0.87546874), 'A inc_periodic__': array([0., 1.]), 'A_prot_lowerbound__': array(0.06765865), 'u1_lowerbound__': array(-2.07944154), 'u2_lowerbound__': array(-1.34323487), 'B_R_lowerbound__': array(0.91629073), 'period_lowerbound__': array(2.35612965), 'inc orb_interval__': array(-1.87180218), 'ecc_interval__': array(0.), 'long periastron_interval__': array(0.36396538), 't0_interval__': array(1.13686838e-12)}
+Traceback (most recent call last):
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/compile/function/types.py", line 974, in __call__
+    self.fn()
+ValueError: some matrix has no unit stride
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/uqrwhi13/PHYS3900/Getafix Resources/DIHerTestScript.py", line 207, in <module>
+    map_soln = pmx.optimize()
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/optim.py", line 115, in optimize
+    initial = objective(x0)[0]
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/optim.py", line 103, in objective
+    nll, grad = wrapper(vec)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/optim.py", line 213, in __call__
+    res = self.func(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/compile/function/types.py", line 987, in __call__
+    raise_with_op(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/link/utils.py", line 508, in raise_with_op
+    raise exc_value.with_traceback(exc_trace)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/compile/function/types.py", line 974, in __call__
+    self.fn()
+ValueError: some matrix has no unit stride
+Apply node that caused the error: Dot22(TensorConstant{[]}, SparseDot.0)
+Toposort index: 176
+Inputs types: [TensorType(float64, matrix), TensorType(float64, matrix)]
+Inputs shapes: [(0, 49), (49, 25)]
+Inputs strides: [(0, 0), (8, 392)]
+Inputs values: [array([], shape=(0, 49), dtype=float64), 'not shown']
+Outputs clients: [[<starry._core.ops.rotation.dotROp object at 0x2b6a042de1f0>(Dot22.0, TensorConstant{-1.0}, TensorConstant{0.0}, TensorConstant{0.0}, Elemwise{Composite{(-(i0 - i1))}}.0), <starry._core.ops.rotation.dotRGradientOp object at 0x2b6a042debe0>(Dot22.0, TensorConstant{-1.0}, TensorConstant{0.0}, TensorConstant{0.0}, Elemwise{Composite{(-(i0 - i1))}}.0, <starry._core.ops.rotation.dotRGradientOp object at 0x2b6a042debe0>.0)]]
+
+Backtrace when the node is created(use Theano flag traceback__limit=N to make it longer):
+  File "/home/uqrwhi13/PHYS3900/Getafix Resources/DIHerTestScript.py", line 204, in <module>
+    pm.Potential("marginal", system.lnlike(t=time))
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/kepler.py", line 1535, in lnlike
+    design_matrix = self.design_matrix(t)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/kepler.py", line 914, in design_matrix
+    return self.ops.X(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/utils.py", line 141, in wrapper
+    return func(instance, *args)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/core.py", line 2455, in X
+    phase_pri = pri_amp * self.primary.map.ops.X(
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/utils.py", line 141, in wrapper
+    return func(instance, *args)
+  File "/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/starry/_core/core.py", line 230, in X
+    sTAR = tt.dot(sTAR, A1InvFA1)
+
+HINT: Use the Theano flag 'exception_verbosity=high' for a debugprint and storage map footprint of this apply node.

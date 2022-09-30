@@ -1,0 +1,14 @@
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/sampling/schedule.py:33: UserWarning: there are not enough tuning steps to accomodate the tuning schedule; assigning automatically as 20%/70%/10%
+  warnings.warn(
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/sampling/sampling.py:109: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
+  return pm.sample(draws=draws, tune=tune, model=model, step=step, **kwargs)
+Only 100 samples in chain.
+Multiprocess sampling (2 chains in 4 jobs)
+NUTS: [A_prot, A inc]
+Import good.
+Data read good.
+Save MAP good.
+Init model good.
+Set data good.
+Starting MCMC.
+█slurmstepd: error: *** JOB 13900078 ON smp-0-25 CANCELLED AT 2022-09-27T09:29:08 DUE TO TIME LIMIT ***

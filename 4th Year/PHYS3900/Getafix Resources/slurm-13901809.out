@@ -1,0 +1,46 @@
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/sampling/schedule.py:33: UserWarning: there are not enough tuning steps to accomodate the tuning schedule; assigning automatically as 20%/70%/10%
+  warnings.warn(
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: <starry._core.ops.rotation.tensordotRzGradientOp object at 0x2b448d26ec10>.1
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: <starry._core.ops.rotation.tensordotRzGradientOp object at 0x2b448d26ec10>.1
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+WARNING (theano.tensor.opt): Cannot construct a scalar test value from a test value with no size: AdvancedSubtensor1.0
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/pymc3_ext/sampling/sampling.py:109: FutureWarning: In v4.0, pm.sample will return an `arviz.InferenceData` object instead of a `MultiTrace` by default. You can pass return_inferencedata=True or return_inferencedata=False to be safe and silence this warning.
+  return pm.sample(draws=draws, tune=tune, model=model, step=step, **kwargs)
+Multiprocess sampling (4 chains in 4 jobs)
+NUTS: [A_prot, A inc, A_R, A_M]
+Import good.
+Data read good.
+Save MAP good.
+Init model good.
+Set data good.
+Starting MCMC.
+█/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in multiply
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in power
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in exp
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: invalid value encountered in multiply
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: divide by zero encountered in divide
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in power
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: invalid value encountered in divide
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in multiply
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in exp
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: invalid value encountered in multiply
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in exp
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: invalid value encountered in multiply
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: overflow encountered in power
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
+/opt/modules/Anaconda3/2020.11/envs/starry/lib/python3.9/site-packages/theano/tensor/elemwise.py:826: RuntimeWarning: invalid value encountered in divide
+  variables = ufunc(*ufunc_args, **ufunc_kwargs)
