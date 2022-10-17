@@ -670,7 +670,7 @@ def Q3(N=15, trials=10):
 # Q2c(trials=10)
 # Q2d(trials=100)
 # Q2e()
-Q3()
+# Q3()
 
 # t1 = time()
 # a = gen_init_Ising2d(100)
@@ -681,11 +681,13 @@ Q3()
 # print(time() - t1)
 # plot_2d_Ising([b])
 
-# a = gen_init_Ising3d(20)
-# b = metropolis3d(a, 10**5, 2)
+for t, temp in enumerate([6, 4, 2]):
+    
+    a = gen_init_Ising3d(20) if t == 0 else b
+    b = metropolis3d(a, 10**5, temp)
 # # print(b)
 # # plot_3d_Ising([b], style='2d')
-# plot_both_3d([b], '3D20')
+    plot_both_3d([b], f'3D20-T={temp}')
 
 
 
