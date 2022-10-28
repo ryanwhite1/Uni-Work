@@ -17,6 +17,13 @@ print('mean = ', np.mean(data['rating']), ' sd = ', np.std(data['rating']), ' me
       ' mode = ', stats.mode(data['rating']))
 # plt.hist(data['rating'])
 
+# q1b
+InfAnswers = data[data['user'] == 'influencer']
+RegAnswers = data[data['user'] == 'regular']
+
+plt.hist(InfAnswers['rating'])
+print(np.mean(InfAnswers['rating']), np.mean(RegAnswers['rating']))
+
 # q2h
 print(1 - stats.chi2.cdf(6.368, 1))
 
