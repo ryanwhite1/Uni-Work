@@ -44,7 +44,7 @@ m.setObjective(quicksum(cost[n] * Y[n] for n in N if n in cost) +
                , GRB.MINIMIZE)
 
 # Constraints
-## Supply
+## Supply Constraint
 for n in N:
     if n in supply:
         m.addConstr(Y[n] <= supply[n])
@@ -54,6 +54,9 @@ for n in N:
 for n in N:
     m.addConstr(Y[n] + quicksum(X[e] for e in E if e[1] == n) == 
                 quicksum(X[e] for e in E if e[0] == n) + demand[n])
+## Pipeline Capacity Constraint
+for e in E:
+    m.addConstr(X[e] <= 489)
 
 m.optimize()
 
