@@ -12,6 +12,14 @@ u = sym.Symbol('u')
 v = sym.Symbol('v')
 thet = sym.Symbol('thet')
 
-X = sym.Matrix([[v * cos(thet) / (u**2 + v**2), v * sin(thet) / (u**2 + v**2), u / (u**2 + v**2)]])
+X = sym.Matrix([[v * cos(thet) / (u**2 + v**2), v * sin(thet) / (u**2 + v**2), u / (u**2 + v**2)],
+                [u * cos(thet) / (u**2 + v**2), u * sin(thet) / (u**2 + v**2), -v / (u**2 + v**2)],
+                [-sin(thet) / (u * v), cos(thet) / (u * v), 0]])
 
-print(X.T)
+T = sym.Matrix([[1, 0.5, -4],
+                [0.5, 2, 0],
+                [3, -6, 7]])
+
+a = X * T * X.T
+b = sym.simplify(a)
+print(b)
