@@ -25,6 +25,14 @@ MaxF = 489 # MJ/day
 MaxS = 11265 # MJ over 2 weeks
 imCost = 0.1 # $/MJ due to imbalance in each pipe
 
+# mickey's data
+supply = { 1: 313, 5: 754, 11: 750, 42: 557 }
+cost = { 1: 71, 5: 85, 11: 65, 42: 75 }
+MaxF = 348
+MaxS = 9378
+nodes2 = pd.read_csv("mickey_nodes2.csv")
+pipes = pd.read_csv("mickey_pipelines.csv")
+
 # E[i,j] gives the distance (km) from node i to node j
 E = {}
 for j in range(len(pipes['Pipeline'])):
