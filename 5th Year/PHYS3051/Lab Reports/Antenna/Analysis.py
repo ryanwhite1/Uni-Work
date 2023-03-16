@@ -9,7 +9,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import scipy.integrate as integ
 
-P = lambda k, t, L: (np.cos(0.5 * k * L * np.cos(t)) - np.cos(0.5 * k * L)) / np.sin(t) 
+P = lambda k, t, L: (np.cos(0.5 * k * L * np.cos(t)) - np.cos(0.5 * k * L)) / np.sin(t)
 
 wavelen = 0.032 # meters
 horn_len = 0.059 # meters
@@ -93,11 +93,13 @@ fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
 theta = np.arange(0, 2 * np.pi, 0.01)
 pred = np.zeros(len(theta))
 for i, t in enumerate(theta):
-    pred[i] = P(1, t + np.pi / 2, a_length[0])
+    k = 2 * np.pi / wavelen
+    # pred[i] = P(1, t + np.pi / 2, a_length[2])
+    pred[i] = P(k, t + np.pi / 2, a_length[2])
     if np.isnan(pred[i]):
         pred[i] = 0
-pred *= max(levels[2]) / max(pred)
-ax.plot(angles[2] * np.pi / 180, levels[2])
+# pred *= max(levels[2]) / max(pred)
+# ax.plot(angles[2] * np.pi / 180, levels[2])
 ax.plot(theta, abs(pred))
 
 
