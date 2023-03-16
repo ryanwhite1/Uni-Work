@@ -24,6 +24,14 @@ distC = 0.01 # $/MJ/km
 MaxF = 489 # MJ/day
 MaxS = 11265 # MJ over 2 weeks
 
+# LEANNA DATA
+supply = {21: 375, 35: 805, 39: 830, 45: 577}
+cost = {21: 81, 35: 67, 39: 72, 45: 84}
+nodes = pd.read_csv("leanna_nodes.csv")
+nodes2 = pd.read_csv("leanna_nodes2.csv")
+pipes = pd.read_csv("leanna_pipelines.csv")
+
+
 # E[i,j] gives the distance (km) from node i to node j
 E = {}
 for j in range(len(pipes['Pipeline'])):
