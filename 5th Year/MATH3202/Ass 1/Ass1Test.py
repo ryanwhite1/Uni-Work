@@ -32,6 +32,7 @@ MaxF = 348
 MaxS = 9378
 nodes2 = pd.read_csv("mickey_nodes2.csv")
 pipes = pd.read_csv("mickey_pipelines.csv")
+nodes = nodes2[['Node', 'X', 'Y']].copy()
 
 # E[i,j] gives the distance (km) from node i to node j
 E = {}
@@ -50,7 +51,7 @@ m = Model("GasPipes")
 # Variables
 Y = {(n, t): m.addVar() for n in N for t in T} # production in each node
 X = {(e, t): m.addVar() for e in E for t in T} # net gas transmission on edge between nodes
-I = {(e, t): m.addVar() for e in E for t in T} # imbalance in each pipe for each day
+I = {(e, t): m.addVar(lb = -GRB.INFINITY) for e in E for t in T} # imbalance in each pipe for each day
 AI = {(e, t): m.addVar() for e in E for t in T} # absolute value of imbalance for each day
     
 # Objective
@@ -72,7 +73,7 @@ for t in T:
     for n in N:
         if t > 0:
             m.addConstr(Y[n, t] + quicksum(X[e, t] + I[e, t] for e in E if e[1] == n) == 
-                        quicksum(X[e, t] + I[e, t - 1] for e in E if e[0] == n) + demand[t][n])
+                        quicksum(X[e, t] for e in E if e[0] == n) + demand[t][n])
         else:
             m.addConstr(Y[n, t] + quicksum(X[e, t] + I[e, t] for e in E if e[1] == n) == 
                         quicksum(X[e, t] for e in E if e[0] == n) + demand[t][n])
@@ -87,15 +88,11 @@ for n in N:
     if n in supply:
         m.addConstr(quicksum(Y[n, t] for t in T) <= MaxS)
 
-## Imbalance Constraint
+## Imbalance Constraints
 for e in E:
-    # for t in T:
-    #     if t > 0:
-    #         m.addConstr(I[e, t] == I[e, t - 1] + quicksum(X[e, t] for n in N if e[1] == n) - quicksum(X[e, t] for n in N if e[0] == n))
-    #     else:
-    #         m.addConstr(I[e, t] == quicksum(X[e, t] for n in N if e[1] == n) - quicksum(X[e, t] for n in N if e[0] == n))
     m.addConstr(I[e, T[0]] == 0)
     m.addConstr(I[e, T[-1]] == 0)
+    m.addConstr(quicksum(I[e, t] for t in T) == 0)
 
 ## Abs Value Constraint
 for e in E:
@@ -107,4 +104,4 @@ for e in E:
 m.optimize()
 
 # for e in E:
-#     print(AI[e, 5].x)
+#     print(I[e, 5].x)
