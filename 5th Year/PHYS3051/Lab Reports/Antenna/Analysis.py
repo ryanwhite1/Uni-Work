@@ -89,17 +89,23 @@ for i in range(3):
         
         
         
+# matches predicted for 1/2 lambda, 3/2 lambda, and 4 lambda
 fig, ax = plt.subplots(subplot_kw={'projection': 'polar'})
 theta = np.arange(0, 2 * np.pi, 0.01)
 pred = np.zeros(len(theta))
 for i, t in enumerate(theta):
     k = 2 * np.pi / wavelen
     # pred[i] = P(1, t + np.pi / 2, a_length[2])
-    pred[i] = P(k, t + np.pi / 2, a_length[2])
+    pred[i] = P(k, t + np.pi / 2, 4 * a_length[1])
     if np.isnan(pred[i]):
         pred[i] = 0
+<<<<<<< Updated upstream
 pred *= max(levels[2]) / max(pred)
 ax.plot(angles[2] * np.pi / 180, levels[2])
+=======
+pred *= max(levels[8]) / max(pred)
+ax.plot(angles[8] * np.pi / 180, levels[8])
+>>>>>>> Stashed changes
 ax.plot(theta, abs(pred))
 
 
