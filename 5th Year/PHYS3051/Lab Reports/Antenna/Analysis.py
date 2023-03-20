@@ -98,8 +98,8 @@ for i, t in enumerate(theta):
     pred[i] = P(k, t + np.pi / 2, a_length[2])
     if np.isnan(pred[i]):
         pred[i] = 0
-# pred *= max(levels[2]) / max(pred)
-# ax.plot(angles[2] * np.pi / 180, levels[2])
+pred *= max(levels[2]) / max(pred)
+ax.plot(angles[2] * np.pi / 180, levels[2])
 ax.plot(theta, abs(pred))
 
 
