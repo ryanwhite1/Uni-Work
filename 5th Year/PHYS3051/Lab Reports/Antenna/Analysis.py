@@ -36,6 +36,9 @@ def directivity(levels, angles, levels_unc, iters):
         
     return av_direct, sd_direct
 
+def one_directivity(levels, angles):
+    return 4 * integ.trapezoid((levels)**2 * abs(np.sin(angles)), angles)**-1
+
 # define 
 fs = 8 # fig size, inches
 wavelen = 0.032 # meters
@@ -96,6 +99,43 @@ for i in range(len(time)):
             a += -1
     
     half_beam[i] = abs(angles[i][max_ind] - angles[i][max_ind + a])
+    
+
+# theory half beam width and directivity
+pred_patterns = np.zeros((len(a_length), len(rad_angles[0])))
+for i in range(len(a_length)):
+    theta = rad_angles[0]
+    for j, t in enumerate(theta):
+        k = 2 * np.pi / wavelen  # wavenumber calculation
+        pred_patterns[i, j] = abs(P(k, t,  a_length[i]))   # calculate predicted values here
+        if np.isnan(pred_patterns[i, j]):
+            pred_patterns[i, j] = 0
+for i in range(len(a_length)):
+    pred_patterns[i, :] /= max(pred_patterns[i, :])
+pred_HBW = np.zeros(len(a_length))
+pred_direct = np.zeros(len(a_length))
+pred_a = 20 * np.log(pred_patterns)
+for i in range(len(a_length)):
+    max_val = max(pred_a[i, :])
+    max_ind = np.argwhere(pred_a[i, :] == max_val)[0][0]
+    
+    try:
+        a = 0
+        currval = max_val
+        while currval >= max_val - 3:
+            currval = pred_a[i, :][max_ind + a]
+            a += 1
+    except IndexError:
+        a = 0
+        currval = max_val
+        while currval >= max_val - 3:
+            currval = pred_a[i, :][max_ind + a - 1]
+            a += -1
+    
+    pred_HBW[i] = abs(angles[0][max_ind] - angles[0][max_ind + a])
+    
+for i in range(len(a_length)):
+    pred_direct[i] = one_directivity(pred_patterns[i, :], rad_angles[0])
     
     
 ## calculate uncertainties in pattern
