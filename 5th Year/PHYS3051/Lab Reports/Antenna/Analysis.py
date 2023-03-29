@@ -178,12 +178,14 @@ for i in range(3):
 
 # now plot the observed vs predicted pattern for each antenna length
         
+chi2 = np.zeros(len(a_length))
+chi2dof = np.zeros(len(a_length))
 names = ["0.5Lambda Obs vs Pred, 180cm", "1.5Lambda Obs vs Pred, 180cm", "4Lambda Obs vs Pred, 180cm"]
 # Calculate predicted pattern for each antenna length
 for i, ind in [(0, 2), (1, 5), (2, 8)]:
     # matches predicted for 1/2 lambda, 3/2 lambda, and 4 lambda
     
-    theta = np.arange(0, 2 * np.pi, 0.01)
+    theta = np.arange(-np.pi, np.pi, 2 * np.pi / len(rad_angles[i]))
     pred = np.zeros(len(theta))
     
     for j, t in enumerate(theta):
@@ -206,6 +208,9 @@ for i, ind in [(0, 2), (1, 5), (2, 8)]:
     ax.legend(loc='upper right')
     fig.savefig(names[i] + ".pdf", bbox_inches='tight')
     fig.savefig(names[i] + ".png", bbox_inches='tight')
+    
+    chi2[i] = sum((averages[i, :][j] - pred[j])**2 / pred[j] if pred[j] != 0 else 0 for j in range(len(pred)))
+    chi2dof[i] = chi2[i] / len(pred)
 
 
 
@@ -232,6 +237,30 @@ for i in range(len(averages[:, 0])):
 
 
 # fig, ax = plt.subplots()
+fig, ax = plt.subplots(figsize=(fs, fs), subplot_kw={'projection': 'polar'})
+
+test_angles = np.linspace(0, 2*np.pi, 500)
+test_lengths = np.linspace(wavelen / 2, 4 * wavelen, 10)
+
+import matplotlib.cm as cm
+import matplotlib.colors
+colours = cm.plasma(np.linspace(0, 1, len(test_lengths)))
+
+for j, length in enumerate(test_lengths):
+    pred = np.zeros(len(test_angles))
+    for i, angle in enumerate(test_angles):
+        pred[i] = P(k, angle, length)
+        if np.isnan(pred[i]):
+            pred[i] = 0
+    pred = abs(pred)
+    
+    figure = ax.plot(test_angles, pred, c=colours[j], alpha=0.7)
+
+fig.colorbar(cm.ScalarMappable(norm=matplotlib.colors.Normalize(vmin=0.5, vmax=4), cmap='plasma'),
+             label=r'Antenna Length (frac. of $\lambda$)',
+             shrink=0.8, pad=0.08)
+fig.savefig("predictionMap.pdf", bbox_inches='tight')
+fig.savefig("predictionMap.png", bbox_inches='tight')
 
 
 
