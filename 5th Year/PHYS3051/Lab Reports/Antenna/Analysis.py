@@ -242,6 +242,7 @@ fig, ax = plt.subplots(figsize=(fs, fs), subplot_kw={'projection': 'polar'})
 test_angles = np.linspace(0, 2*np.pi, 500)
 test_lengths = np.linspace(wavelen / 2, 4 * wavelen, 10)
 
+
 import matplotlib.cm as cm
 import matplotlib.colors
 colours = cm.plasma(np.linspace(0, 1, len(test_lengths)))
@@ -261,6 +262,34 @@ fig.colorbar(cm.ScalarMappable(norm=matplotlib.colors.Normalize(vmin=0.5, vmax=4
              shrink=0.8, pad=0.08)
 fig.savefig("predictionMap.pdf", bbox_inches='tight')
 fig.savefig("predictionMap.png", bbox_inches='tight')
+
+
+
+test_lengths = np.linspace(wavelen / 2, 4 * wavelen, 100)
+test_directs = np.zeros(len(test_lengths))
+for j, length in enumerate(test_lengths):
+    pred = np.zeros(len(test_angles))
+    for i, angle in enumerate(test_angles):
+        pred[i] = P(k, angle, length)
+        if np.isnan(pred[i]):
+            pred[i] = 0
+    pred = abs(pred)
+    
+    test_directs[j] = one_directivity(pred / max(pred), test_angles)
+
+fig, ax = plt.subplots(figsize=(fs, fs/3))
+ax.plot(test_lengths / wavelen, test_directs)
+ax.set_xlabel(r"Antenna length (frac. of $\lambda$)")
+ax.set_ylabel(r"Idealised Directivity")
+ax.grid()
+ax.set_ylim(ymin=1)
+ax.set_xlim(0.5, 4)
+
+fig.savefig("predDirectivity.pdf", bbox_inches='tight')
+fig.savefig("predDirectivity.png", bbox_inches='tight')
+
+
+
 
 
 
