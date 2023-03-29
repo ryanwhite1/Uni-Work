@@ -267,6 +267,7 @@ fig.savefig("predictionMap.png", bbox_inches='tight')
 
 test_lengths = np.linspace(wavelen / 2, 4 * wavelen, 100)
 test_directs = np.zeros(len(test_lengths))
+test_HPBW = np.zeros(len(test_lengths))
 for j, length in enumerate(test_lengths):
     pred = np.zeros(len(test_angles))
     for i, angle in enumerate(test_angles):
@@ -276,11 +277,33 @@ for j, length in enumerate(test_lengths):
     pred = abs(pred)
     
     test_directs[j] = one_directivity(pred / max(pred), test_angles)
+    
+    pred_a = 20 * np.log(pred)
+    max_val = max(pred_a)
+    max_ind = np.argwhere(pred_a == max_val)[0][0]
+    
+    try:
+        a = 0
+        currval = max_val
+        while currval >= max_val - 3:
+            currval = pred_a[max_ind + a]
+            a += 1
+    except IndexError:
+        a = 0
+        currval = max_val
+        while currval >= max_val - 3:
+            currval = pred_a[max_ind + a - 1]
+            a += -1
+    
+    test_HPBW[j] = abs(test_angles[max_ind] - test_angles[max_ind + a])
 
 fig, ax = plt.subplots(figsize=(fs, fs/3))
+ax2 = ax.twinx()
 ax.plot(test_lengths / wavelen, test_directs)
 ax.set_xlabel(r"Antenna length (frac. of $\lambda$)")
 ax.set_ylabel(r"Idealised Directivity")
+ax2.plot(test_lengths / wavelen, test_HPBW * 180 / np.pi, c='tab:purple')
+ax2.set_ylabel(r"Half-Power Beam Width", color='tab:purple')
 ax.grid()
 ax.set_ylim(ymin=1)
 ax.set_xlim(0.5, 4)
