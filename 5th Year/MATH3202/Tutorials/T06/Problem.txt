@@ -1,0 +1,44 @@
+Problem
+-------
+
+
+Sets
+----
+J 				- flavour of juices made
+G subset of J 	- gourmet juices
+F 				- set of constituent fruits (ingredients) [assume 0 is FCOJ]
+T 				- set of time periods (quarters)
+
+
+Data
+----
+P_{jt} 	- predicted (forecast) sales of each juice flavour for each quarter
+C_f 	- cost per component juice ($/kL)
+S 		- Sale price of juice  ($/L) [all flavours sell for same price]
+b_{jf} 	- amount of constituent juice in each flavour
+FCOJ_t 	- limit on FCOJ imported in quarter t
+
+
+Variables
+---------
+X_{jt} - amount of each juice to make each quarter
+Y_{ft} - integer number of truckloads of fruit f (>0) purchased in quarter t
+Z_{gt} - set to 1 if gourmet juice g is produced in quarter t, 0 otherwise
+
+
+Objective
+---------
+maximise profit = sales - costs
+
+max SUM_{jt} (S * X_{jt}  -  C_0 * b_{j0} * X_{jt} - SUM_{f>0} C_f * 10 * Y_{ft})
+
+
+Constraints
+-----------
+
+Limit on FCOJ: 				SUM_{j} b_{j0} * x_{jt} <= FCOL_t 		for all t in T
+Limit on fruit used: 		SUM_{j} b_{jf} * X_{jt} <= 10 * Y_{ft} 	for all f in F, t in T
+Gourmet juice constraint: 	SUM_{g} Z_{gt} <= 2						for all t in T
+Limit on demand:			X_{jt} <= P_{jt} 						for all j in J, t in T
+Limit on gourmet demand:	X_{jt} <= P_{jt} * Z_{jt} 				for all j in G, t in T
+Non-zero constraint: 		X_{jt} >= 0 							for all j in J, t in T

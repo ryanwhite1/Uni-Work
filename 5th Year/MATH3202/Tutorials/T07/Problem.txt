@@ -1,0 +1,46 @@
+Sets
+----
+
+P 	- set of products {1, 2, ..., 10}
+S 	- set of scenarios
+
+
+Data
+----
+
+r_p 		- first year return on product p in P
+r'_{ps} 	- second year return on product p in P for scenario s in S 
+prob_s 		- probability of scenario s in S 
+
+
+Variables
+---------
+X_p		 	- amount to invest in product p in P
+W_p 		- 1 if we invest in product p in P in the first year, 0 otherwise
+Y_{ps} 		- amount to invest in product p in P in the second year in scenario s in S 
+Z_{ps} 		- 1 if we invest in product p in P in the second year in scenario s in S, 0 otherwise
+
+
+Objective
+---------
+
+max (SUM_p r_p * X_p) + SUM_s (prob_s * (SUM_p r'_{ps} * Y_{ps}))
+
+
+Constraints
+-----------
+
+SUM_p X_p <= 100,000
+X_1 + X_2 <= 30,000
+X_3 + X_4 <= 30,000
+...
+X_9 >= 0.4X_10
+...
+Y_{ps} <= X_p + 10,000 		for all p in P, s in S 
+Y_{ps} >= X_p - 10,000 		for all p in P, s in S 
+X_p >= 0 					for all p in P 
+Y_{ps} >= 0					for all p in P, s in S 
+X_p >= 10000 * W_p 			for all p in P
+X_p <= 100000 * W_p 		for all p in P
+Y_{ps} >= 10000 * Z_{ps} 	for all p in P, s in S
+Y_{ps} <= 100000 * Z_{ps} 	for all p in P, s in S 
