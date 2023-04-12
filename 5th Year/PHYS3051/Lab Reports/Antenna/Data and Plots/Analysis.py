@@ -295,7 +295,7 @@ for j, length in enumerate(test_lengths):
             currval = pred_a[max_ind + a - 1]
             a += -1
     
-    test_HPBW[j] = abs(test_angles[max_ind] - test_angles[max_ind + a])
+    test_HPBW[j] = 2 * abs(test_angles[max_ind] - test_angles[max_ind + a])
 
 fig, ax = plt.subplots(figsize=(fs, fs/3))
 ax2 = ax.twinx()
