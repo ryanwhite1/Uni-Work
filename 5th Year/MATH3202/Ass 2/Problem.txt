@@ -1,0 +1,45 @@
+Sets
+----
+N 				- Nodes
+S subset of N 	- Supplier Nodes 
+E 				- Edges (popes that link nodes)
+T				- Forecasted demand period (time)
+O 				- Options for upgrades (0th option is no upgrade)
+
+Data
+----
+l_e			- Length of edge e in E
+d_{nt}		- Forecast gas demand for node n in N at time t in T
+c_s 		- cost per unit gas from supplier s in S 
+SC_s 		- Maximum supply (supplying capacity) of supplier s in S over one day 
+f_e, t_e 	- "From" and "to" nodes of each edge e in E 
+SU_{os}		- Supply upgrade for option o in O for supplying node s in S 
+UC_{os} 	- Upgrade cost for option o in O for supplying node s in S 
+
+
+
+
+Variables
+---------
+X_{nt}		- gas supplied by supplier n in N at time t in T 				(continuous)
+Y_{et}		- net gas transmission along edge e in E at time t in T 		(continuous)
+W_{os}		- 1 if using upgrade o in O for supplier s in S, 0 otherwise 	(binary)
+
+
+
+
+Objective
+---------
+
+min SUM_{o s} UC_{os} * W_{os} 
+
+
+
+
+
+Constraints
+-----------
+Supply constraints: 		X_{st} <= SC_{s} + SUM_o (W_{os} * SU_{os})										for all s in S, t in T 
+							X_{nt} <= 0																		for all n in N \ S, t in T
+Flow constraint:			X_{nt} + SUM_{e s.t. t_e == n} Y_{et} == SUM_{e s.t. f_e == n} Y_{et} + d_{nt}	for all n in N, t in T
+Unique upgrade constraint: 	SUM_o W_{os} == 1																for all s in S
