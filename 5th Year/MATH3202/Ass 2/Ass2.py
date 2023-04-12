@@ -31,8 +31,9 @@ for year in ["Year5", "Year10"]:
     for n in N:
         demand[n, year] = nodes[year][n]
 
-S = {20: 458, 27: 897, 36: 912, 45: 685}      # supplying nodes
+S = {20: 458, 27: 897, 36: 912, 45: 685}      # supplying nodes. Format is node: MW
 
+# Each upgrade option for each supplying node. Format is (node, option): [MW, $$$]
 Upgrades = {(20, 0): [0, 0], (27, 0): [0, 0], (36, 0): [0, 0], (45, 0): [0, 0],
     (20, 1): [90, 9058000], (27, 1): [180, 17838000], (36, 1): [185, 18352000], (45, 1): [133, 13603000],
     (20, 2): [224, 22582000], (27, 2): [440, 42746000], (36, 2): [454, 42306000], (45, 2): [345, 42306000],
