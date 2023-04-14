@@ -17,24 +17,23 @@ SU_{os}		- Supply upgrade for option o in O for supplying node s in S 				(MJ)
 UC_{os} 	- Upgrade cost for option o in O for supplying node s in S 					($)
 Pmax 		- Maximum capacity of pipeline 												(MJ)
 Pcost		- Pipeline upgrade cost per kilometer										($/km)
-
+CMult_t		- Cost multiplier for t in T (equal to the list [1, 0.7])
 
 
 
 Variables
 ---------
-X_{nt}		- gas supplied by supplier n in N at time t in T 				(continuous)
-Y_{et}		- net gas transmission along edge e in E at time t in T 		(continuous)
-W_{os}		- 1 if using upgrade o in O for supplier s in S, 0 otherwise 	(binary)
-P_{e}		- 1 if duplicating pipeline e in E, otherwise 0 				(binary)
+X_{nt}		- gas supplied by supplier n in N at time t in T 								(continuous)
+Y_{et}		- net gas transmission along edge e in E at time t in T 						(continuous)
+W_{ost}		- 1 if using upgrade o in O for supplier s in S at time t in T, 0 otherwise 	(binary)
+P_{et}		- 1 if duplicating pipeline e in E at time t in T, otherwise 0 					(binary)
 
 
 
 
 Objective
 ---------
-
-min (SUM_{o s} UC_{os} * W_{os}) + (SUM_{e} P_e * l_e * Pcost)
+min ([SUM_{o s t} CMult_t * UC_{os} * W_{ost}] + [SUM_{e t} CMult_t * P_{et} * l_e * Pcost])
 
 
 
@@ -42,8 +41,9 @@ min (SUM_{o s} UC_{os} * W_{os}) + (SUM_{e} P_e * l_e * Pcost)
 
 Constraints
 -----------
-Supply constraints: 			X_{st} <= SC_{s} + SUM_o (W_{os} * SU_{os})										for all s in S, t in T 
+Supply constraints: 			X_{st} <= SC_{s} + SUM_{o, j<=t} (W_{osj} * SU_{os})							for all s in S, t in T 
 								X_{nt} <= 0																		for all n in N \ S, t in T
 Flow constraint:				X_{nt} + SUM_{e s.t. t_e == n} Y_{et} == SUM_{e s.t. f_e == n} Y_{et} + d_{nt}	for all n in N, t in T
-Unique upgrade constraint: 		SUM_o W_{os} == 1																for all s in S
-Pipeline upgrade constraint:	Y_{et} <= Pmax * (1 + P_e)														for all e in E, t in T
+Unique upgrade constraint: 		SUM_{o t} W_{ost} == 1															for all s in S
+Pipeline upgrade constraints:	Y_{et} <= Pmax * (1 + SUM_{j<=t}[P_{ej}])										for all e in E, t in T
+								SUM_t P_{et} <= 1																for all e in E

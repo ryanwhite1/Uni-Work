@@ -27,7 +27,8 @@ for j in range(len(pipes['Pipeline'])):
     E[n1, n2] = distance
 
 demand = {}
-for year in ["Year5", "Year10"]:
+years = ["Year5", "Year10"]
+for year in years:
     for n in N:
         demand[n, year] = nodes[year][n]
 
@@ -41,17 +42,19 @@ Upgrades = {(20, 0): [0, 0], (27, 0): [0, 0], (36, 0): [0, 0], (45, 0): [0, 0],
     
 Pmax = 358 # MJ, maximum pipeline capacity
 Pcost = 200000 # $/km, upgrade cost of pipeline per km
+CMult = [1, 0.7]
 
 m = Model("Upgrades")
 
 # Variables
 X = {(n, t): m.addVar() for n in N for t in T}
 Y = {(e, t): m.addVar() for e in E for t in T}
-W = {(o, s): m.addVar(vtype=GRB.BINARY) for o in O for s in S}
-P = {e: m.addVar(vtype=GRB.BINARY) for e in E}
+W = {(o, s, t): m.addVar(vtype=GRB.BINARY) for o in O for s in S for t in T}
+P = {(e, t): m.addVar(vtype=GRB.BINARY) for e in E for t in T}
 
 # Objective
-m.setObjective(quicksum(W[o, s] * Upgrades[s, o][1] for o in O for s in S) + quicksum(P[e] * E[e] * Pcost for e in E),
+m.setObjective(quicksum(CMult[t] * W[o, s, t] * Upgrades[s, o][1] for o in O for s in S for t in T) 
+               + quicksum(CMult[t] * P[e, t] * E[e] * Pcost for e in E for t in T),
                GRB.MINIMIZE)
 
 # Constraints
@@ -60,22 +63,30 @@ for t in T:
         ## Supply constraints
         if n in S:
             s = n
-            m.addConstr(X[s, t] <= S[s] + quicksum(W[o, s] * Upgrades[s, o][0] for o in O))
+            # below reads as:   node output <= max_supply + all of the upgrades done so far * the upgrade capacity
+            m.addConstr(X[s, t] <= S[s] + quicksum(W[o, s, j] * Upgrades[s, o][0] for o in O for j in T[:t+1]))
         else:
             m.addConstr(X[n, t] <= 0)
             
         # Flow constraint:
         m.addConstr(X[n, t] + quicksum(Y[e, t] for e in E if e[1] == n) == 
-                    quicksum(Y[e, t] for e in E if e[0] == n) + demand[n, "Year10"])
+                    quicksum(Y[e, t] for e in E if e[0] == n) + demand[n, years[t]])
 
 ## Unique upgrade constraint
 for s in S:
-    m.addConstr(quicksum(W[o, s] for o in O) == 1)
+    m.addConstr(quicksum(W[o, s, t] for o in O for t in T) == 1)
+
 ## Pipeline upgrade constraint
 for t in T:
     for e in E:
-        m.addConstr(Y[e, t] <= Pmax * (1 + P[e]))
+        # below reads as:   pipeflow at this time <= max pipeflow + sum of the pipeflow upgrades done so far
+        m.addConstr(Y[e, t] <= Pmax * (1 + quicksum(P[e, j] for j in T[:t+1])))
+
+for e in E:
+    m.addConstr(quicksum(P[e, t] for t in T) <= 1)
 
 
 # Optimise!
 m.optimize()
+
+print(m.objVal)
