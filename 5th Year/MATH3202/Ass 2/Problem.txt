@@ -5,6 +5,7 @@ S subset of N 	- Supplier Nodes
 E 				- Edges (pipes that link nodes)
 T				- Forecasted demand period (time)
 O 				- Options for upgrades (0th option is no upgrade)
+F 				- Forecasts for demand in 10 years
 
 Data
 ----
@@ -18,22 +19,23 @@ UC_{os} 	- Upgrade cost for option o in O for supplying node s in S 					($)
 Pmax 		- Maximum capacity of pipeline 												(MJ)
 Pcost		- Pipeline upgrade cost per kilometer										($/km)
 CMult_t		- Cost multiplier for t in T (equal to the list [1, 0.7])
+DMult_tf	- Demand forecast multiplier for t in T for f in F = [[1, 1, 1], [0.8, 1, 1.2]]
 
 
 
 Variables
 ---------
-X_{nt}		- gas supplied by supplier n in N at time t in T 								(continuous)
-Y_{et}		- net gas transmission along edge e in E at time t in T 						(continuous)
-W_{ost}		- 1 if using upgrade o in O for supplier s in S at time t in T, 0 otherwise 	(binary)
-P_{et}		- 1 if duplicating pipeline e in E at time t in T, otherwise 0 					(binary)
+X_{ntf}		- gas supplied by supplier n in N at time t in T for scenario f in F								(continuous)
+Y_{etf}		- net gas transmission along edge e in E at time t in T for scenario f in F 						(continuous)
+W_{ostf}	- 1 if using upgrade o in O for supplier s in S at time t in T for scenario f in F, 0 otherwise 	(binary)
+P_{etf}		- 1 if duplicating pipeline e in E at time t in T for scenario f in F, otherwise 0  				(binary)
 
 
 
 
 Objective
 ---------
-min ([SUM_{o s t} CMult_t * UC_{os} * W_{ost}] + [SUM_{e t} CMult_t * P_{et} * l_e * Pcost])
+min SUM_f 1/3 * ([SUM_{o s t} CMult_t * UC_{os} * W_{ostf}] + [SUM_{e t} CMult_t * P_{etf} * l_e * Pcost])
 
 
 
@@ -41,9 +43,11 @@ min ([SUM_{o s t} CMult_t * UC_{os} * W_{ost}] + [SUM_{e t} CMult_t * P_{et} * l
 
 Constraints
 -----------
-Supply constraints: 			X_{st} <= SC_{s} + SUM_{o, j<=t} (W_{osj} * SU_{os})							for all s in S, t in T 
-								X_{nt} <= 0																		for all n in N \ S, t in T
-Flow constraint:				X_{nt} + SUM_{e s.t. t_e == n} Y_{et} == SUM_{e s.t. f_e == n} Y_{et} + d_{nt}	for all n in N, t in T
-Unique upgrade constraint: 		SUM_{o t} W_{ost} == 1															for all s in S
-Pipeline upgrade constraints:	Y_{et} <= Pmax * (1 + SUM_{j<=t}[P_{ej}])										for all e in E, t in T
-								SUM_t P_{et} <= 1																for all e in E
+Supply constraints: 			X_{stf} <= SC_{s} + SUM_{o, j<=t} (W_{osjf} * SU_{os})											for all s in S, t in T , f in F
+								X_{ntf} <= 0																					for all n in N \ S, t in T, f in F
+Flow constraint:				X_{ntf} + SUM_{e s.t. t_e == n} Y_{etf} == SUM_{e s.t. f_e == n} Y_{etf} + DMult_tf * d_{nt}	for all n in N, t in T, f in F
+Unique upgrade constraint: 		SUM_{o t} W_{ostf} == 1																			for all s in S, f in F
+Pipeline upgrade constraints:	Y_{etf} <= Pmax * (1 + SUM_{j<=t}[P_{ejf}])														for all e in E, t in T, f in F
+								SUM_t P_{etf} <= 1																				for all e in E, f in F	
+5-Year Upgrade constraints: 	SUM_f P_{e0f} == len(F) * P_{e00}																for all e in E						(this constraint makes all upgrades across F the same over the first 5 years)
+								SUM_{of} W_{os0f} == len(F) * SUM_o W_{os00}													for all s in S 						(analogous constraint to the one above)
