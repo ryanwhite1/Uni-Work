@@ -51,3 +51,5 @@ Pipeline upgrade constraints:	Y_{etf} <= Pmax * (1 + SUM_{j<=t}[P_{ejf}])							
 								SUM_t P_{etf} <= 1																				for all e in E, f in F	
 5-Year Upgrade constraints: 	SUM_f P_{e0f} == len(F) * P_{e00}																for all e in E						(this constraint makes all upgrades across F the same over the first 5 years)
 								SUM_{of} W_{os0f} == len(F) * SUM_o W_{os00}													for all s in S 						(analogous constraint to the one above)
+5-vs-10 Year Upgrade Constr:	SUM_{os} W_{os1f} * UC_{os} + SUM_e P_{e1f} * l_e * Pcost
+								<= 2 * (SUM_{os} W_{os0f} * UC_{os} + SUM_e P_{e0f} * l_e * Pcost)								for all f in F

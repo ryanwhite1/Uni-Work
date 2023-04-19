@@ -13,8 +13,8 @@ import math
 nodes = pd.read_csv("nodes3.csv")
 pipes = pd.read_csv("pipelines.csv")
 
-N = range(len(nodes['Node']))
-T = range(2) # number of days we're looking at
+N = range(len(nodes['Node'])) # number of nodes in the pipeline system
+T = range(2) # number of time periods we're looking at
 O = range(4) # number of options we have to upgrade (0th option is no upgrade)
 F = range(3) # number of possible demand scenarios in 10 years
 
@@ -28,10 +28,10 @@ for j in range(len(pipes['Pipeline'])):
     E[n1, n2] = distance
 
 demand = {}
-years = ["Year5", "Year10"]
+years = ["Year5", "Year10"] # each time period we're looking at
 for year in years:
     for n in N:
-        demand[n, year] = nodes[year][n]
+        demand[n, year] = nodes[year][n] # get the demand in a specific year at the specific node
 
 S = {20: 458, 27: 897, 36: 912, 45: 685}      # supplying nodes. Format is node: MW
 
@@ -43,10 +43,10 @@ Upgrades = {(20, 0): [0, 0], (27, 0): [0, 0], (36, 0): [0, 0], (45, 0): [0, 0],
     
 Pmax = 358 # MJ, maximum pipeline capacity
 Pcost = 200000 # $/km, upgrade cost of pipeline per km
-CMult = [1, 0.7] # Cost multiplier for upgrading things now vs in 5 years
-DMult = [[1, 1, 1], [0.8, 1, 1.2]] # Demand multipliers for forecast demand in 10 years
+CMult = [1, 0.7] # Cost multiplier for upgrading things now vs in 5 years; CMult[T]
+DMult = [[1, 1, 1], [0.8, 1, 1.2]] # Demand multipliers for forecast demand in 10 years; DMult[T][F]
 
-m = Model("Upgrades")
+m = Model("Upgrades") # initialise model
 
 # Variables
 X = {(n, t, f): m.addVar() for n in N for t in T for f in F}
@@ -95,8 +95,34 @@ for e in E:
 for s in S:
     m.addConstr(quicksum(W[o, s, 0, f] for f in F for o in O) == len(F) * quicksum(W[o, s, 0, 0] for o in O))
 
+## 10 vs 5 Year Upgrade Constraint
+C = {}
+for f in F:
+    C[f] = m.addConstr(quicksum(W[o, s, 1, f] * Upgrades[s, o][1] for o in O for s in S) + quicksum(P[e, 1, f] * E[e] * Pcost for e in E)
+                <= 2 * quicksum(W[o, s, 0, f] * Upgrades[s, o][1] for o in O for s in S) + quicksum(P[e, 0, f] * E[e] * Pcost for e in E))
 
 # Optimise!
 m.optimize()
 
-print(m.objVal)
+print("Optimal solution:", round(m.objval, 0))
+
+# Upgrade values
+for f in F: 
+    print("Scenario:", f)
+    for t in T:
+        print(years[t])
+        for s in S:
+            print([W[o, s, t, f].x for o in O])
+        for e in E:
+            if P[e, t, f].x == 1:
+                print("Upgraded pipe linking:", e, "for cost:", E[e] * Pcost * CMult[t])
+    print("")
+    
+for f in F:
+    print(f"Slack in scenario {f} is ${round(C[f].slack, 0)}")
+
+
+
+
+
+
