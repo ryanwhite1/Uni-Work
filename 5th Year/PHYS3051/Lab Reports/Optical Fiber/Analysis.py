@@ -14,8 +14,8 @@ def gaussian(x, a, b, c):
     return a * np.exp(-(x - b)**2 / (2 * c**2))
 def sine(x, A, P, S, E):
     return A * np.sin((2 * np.pi / P) * (x - S)) + E
-def cosSquare(x, A, S):
-    return A * np.cos(x - S)**2
+def cosSquare(x, A, S, B):
+    return A * np.cos(x - S)**2 + B
 def acceptance_angle(yvals):
     max_val = max(yvals)
     max_ind = np.argwhere(yvals == max_val)[0][0]
@@ -26,7 +26,7 @@ def acceptance_angle(yvals):
     while currval > max_val * 0.05:
         currval = yvals[max_ind + a]
         a += 1
-    return a / 2
+    return a
 
 def monte_carlo(x, y, xerr, yerr, iters, func, p0=None, method='fit'):
     '''
@@ -42,7 +42,7 @@ def monte_carlo(x, y, xerr, yerr, iters, func, p0=None, method='fit'):
         
         if method == 'fit':
             new_y = np.random.normal(y, yerr)
-            iter_params, covar = curve_fit(func, new_x, new_y, p0=p0)
+            iter_params, covar = curve_fit(func, new_x, new_y, p0=p0, maxfev=1500)
         elif method == 'find':
             iter_params = func(new_x)
         params[i] = iter_params
@@ -90,8 +90,8 @@ x = np.linspace(0, max(polarisation_angles), 100)
 
 pol_params, pol_params_unc = monte_carlo(polarisation_angles, polarisation_means,
                                          4 * np.pi/180, polarisation_stds, 
-                                         1000, cosSquare, p0=[12, 0])
-fit_y = cosSquare(x, pol_params[0], pol_params[1])
+                                         1000, cosSquare, p0=[12, 1, 0])
+fit_y = cosSquare(x, pol_params[0], pol_params[1], pol_params[2])
 
 ax.plot(x, fit_y, c='tab:blue')
 ax.set_ylim(ymin=0)
@@ -105,7 +105,7 @@ fig.savefig(fname + '.png', bbox_inches='tight', dpi=300)
 fig.savefig(fname + '.pdf', bbox_inches='tight', dpi=300)
 
 # predicted = sine(polarisation_angles, pol_params[0], pol_params[1], pol_params[2], pol_params[3])
-predicted = cosSquare(polarisation_angles, pol_params[0], pol_params[1])
+predicted = cosSquare(polarisation_angles, pol_params[0], pol_params[1], pol_params[2])
 chi2_polarised = sum((polarisation_means - predicted)**2 / predicted)
 chi2_dof_polarised = chi2_polarised / len(predicted)
 
@@ -167,15 +167,16 @@ for i, im_name in enumerate(names):
     ax.set_xlabel("Horizontal Pixel")
     
     
-    # params, covar = curve_fit(gaussian, x, red_level, p0=[150, 500, 10])
-    params, stds = monte_carlo(x, red_level, 3, np.sqrt(red_level), 1000, gaussian, p0=[150, 500, 10])
+    params, stds = monte_carlo(x, red_level, 3, np.sqrt(red_level), 2000, gaussian, p0=[150, 500, 10])
+    
+    
     gauss_fit = gaussian(x, params[0], params[1], params[2])
     val1 = round(params[1] - 2 * params[2])
     val2 = round(params[1] + 2 * params[2])
     chi2[i] = sum((red_level[val1:val2] - gauss_fit[val1:val2])**2 / gauss_fit[val1:val2])
     chi2_dof[i] = chi2[i] / len(x[val1:val2])
     
-    n = 1000
+    n = 2000
     accept_angles = np.zeros(n)
     for j in range(n):
         a = np.random.normal(params[0], stds[0])
@@ -184,7 +185,7 @@ for i, im_name in enumerate(names):
         gauss_fit = gaussian(x, a, b, c)
         accept_angles[j] = acceptance_angle(gauss_fit) # pixels
         
-    accept_angle[i] = np.mean(accept_angles)
+    accept_angle[i] = min(np.mean(accept_angles), 2 * params[2])
     accept_angle_unc[i] = np.std(accept_angles)
     
     ax.plot(x, gauss_fit, lw=2, c='tab:blue')
