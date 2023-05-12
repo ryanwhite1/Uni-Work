@@ -1,0 +1,29 @@
+------- Data -------
+d_t 			- demand for no. of gas cylinders on day t 
+r 				- sale price (revenue) of gas cylinder
+cap				- capacity for overnight cylinder storage 
+DC(n)			- delivery cost for delivering n cylinders: 	DC(n) = 300 + 50n
+
+
+
+------- Stages -------
+Days 			- t \in {0,...,13}
+
+
+------- States -------
+s_t 			- number of stored cylinders on day t 
+
+
+------- Actions -------
+n_t 			- number of cylinders to deliver on day t
+
+
+------- Value Function -------
+V_[t](t, s_t) 	= maximum profit if we start day t with s_t cylinders currently in storage
+				= max_[0 <= n_t <= cap - s_t + d_t] {min(d_t, s + n) * r - min(n, 1) * DC(n) + V_[t+1] (t + 1, s_t + n - min(d_t, s + n))}
+
+- Base Cases -
+V_[14](14, s_t) = 0
+
+
+Seek: V_[0](0, 0)
