@@ -12,6 +12,9 @@ def deliv_cost(n):
 demand = [7, 14, 8, 8, 12, 15, 6, 15, 7, 12, 13, 9, 6, 11]
 r = 120
 cap = 30
+Dcap = 1000
+Mcyl = 45
+Ncyl = math.floor(Dcap / Mcyl)
 
 gas_ = {}
 def gas(t, s):
@@ -19,6 +22,7 @@ def gas(t, s):
         if t == 14:
             gas_[t, s] = (0, 'finish')
         else:
+            print(t)
             gas_[t, s] = max([(min(demand[t], s + n) * r - min(n, 1) * deliv_cost(n) + 
-                               gas(t + 1, s + n - min(demand[t], s + n))[0], n) for n in range(0, cap - s + demand[t] + 1)])
+                               gas(t + 1, s + n - min(demand[t], s + n))[0], n) for n in range(0, min(cap - s + demand[t], Ncyl) + 1)])
     return gas_[t, s]

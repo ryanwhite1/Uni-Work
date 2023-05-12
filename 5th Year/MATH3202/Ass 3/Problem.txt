@@ -1,8 +1,12 @@
 ------- Data -------
 d_t 			- demand for no. of gas cylinders on day t 
+hd_t 			- high demand for no. of gas cylinders on day to
+p				- probability of high demand of cylinders on a given day
 r 				- sale price (revenue) of gas cylinder
 cap				- capacity for overnight cylinder storage 
 DC(n)			- delivery cost for delivering n cylinders: 	DC(n) = 300 + 50n
+Dcap			- maximum weight of cylinders to transport
+Mcyl			- mass of a cylinder
 
 
 
@@ -20,7 +24,7 @@ n_t 			- number of cylinders to deliver on day t
 
 ------- Value Function -------
 V_[t](t, s_t) 	= maximum profit if we start day t with s_t cylinders currently in storage
-				= max_[0 <= n_t <= cap - s_t + d_t] {min(d_t, s + n) * r - min(n, 1) * DC(n) + V_[t+1] (t + 1, s_t + n - min(d_t, s + n))}
+				= max_[0 <= n_t <= min(cap - s_t + d_t, floor(Dcap/Mcyl))] {min(d_t, s + n) * r - min(n, 1) * DC(n) + V_[t+1] (t + 1, s_t - min(d_t, s + n) + n)}
 
 - Base Cases -
 V_[14](14, s_t) = 0
