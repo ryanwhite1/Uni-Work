@@ -23,8 +23,8 @@ n_t 			- number of cylinders to deliver on day t
 
 
 ------- Value Function -------
-V_[t](t, s_t) 	= maximum profit if we start day t with s_t cylinders currently in storage
-				= max_[0 <= n_t <= min(cap - s_t + d_t, floor(Dcap/Mcyl))] {min(d_t, s + n) * r - min(n, 1) * DC(n) + V_[t+1] (t + 1, s_t - min(d_t, s + n) + n)}
+V_[t](t, s_t) 	= expected maximum profit if we start day t with s_t cylinders currently in storage
+				= max_[0 <= n_t <= min(cap - s_t + hd_t, floor(Dcap/Mcyl))] 	{(p * min(hd_t, s + n) + (1 - p) * min(d_t, s + n)) * r - min(n, 1) * DC(n) + p * V_[t+1](t + 1, s_t + n - min(hd_t, s + n)) + (1 - p) * V_[t+1](t+1, min(cap, s + n - min(d_t, s + n))}
 
 - Base Cases -
 V_[14](14, s_t) = 0
