@@ -4,7 +4,6 @@ Created on Fri May 12 14:00:37 2023
 
 @author: ryanw
 """
-import math
 
 def deliv_cost(n, L):
     ''' Delivery cost for ordering n small gas cylinders and L large gas cylinders
@@ -44,7 +43,6 @@ large_cap = 2
 Dcap = 1000
 Mcyl = 45
 Mcyl_L = 90
-Ncyl = math.floor(Dcap / Mcyl)
 
 gas_ = {}
 def gas(t, s, L):
@@ -57,8 +55,8 @@ def gas(t, s, L):
                                   (1 - p) * gas(t + 1, min(cap, s + n - min(demand[t], s + n)), L + N - large_demand[t])[0], 
                                   [n, N]) \
                                   for N in range(min(large_demand[t], max(0, large_demand[t] - L)), 
-                                                min(large_cap - L + large_demand[t], math.floor(Dcap / Mcyl_L)) + 1) \
-                                  for n in range(0, min(cap - s + high_demand[t], math.floor((Dcap - N * Mcyl_L) / Mcyl)) + 1)
+                                                min(large_cap - L + large_demand[t], Dcap // Mcyl_L) + 1) \
+                                  for n in range(0, min(cap - s + high_demand[t], (Dcap - N * Mcyl_L) // Mcyl) + 1)
                                   ])
     return gas_[t, s, L]
     
