@@ -7,7 +7,9 @@ r_n 			- sale price (revenue) of a normal gas cylinder
 r_L				- sale price (revenue) of a large gas cylinder
 cap_n			- capacity for overnight normal cylinder storage 
 cap_L 			- capacity for overnight large cylinder storage
-DC(n, L)		- delivery cost for delivering n normal and L large cylinders: 	DC(n, L) = 300 + 50n + 80L
+BDC				- base delivery cost
+NDC				- normal (45kg) cylinder delivery cost
+LDC 			- large (90kg) cylinder delivery cost
 Dcap			- maximum weight of cylinders to transport
 Mcyl_n			- mass of a normal cylinder
 Mcyl_L 			- mass of a large cylinder
@@ -30,12 +32,20 @@ N_t 			- number of large cylinders to deliver on day t
 
 ------- Value Function -------
 V_[t](t, s_t, L_t) 	= expected maximum profit if we start day t with s_t normal and L_t large cylinders currently in storage
-					= max_[0 <= n_t <= min(cap_n - s_t + hd_t, floor((Dcap - Mcyl_L * N_t) / Mcyl_n)),
-						   min(LD_t, max(0, LD_t - L_t)) <= N_t <= min(cap_L - L_t + LD_t, floor(Dcap / Mcyl_L)] 	
-						   {(p * min(hd_t, s_t + n_t) + (1 - p) * min(d_t, s_t + n_t)) * r_n + LD_t * r_L - min(n_t + N_t, 1) * DC(n_t, N_t) + p * V_[t+1](t + 1, s_t + n_t - min(hd_t, s_t + n_t), L_t + N_t - LD_t) + (1 - p) * V_[t+1](t+1, min(cap, s_t + n_t - min(d_t, s_t + n_t)), L_t + N_t + LD_t)}
+					= max_[0 <= n_t <= min(cap_n - s_t + hd_t + 2 * deficit(t, L_t, N_t), floor((Dcap - Mcyl_L * N_t) / Mcyl_n)),
+						   0 <= N_t <= min(cap_L - L_t + LD_t, floor(Dcap / Mcyl_L)] 	
+						   {profit(t, s_t, L_t, n, N) + p * V_[t+1](t + 1, s_t + n_t - 2 * deficit(t, L_t, N_t) - min(hd_t, s_t + n_t), L_t + N_t - LD_t) + (1 - p) * V_[t+1](t+1, min(cap, s_t + n_t - min(d_t, s_t + n_t)), L_t + N_t + LD_t)}
 
 - Base Cases -
 V_[14](14, s_t, L_t) = 0
+
+- Additional Functions - 
+deficit(t, L, N)			- deficit function for how many large cylinders we're missing to meet demand: deficit(t, L, N) = max(0, LD_t - L - N)
+DC(n, L)					- delivery cost for delivering n normal and L large cylinders: 	DC(n, L) = BDC + NDC * n + LDC * L
+profit(t, s, L, n, N)		- profit for day t given current storage (s, L) and delivery (n, N): profit(t, s, L, n, N) = (p * min(hd_t, s + n - 2 * deficit(t, L, N)) + (1 - p) * min(d_t, s + n - 2 * deficit(t, L, N))) * r_n + LD_t * r_N - min(n + N, 1) * DC(n, N)
+small_step(t, s, L, n, N)	- calculates the next 45kg inventory amount given the current inventory and the sales: small_step(t, s, L, n, N) = s_t + n_t - 2 * deficit(t, L, N) - min(d_t, s + n - 2 * deficit(t, L, N))
+high_step(t, s, L, n, N)	- calculates the next 45kg inventory amount given the current inventory and the high sales: high_step(t, s, L, n, N) = s_t + n_t - 2 * deficit(t, L, N) - min(hd_t, s + n - 2 * deficit(t, L, N))
+large_step(t, L, N)			- calculates the next 90kg inventory amount given the current inventory and the high sales: large_step(t, L, N) = L + N - LD_t + deficit(t, L, N)
 
 
 Seek: V_[0](0, 0, 0)
