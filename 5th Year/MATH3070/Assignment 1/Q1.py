@@ -13,11 +13,11 @@ plt.rcParams['font.family']='serif'
 plt.rcParams['mathtext.fontset']='cm'
 
 def model(x, k, r):
-    return r * x * np.exp(- x/k)
+    return r * x * np.exp(- np.log(r) * x / k)
 
-x0 = 1
+x0 = 0.1
 k = 1
-rs = np.linspace(0, 35, 500)
+rs = np.linspace(0.001, 35, 500)
 
 fig, ax = plt.subplots(figsize=(8, 5))
 
