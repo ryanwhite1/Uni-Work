@@ -33,10 +33,43 @@ for i, r in enumerate(rs):
             pops[i, j] = model(pops[i, j - 1], k, r)
       
 for i in range(1000, 1500):
-    ax.scatter(rs, pops[:, i], s=0.01, c='tab:blue')
-# ax.plot(rs, pops[:, 1000:1500])
+    ax.scatter(rs, pops[:, i] / k, s=0.01, c='tab:blue')
     
 ax.set_xlabel("Proliferation Value, $r$")
 ax.set_ylabel("Late time population (prop. of $k$)")
 fig.savefig('Q1d.png', dpi=400, bbox_inches='tight')
 fig.savefig('Q1d.pdf', dpi=400, bbox_inches='tight')
+
+
+### Q1e ###
+
+def modelH(x, k, r):
+    if x < k / r:
+        return r * x
+    if x >= k / r:
+        return k
+
+x0 = 0.1
+k = 1
+rs = np.linspace(0.001, 35, 500)
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+times = np.linspace(0, 1500, 1500)
+
+pops = np.zeros((len(rs), len(times)))
+
+pops[:, 0] = x0
+
+for i, r in enumerate(rs):
+    for j, t in enumerate(times):
+        if j != 0:
+            pops[i, j] = modelH(pops[i, j - 1], k, r)
+      
+for i in range(1000, 1500):
+    ax.scatter(rs, pops[:, i] / k, s=0.01, c='tab:blue')
+    
+ax.set_xlabel("Proliferation Value, $r$")
+ax.set_ylabel("Late time population (prop. of $k$)")
+fig.savefig('Q1e.png', dpi=400, bbox_inches='tight')
+fig.savefig('Q1e.pdf', dpi=400, bbox_inches='tight')
