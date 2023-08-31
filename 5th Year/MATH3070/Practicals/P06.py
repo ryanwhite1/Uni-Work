@@ -73,13 +73,15 @@ for i, a in enumerate(attracts):
         # choose 1 if either crop 1/2 negative => one crop is increasing, one is decreasing
         # choose 2 if neither crop 1/2 negative => populations increasing
         
-        if dom_eigvec_aR[0] < 0 or dom_eigvec_aR[2] < 0:
-            if dom_eigvec_aR[2] < 0 and dom_eigvec_aR[0] < 0:
-                aR_mesh[i, j] = 0 
-            else:
-                aR_mesh[i, j] = 1
-        else:
-            aR_mesh[i, j] = 2
+        # if dom_eigvec_aR[0] < 0 or dom_eigvec_aR[2] < 0:
+        #     if dom_eigvec_aR[2] < 0 and dom_eigvec_aR[0] < 0:
+        #         aR_mesh[i, j] = 0 
+        #     else:
+        #         aR_mesh[i, j] = 1
+        # else:
+        #     aR_mesh[i, j] = 2
+        
+        aR_mesh[i, j] = np.mean([dom_eigvec_aR[k] for k in [1, 3]])
 
 fig, ax = plt.subplots()
 # ax.matshow(aR_mesh)
