@@ -1,0 +1,94 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Sep 11 20:38:46 2023
+
+@author: ryanw
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+plt.rcParams.update({"text.usetex": True})
+plt.rcParams['font.family']='serif'
+plt.rcParams['mathtext.fontset']='cm'
+
+### --- Q1 h --- ###
+
+# define some nice non-dimensionalised constants
+alpha = 0.3
+gamma = 2 * alpha / (1 - alpha)
+beta = 1
+
+def dxdtau(x, y):
+    timestep = x * (1 - x / gamma - y / (1 + x))
+    return timestep
+def dydtau(x, y):
+    timestep = beta * y * (x / (1 + x) - alpha)
+    return timestep
+
+def non_dimen_pred_prey(t, z):
+    x, y = z
+    return [dxdtau(x, y), dydtau(x, y)]
+
+x0 = [0.1, 0.01, 1]
+y0 = [0, 1, 0.8]
+colours = ['tab:blue', 'tab:red', 'tab:green']
+
+times = np.linspace(0, 100, 10000)
+dt = times[1] - times[0]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+ax.grid()
+for i in range(len(x0)):
+    ax.scatter(x0[i], y0[i], marker='x', c=colours[i])
+    
+    sol = solve_ivp(non_dimen_pred_prey, [0, max(times)], [x0[i], y0[i]], dense_output=True)
+    
+    z = sol.sol(times)
+    prey, preds = z
+    
+    ax.plot(prey, preds, label=f'$(x_0, y_0) = ({x0[i]}, {y0[i]})$', c=colours[i])
+
+equilibria = [(0, 0), (gamma, 0), (alpha / (1 - alpha), (gamma - alpha / (1 - alpha)) / ((1 - alpha) * gamma))]
+for i, equilibrium in enumerate(equilibria):
+    x, y = equilibrium
+    label = 'Equilibrium' if i == 0 else None
+    ax.scatter(x, y, marker='o', c='k', label=label)
+ax.set_ylabel("Non-Dimensionalised Predator Population, $y$")
+ax.set_xlabel("Non-Dimensionalised Prey Population, $x$")
+ax.legend()
+
+for extension in [".png", ".pdf"]:
+    fig.savefig("PhasePortrait" + extension, dpi=400, bbox_inches='tight')
+    
+    
+### --- Q1 i --- ###
+a_vals = np.linspace(0, 2, 1000)
+gammas = np.linspace(0, 5, 1000)
+agam_mesh = np.zeros((len(a_vals), len(gammas)))
+
+for i, a in enumerate(a_vals):
+    for j, gam in enumerate(gammas):
+        val = 0
+        if a > (gam / (1 + gam)):
+            val += 1
+        if (gam > a / (1 + a)) and (0 < a < 1/2):
+            val += 1
+        agam_mesh[i, j] = val
+        
+fig, ax = plt.subplots()
+img = ax.pcolormesh(a_vals, gammas, agam_mesh)
+ax.set_xlabel(r"Non-dimensional Predator Mortality $\alpha$")
+ax.set_ylabel(r"Non-dimensional Prey Carrying Capacity $\gamma$")
+ax.text(1, 3, "Predator Extinct")
+ax.text(1, 1.5, "No Stable Equilibria")
+ax.text(0.2, 1, "Predator Extinct and Coexistence")
+ax.text(0.05, 2, "Coexistence Only", rotation='vertical')
+fig.colorbar(img, label='No. of Stable Equilibria')
+for extension in [".png"]:
+    fig.savefig("BifurcationDiagram" + extension, dpi=400, bbox_inches='tight')
+
+
+
+
