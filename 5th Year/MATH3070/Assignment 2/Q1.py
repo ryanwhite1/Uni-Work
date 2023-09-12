@@ -16,7 +16,7 @@ plt.rcParams['mathtext.fontset']='cm'
 # ### --- Q1 h --- ###
 
 # # define some nice non-dimensionalised constants
-# alpha = 0.4
+# alpha = 0.3
 # gamma = 2
 # beta = 1
 
@@ -70,33 +70,49 @@ agam_mesh = np.zeros((len(a_vals), len(gammas)))
 
 for i, a in enumerate(a_vals):
     for j, gam in enumerate(gammas):
-        # print(gam / (1 + gam))
-        if a < (gam / (1 + gam)):   # (gamma, 0) stable
-            if gam > (a / (1 - a)): # coexistence stable
-                val = 1
-            # elif a < 1:
-            #     val = 2
+        # # print(gam / (1 + gam))
+        # if a > (gam / (1 + gam)):   # (gamma, 0) stable
+        #     if gam > (a / (1 - a)): # coexistence stable
+        #         if a > 1:
+        #             val = 6
+        #         else:
+        #             val = 1
+        #     else:
+        #         val = 3 
+            
+        # elif gam > (a / (1 - a)):
+        #     # if a < 1:
+        #     #     val = 4
+        #     # else:
+        #     #     val = 5
+        #     val = 2
+        # else: 
+        #     val = 0
+        # agam_mesh[i, j] = val
+        
+        if (a > 1) and (a < gam / (1 + gam)):
+            agam_mesh[i, j] = 0
+        elif (gam > a / (1 - a)) and (a < 1): # coexistence!
+            if (a > gam / (1 + gam)):   # predator extinct
+                agam_mesh[i, j] = 1
             else:
-                val = 3 
-        elif gam > (a / (1 - a)):
-            if a < :
-                val = 4
-            else:
-                val = 5
-        else: 
-            val = 0
+                agam_mesh[i, j] = 2
+        elif (a > gam / (1 + gam)): # only predator extinct
+            agam_mesh[i, j] = 3
+        else:
+            agam_mesh[i, j] = 0
 
         
-        agam_mesh[i, j] = val
+        
         
 fig, ax = plt.subplots(figsize=(8, 6))
 img = ax.pcolormesh(a_vals, gammas, agam_mesh.T)
 ax.set_xlabel(r"Non-dimensional Predator Mortality $\alpha$")
 ax.set_ylabel(r"Non-dimensional Prey Carrying Capacity $\gamma$")
-ax.text(1.25, 1.5, "Predator Extinction\nStable")
+ax.text(1, 1.5, "Predator Extinction\nStable")
 # ax.text(0.75, 2.5, "Both\nExtinction")
-ax.text(0.5, 0.6, "Both Stable")
-ax.text(0.1, 2, "Coexistence\nStable")
+# ax.text(0.5, 0.6, "Both Stable")
+ax.text(0.2, 2, "Coexistence\nand Predator\nExtinction\nStable")
 fig.colorbar(img, label='Type of Stable Equilibria')
 for extension in [".png"]:
     fig.savefig("BifurcationDiagram" + extension, dpi=400, bbox_inches='tight')
