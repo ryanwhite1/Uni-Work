@@ -81,11 +81,11 @@ agam_mesh = np.zeros((len(a_vals), len(gammas)))    # initialise a matrix to sto
 for i, a in enumerate(a_vals):
     for j, gam in enumerate(gammas):
         if (a > gam / (1 + gam)):   # pred extinct stable
-            if (gam < 1 + 2 * a / (1 - a)) and (gam > a / (1 - a)):     # both stable
+            if (gam < 1 + 2 * a / (1 - a)) and (a < (1 + 1/gam)**-1):     # both stable
                 agam_mesh[i, j] = 3
             else:   # only predator extinct is stable
                 agam_mesh[i, j] = 1 
-        elif (gam < 1 + 2 * a / (1 - a)) and (gam > a / (1 - a)):   # only coexistence stable
+        elif (gam < 1 + 2 * a / (1 - a)) and (a < (1 + 1/gam)**-1):   # only coexistence stable
             agam_mesh[i, j] = 2
         else:   # neither of them are stable
             agam_mesh[i, j] = 0

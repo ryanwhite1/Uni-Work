@@ -21,8 +21,8 @@ def model(xt):
 
 def leastsquares(data):
     # least squares estimate for a_hat based on the equation derivation in question 2a
-    numer = sum([2 * data[i] * data[i + 1] / (b + data[i]) for i in range(len(data) - 1)])
-    denom = sum([2 * data[i]**2 / (b + data[i])**2 for i in range(len(data) - 1)])
+    numer = sum([data[i] * data[i + 1] / (b + data[i]) for i in range(len(data) - 1)])
+    denom = sum([data[i]**2 / (b + data[i])**2 for i in range(len(data) - 1)])
     return numer / denom
 
 
