@@ -34,7 +34,7 @@ enviro_data$tmax <- 100 # Set length of simulation (years)
 # Read in the parameter values
 Groups <- read.csv("TestGroups.csv", stringsAsFactors = FALSE) # Load in functional group information. This can be edited directly.
 
-Groups$SearchCoef <- 480
+# Groups$SearchCoef[1:9] <- 800
 
 jobname <- "Default"  # This is the job name used on the HPC queue, and also to save the run: Recommend: YYYYMMDD_AbbrevExperimentName.
 
@@ -44,6 +44,7 @@ out$model$model_runtime <- system.time(                     # Saves the time tak
 
 # Save the output if you want
 saveRDS(out, file = paste0("RawOutput/", jobname, ".RDS"))
+# out <- readRDS("RawOutput/Default.RDS")   # read in data from a run
 
 
 ## Plotting
@@ -51,10 +52,13 @@ saveRDS(out, file = paste0("RawOutput/", jobname, ".RDS"))
 # Plot predator-prey
 # Have a look at the predator-prey interactions
 (ggPP <- fZooMSS_PlotPredPrey(Groups))
+# ggsave("DefaultPredPrey.pdf", ggPP, width=6, height=4)
+ggsave(paste0("Plots/", jobname, "PredPrey.pdf"), ggPP, width=6, height=4)
 
 # Plot Size Spectra
 #(ggSizeSpec <- fZooMSS_Plot_SizeSpectra(out)) # abundance size spectra
 (ggBiomassSizeSpec <- fZooMSS_Plot_BiomassSizeSpectra(out)) # biomass size spectra
+ggsave(paste0("Plots/", jobname, "SizeSpectra.pdf"), ggBiomassSizeSpec, width=6, height=4)
 
 # Plot PPMRs
 # (ggPPMR <- fZooMSS_Plot_PPMR(out))
@@ -64,12 +68,13 @@ saveRDS(out, file = paste0("RawOutput/", jobname, ".RDS"))
 ggBiomassTS <- fZooMSS_Plot_BiomassTimeSeries(out)  # biomass time series
 ggGrowthTS <- fZooMSS_Plot_GrowthTimeSeries(out) # growth rate time series
 #ggPredTS <- fZooMSS_Plot_PredTimeSeries(out) # predation mortality time series
-(ggBiomassTS / ggGrowthTS) + plot_layout(guides = "collect") # plot them on top of each other
+ggCombined <- (ggBiomassTS / ggGrowthTS) + plot_layout(guides = "collect") # plot them on top of each other
+ggsave(paste0("Plots/", jobname, "Biomass-Growth-TimeSeries.pdf"), ggCombined, width=8, height=6)
 
 # Get abundance by size class
 Ssize <- fZooMSS_SumSpecies(list(out$abundances))[[1]] # Function returns a list so we get the first
 
-# Get abundance by species
+# Get abundance by species (number density per volume)
 Sspecies <- fZooMSS_SumSize(list(out$abundances))[[1]] # Function returns a list so we get the first
 
 # Get the wet weight of each size class
@@ -81,7 +86,7 @@ WWspecies <- fZooMSS_SpeciesBiomass(list(out$abundances), out$model)[[1]] # Func
 # Get the carbon biomass of each group
 C <- fZooMSS_SpeciesCarbonBiomass(list(out$abundances), out$model)[[1]] # Function returns a list so we get the first
 
-# Get the trophic level of each group
+# Get the trophic level of each group (phytoplankton val = 1. Anything that eats exclusively phytoplankton has val = 2, etc)
 TL <- fZooMSS_TrophicLevel(out)
 
 df <- data.frame(Groups, Abundance = Sspecies, Biomass = WWspecies, TrophicLevel = TL, CarbonBiomass = C)
