@@ -34,7 +34,9 @@ enviro_data$tmax <- 100 # Set length of simulation (years)
 # Read in the parameter values
 Groups <- read.csv("TestGroups.csv", stringsAsFactors = FALSE) # Load in functional group information. This can be edited directly.
 
-# Groups$SearchCoef[1:9] <- 800
+# Groups$SearchCoef[1:9] <- 480
+# Groups$PPMR[3:9] <- 3
+# Groups$PPMRscale[3:12] <- NA
 
 jobname <- "Default"  # This is the job name used on the HPC queue, and also to save the run: Recommend: YYYYMMDD_AbbrevExperimentName.
 
@@ -94,3 +96,4 @@ write.csv(x = df, file = paste0("Outputs", jobname, ".csv"))
 
 sum(WWspecies[3:9])
 sum(WWspecies[10:12])
+
