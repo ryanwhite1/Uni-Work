@@ -37,6 +37,7 @@ Groups <- read.csv("TestGroups.csv", stringsAsFactors = FALSE) # Load in functio
 # Groups$SearchCoef[1:9] <- 480
 # Groups$PPMR[3:9] <- 3
 # Groups$PPMRscale[3:12] <- NA
+# Groups$SearchExp[1:12] <- 0.9
 
 jobname <- "Default"  # This is the job name used on the HPC queue, and also to save the run: Recommend: YYYYMMDD_AbbrevExperimentName.
 
