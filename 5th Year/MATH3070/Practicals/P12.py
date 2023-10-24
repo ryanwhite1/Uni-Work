@@ -89,9 +89,9 @@ fig, axes = plt.subplots(nrows=2, gridspec_kw={"hspace":1})
 
 k_est = round(np.median(posterior), 1)
 p1, p2 = np.percentile(posterior, [16, 84])
-plus, minus = round(abs(k_est - p1), 1), round(abs(k_est - p2), 1)
+plus, minus = round(abs(k_est - p2), 1), round(abs(k_est - p1), 1)
 
-axes[0].scatter(np.arange(0, len(posterior)), posterior)
+axes[0].scatter(np.arange(0, len(posterior)), posterior, s=0.5)
 axes[1].hist(posterior, bins=100)
 axes[1].set(xlabel="Carrying Capacity", ylabel="Frequency",
             title=f"$k_{{est}} = {k_est}^{{+{plus}}}_{{-{minus}}}$")
@@ -108,5 +108,77 @@ for i in range(len(years[1:])):
 ax.scatter(years, biomass)
 ax.plot(years[1:], ys)
 ax.set(xlabel="Year", ylabel="Population Biomass (Tonnes)")
+
+
+### --- Week 13 Practical --- ###
+
+nk = len(posterior)     # number of samples
+
+nt = 100    # number of timesteps
+
+nQ = 100    # number of quotas
+
+Q = np.linspace(0, 25, nQ)  # range of quotas
+# K = np.linspace(min(posterior), max(posterior), nk)
+
+# Now we want to compute the yield given a quota q and carrying capacity k
+Y = np.zeros((nQ, nk))
+
+Ymean = np.zeros(nQ)    # initialise expected yield
+
+k_hat = np.median(posterior)    # median value of samples
+
+Ym = np.zeros(nQ)   # initialise vector for yield under mean k for each quota
+
+B = np.zeros(nt)    # initialise the biomass vector
+B[0] = biomass[-1]  # set initial biomass to our last data point as per question requirements
+
+# Calculate the yield for each quota and k in the sample
+for i in range(nQ):
+    for j in range(nk): # begin k loop
+        Yield = 0
+        for t in range(1, nt):  # now loop over time
+            B[t] = bevHolt(B[t - 1], posterior[j])  # calculate population at next time step
+            harvest = min(Q[i], B[t])
+            B[t] += - harvest
+            Yield += harvest
+            
+        Y[i, j] = Yield     # now store yield in our matrix
+        
+    Ymean[i] = np.mean(Y[i, :])
+    
+import numpy as np
+NUM = 100    # plot yield vs quota for first np samples in the posterior
+
+fig, ax = plt.subplots()
+
+for i in range(NUM):
+    ax.plot(Q, Y[:, i])
+    
+ax.plot(Q, Ymean[:NUM], lw=3, c='k')
+
+            
+for i in range(nQ):
+    Yield = 0
+    for t in range(1, nt):  # now loop over time
+        B[t] = bevHolt(B[t - 1], k_hat)  # calculate population at next time step
+        harvest = min(Q[i], B[t])
+        B[t] += - harvest
+        Yield += harvest
+        
+    Ym[i] = Yield
+
+ax.plot(Q, Ym, c='r', lw=3, ls='--')
+
+
+print("The Quota which maximises the yield given the median carrying capacity is",
+      Q[np.argwhere(Ym == max(Ym)).flatten()[0]])
+
+print("The quota which maximises the expected yield given all k values is",
+      Q[np.argwhere(Ymean == max(Ymean)).flatten()[0]])
+
+
+
+
 
 
