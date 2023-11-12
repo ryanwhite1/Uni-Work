@@ -24,6 +24,5 @@ for phi in [0.5, 1, 2]:
     ax.plot(x, function(x, phi), label=f"$\phi = {phi}$")
 ax.plot(x, x, ls=':', c='k', alpha=0.5)
 ax.legend()
-# ax.grid()
 ax.set(ylabel="$x_{t+1}$", xlabel="$x_t$")
 fig.savefig("Q1a.pdf", bbox_inches='tight', dpi=400)

@@ -1,0 +1,3 @@
+The files Q1.py and Q2.py were programmed in Python 3.9.12 (although should work for most 3.x installations) and need reasonably up-to-date matplotlib, numpy and scipy packages installed. 
+
+These files are easily runnable with an installation of Anaconda and Spyder, where you can open the file in Spyder and run it (either with Shift+Enter, or with the green button at the top) to produce and save all figures and produce numerical output used in the report. 
