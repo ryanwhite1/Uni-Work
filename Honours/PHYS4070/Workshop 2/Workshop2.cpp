@@ -7,6 +7,8 @@
 
 
 class Matrix {
+    // Matrix class kindly supplied by Ben Roberts
+    // https://github.com/benroberts999/cpp-cheatsheet/blob/main/lapack_matrix.cpp
     private:
         // use a std::vector to store the data
         std::vector<double> m_data;
@@ -52,13 +54,14 @@ class Matrix {
 };
 
 Matrix operator+(Matrix &a, Matrix &b) {
-  Matrix sum = a;
-  for (int i = 0; i < b.rows(); i++) {
-    for (int j = 0; j < b.cols(); j++) {
-      sum(i, j) += b(i, j);
+    // overload matrix addition so we can easily add two matrices together
+    Matrix sum = a;
+    for (int i = 0; i < b.rows(); i++) {
+        for (int j = 0; j < b.cols(); j++) {
+        sum(i, j) += b(i, j);
+        }
     }
-  }
-  return sum;
+    return sum;
 }
 
 // dsyev_ is a symbol in the LAPACK library files
@@ -102,14 +105,16 @@ class MatrixAndVector{
         std::vector<double> vec;
 
         MatrixAndVector(int rows, int cols) 
-            : mat(rows, cols), vec(cols) {}
+            : rows(rows), cols(cols), mat(rows, cols), vec(cols) {}
+
+        int m_rows() { return rows; }
+        int m_cols() { return cols; }
         
         void print_vector(){
-            for (int i = 0; i < cols; i++){
+            for (int i = 0; i < rows; i++){
                 std::cout << vec.at(i) << "\t";
             }
             std::cout << std::endl;
-
         }
 
         void print_matrix(){
@@ -147,6 +152,7 @@ MatrixAndVector solveEigenSystem(Matrix matrix, int dimension){
 }
 
 MatrixAndVector solveEigenSystem_AveBv(Matrix matrix_A, Matrix matrix_B, int dimension){
+    // copy the arrays to avoid overwriting them
     Matrix matcopy_A = matrix_A;
     Matrix matcopy_B = matrix_B;
     int itype = 1;
@@ -157,29 +163,33 @@ MatrixAndVector solveEigenSystem_AveBv(Matrix matrix_A, Matrix matrix_B, int dim
     int info = 0; // will hold potential error message
     // create a blank vector to store calculated eigenvalues:
     std::vector<double> work(lwork);
-    dsygv_(&itype, &jobz, &uplo, &dimension, matcopy_A.data(), &dimension, matcopy_B.data(), &dimension, evals.data(), work.data(), &lwork, &info);
+
     MatrixAndVector mat_and_vec(dimension, dimension);
-    for (int i = 0; i < dimension; i++){
-        for (int j = 0; j < dimension; j++){
-            mat_and_vec.mat.at(i, j) = matcopy_A.at(i, j);
-        }
-        mat_and_vec.vec.at(dimension-i-1) = evals.at(dimension-i-1);
-    }
+    std::cout << mat_and_vec.m_rows() << "\t" << mat_and_vec.m_cols() << std::endl;
 
-    for (int i = 0; i < dimension; i++){
-        for (int j = 0; j < dimension; j++){
-            mat_and_vec.mat.at(i, j) = matcopy_A.at(i, j);
-        }
-        mat_and_vec.vec.at(dimension-i-1) = evals.at(dimension-i-1);
+    dsygv_(&itype, &jobz, &uplo, &dimension, matcopy_A.data(), &dimension, matcopy_B.data(), &dimension, evals.data(), work.data(), &lwork, &info);
+    
+    mat_and_vec.mat = matcopy_A;
+    mat_and_vec.vec = evals;
+    // for (int i = 0; i < dimension; i++){
+    //     for (int j = 0; j < dimension; j++){
+    //         mat_and_vec.mat.at(i, j) = matcopy_A.at(i, j);
+    //     }
+    //     mat_and_vec.vec.at(i) = evals[i];
+    // }
+    
+    if (info != 0){
+        std::cout << info << std::endl;
     }
-
     return mat_and_vec;
 }
 
 double trapezoid_area(double x1, double x2, double y1, double y2){
-    return 0.5 * (y1 + y2) / fabs(x2 - x1);
+    // calculates the area of a single trapezoid
+    return 0.5 * (y1 + y2) * fabs(x2 - x1);
 }
 double trapezoid_integration(std::vector<double> x, std::vector<double> y){
+    // calculates the area under the curve (with the trapezoid rule) by points specified by (x,y)
     int N = x.size();
     double run_total = 0.;
     for (int i = 0; i < N-1; i++){
@@ -188,49 +198,51 @@ double trapezoid_integration(std::vector<double> x, std::vector<double> y){
     return run_total;
 }
 double Bspl_deriv(BSpline bspline, int i, double r){
+    // Approximates the bspline derivative value over a very small interval
     double dr = 5.e-5;
     return (bspline.b(i, r + dr/2.) - bspline.b(i, r - dr/2.)) / dr;
 }
 
 double potential(double r, int l){
+    // potential for our Hydrogen-like atoms
     return -1./r + l * (l + 1.) / (2. * r*r);
 }
 
 void populate_Hamiltonian(Matrix &mat, BSpline bspline, double r0, double rmax, int l){
     int N = mat.cols();
-    int r_N = 100;
+    int r_N = 2000;
     std::vector<double> r(r_N);
     double step_size = (rmax - r0) / r_N;
     for (int i = 0; i < r_N; i++){
         r[i] = r0 + i * step_size;
     }
 
-    for (int i = 2; i < N-1; i++){
-        for (int j = 2; j < N-1; j++){
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < N; j++){
             std::vector<double> int1(r_N), int2(r_N);
             for (int k = 0; k < r_N; k++){
-                int2[k] = bspline.b(i, r[k]) * potential(r[k], l) * bspline.b(j, r[k]);
-                int1[k] = Bspl_deriv(bspline, i, r[k]) * Bspl_deriv(bspline, j, r[k]);
+                int1[k] = Bspl_deriv(bspline, i+2, r[k]) * Bspl_deriv(bspline, j+2, r[k]);  // b'_i * b'_j
+                int2[k] = bspline.b(i+2, r[k]) * potential(r[k], l) * bspline.b(j+2, r[k]); // b_i * V(r) * b_j
             }
-            mat.at(i, j) = 0.5 * trapezoid_integration(r, int1) + trapezoid_integration(r, int2);
+            mat.at(i, j) = 0.5 * trapezoid_integration(r, int1) + trapezoid_integration(r, int2); 
         }
     }
 }
 
 void populate_B_Matrix(Matrix &mat, BSpline bspline, double r0, double rmax){
     int N = mat.cols();
-    int r_N = 100;
+    int r_N = 2000;
     std::vector<double> r(r_N);
     double step_size = (rmax - r0) / r_N;
     for (int i = 0; i < r_N; i++){
         r[i] = r0 + i * step_size;
     }
 
-    for (int i = 2; i < N-1; i++){
-        for (int j = 2; j < N-1; j++){
+    for (int i = 0; i < N; i++){
+        for (int j = 0; j < N; j++){
             std::vector<double> int1(r_N), int2(r_N);
             for (int k = 0; k < r_N; k++){
-                int1[k] = bspline.b(i, r[k]) * bspline.b(j, r[k]);
+                int1[k] = bspline.b(i+2, r[k]) * bspline.b(j+2, r[k]);
             }
             mat.at(i, j) = trapezoid_integration(r, int1);
         }
@@ -243,60 +255,64 @@ void populate_B_Matrix(Matrix &mat, BSpline bspline, double r0, double rmax){
 
 int main(){
 
-    // PART A:
-    int dimension = 2; // N if we have NxN matrix
+    // // PART A:
+    // int dimension = 2; // N if we have NxN matrix
 
-    Matrix mat(2, 2);
-    for (int i = 0; i < dimension; i++){
-        for (int j = 0; j < dimension; j++){
-            mat.at(i, j) = 1. / (i + j + 1.);
-        }
-    }
-    MatrixAndVector matvec = solveEigenSystem(mat, dimension);
+    // Matrix mat(2, 2);
+    // for (int i = 0; i < dimension; i++){
+    //     for (int j = 0; j < dimension; j++){
+    //         mat.at(i, j) = 1. / (i + j + 1.);
+    //     }
+    // }
+    // MatrixAndVector matvec = solveEigenSystem(mat, dimension);
 
-    std::cout << "Eigenvecs = {";
-    for (int i = 0; i < dimension; i++){
-        std::cout << "{";
-        for (int j = 0; j < dimension; j++){
-            std::cout << matvec.mat.at(i, j);
-            if (j < dimension-1){
-                std::cout << ", ";
-            }
-        }
-        if (i < dimension-1){
-            std::cout << "}, " << std::endl;
-        }
-    }
-    std::cout << "}}" << std::endl;
+    // std::cout << "Eigenvecs = {";
+    // for (int i = 0; i < dimension; i++){
+    //     std::cout << "{";
+    //     for (int j = 0; j < dimension; j++){
+    //         std::cout << matvec.mat.at(i, j);
+    //         if (j < dimension-1){
+    //             std::cout << ", ";
+    //         }
+    //     }
+    //     if (i < dimension-1){
+    //         std::cout << "}, " << std::endl;
+    //     }
+    // }
+    // std::cout << "}}" << std::endl;
 
-    std::cout << "Eigenvals = {";
-    for (int i = 0; i < dimension; i++){
-        std::cout << matvec.vec.at(i);
-        if (i < dimension - 1){
-            std::cout << ", ";
-        }
-    }
-    std::cout << "}" << std::endl;
+    // std::cout << "Eigenvals = {";
+    // for (int i = 0; i < dimension; i++){
+    //     std::cout << matvec.vec.at(i);
+    //     if (i < dimension - 1){
+    //         std::cout << ", ";
+    //     }
+    // }
+    // std::cout << "}" << std::endl;
 
     
 
     // PART B:
     int N = 30;
-    double r0 = 1.e-3;
-    double rmax = 50.;
+    double r0 = 1.e-5;
+    double rmax = 20.;
     int k_spline = 7;
     int l = 0;
 
     BSpline bspl(k_spline, N, r0, rmax);
 
-    Matrix matrix_H(N, N);
-    Matrix matrix_B(N, N);
+    int N_red = N - 3;
+    Matrix matrix_H(N_red, N_red);
+    Matrix matrix_B(N_red, N_red);
     populate_Hamiltonian(matrix_H, bspl, r0, rmax, l);
-    matrix_H.print_matrix();
+    // matrix_H.print_matrix();
     populate_B_Matrix(matrix_B, bspl, r0, rmax);
-    // MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N);
+    
+    MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
 
     // matandvec.print_matrix();
+    matandvec.print_vector();
+    
 
     return 0;
 }
