@@ -15,6 +15,12 @@ double hydrogen_like_potential(double r, int l, double Z){
 double hydrogen_potential(double r, int l){return hydrogen_like_potential(r, l, 1.);}
 double lithium_potential(double r, int l){return hydrogen_like_potential(r, l, 3.);}
 
+double gr_hydrogen_like_potential(double r, int l, double Z, double h, double d){
+    double V_gr = ((Z - 1.) * h * (exp(r / d) - 1.)) / (r * (1. + h * (exp(r / d) - 1.)));
+    return hydrogen_like_potential(r, l, Z) + V_gr;
+}
+double gr_lithium_potential(double r, int l){return gr_hydrogen_like_potential(r, l, 3., 1., 0.2);}
+
 void populate_Hamiltonian(Matrix &mat, std::vector<double> r, BSpline bspline, int l, double (*potential)(double, int)){
     int N = mat.cols();
     int r_N = r.size();
@@ -75,6 +81,19 @@ MatrixAndVector solve_schrodinger(BSpline bspl, int l, int N_red, std::vector<do
     Matrix matrix_H(N_red, N_red);
     Matrix matrix_B(N_red, N_red);
     populate_Hamiltonian(matrix_H, r, bspl, l, &lithium_potential);
+    populate_B_Matrix(matrix_B, r, bspl);
+    
+    MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
+    return matandvec;
+}
+MatrixAndVector solve_schrodinger_gr(BSpline bspl, int l, int N_red, std::vector<double> r){
+    // l = orbital state
+    // N_red = reduced number of b_splines (i.e. ignoring first 2 and last 1)
+    // r = integration grid of radii
+
+    Matrix matrix_H(N_red, N_red);
+    Matrix matrix_B(N_red, N_red);
+    populate_Hamiltonian(matrix_H, r, bspl, l, &gr_lithium_potential);
     populate_B_Matrix(matrix_B, r, bspl);
     
     MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
