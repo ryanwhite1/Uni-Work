@@ -110,8 +110,10 @@ class MatrixAndVector{
         int m_rows() { return rows; }
         int m_cols() { return cols; }
         
-        void print_vector(){
-            for (int i = 0; i < rows; i++){
+        void print_vector(int num = 0){
+            int N = num;
+            if (num == 0){N = rows;}
+            for (int i = 0; i < N; i++){
                 std::cout << vec.at(i) << "\t";
             }
             std::cout << std::endl;
@@ -165,18 +167,11 @@ MatrixAndVector solveEigenSystem_AveBv(Matrix matrix_A, Matrix matrix_B, int dim
     std::vector<double> work(lwork);
 
     MatrixAndVector mat_and_vec(dimension, dimension);
-    std::cout << mat_and_vec.m_rows() << "\t" << mat_and_vec.m_cols() << std::endl;
 
     dsygv_(&itype, &jobz, &uplo, &dimension, matcopy_A.data(), &dimension, matcopy_B.data(), &dimension, evals.data(), work.data(), &lwork, &info);
     
     mat_and_vec.mat = matcopy_A;
     mat_and_vec.vec = evals;
-    // for (int i = 0; i < dimension; i++){
-    //     for (int j = 0; j < dimension; j++){
-    //         mat_and_vec.mat.at(i, j) = matcopy_A.at(i, j);
-    //     }
-    //     mat_and_vec.vec.at(i) = evals[i];
-    // }
     
     if (info != 0){
         std::cout << info << std::endl;
@@ -199,24 +194,20 @@ double trapezoid_integration(std::vector<double> x, std::vector<double> y){
 }
 double Bspl_deriv(BSpline bspline, int i, double r){
     // Approximates the bspline derivative value over a very small interval
-    double dr = 5.e-5;
+    double dr = 5.e-7;
     return (bspline.b(i, r + dr/2.) - bspline.b(i, r - dr/2.)) / dr;
 }
 
-double potential(double r, int l){
+double hydrogen_like_potential(double r, int l, double Z){
     // potential for our Hydrogen-like atoms
-    return -1./r + l * (l + 1.) / (2. * r*r);
+    return -Z/r + l * (l + 1.) / (2. * r*r);
 }
+double hydrogen_potential(double r, int l){return hydrogen_like_potential(r, l, 1.);}
+double lithium_potential(double r, int l){return hydrogen_like_potential(r, l, 3.);}
 
-void populate_Hamiltonian(Matrix &mat, BSpline bspline, double r0, double rmax, int l){
+void populate_Hamiltonian(Matrix &mat, std::vector<double> r, BSpline bspline, int l, double (*potential)(double, int)){
     int N = mat.cols();
-    int r_N = 2000;
-    std::vector<double> r(r_N);
-    double step_size = (rmax - r0) / r_N;
-    for (int i = 0; i < r_N; i++){
-        r[i] = r0 + i * step_size;
-    }
-
+    int r_N = r.size();
     for (int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
             std::vector<double> int1(r_N), int2(r_N);
@@ -229,15 +220,9 @@ void populate_Hamiltonian(Matrix &mat, BSpline bspline, double r0, double rmax, 
     }
 }
 
-void populate_B_Matrix(Matrix &mat, BSpline bspline, double r0, double rmax){
+void populate_B_Matrix(Matrix &mat, std::vector<double> r, BSpline bspline){
     int N = mat.cols();
-    int r_N = 2000;
-    std::vector<double> r(r_N);
-    double step_size = (rmax - r0) / r_N;
-    for (int i = 0; i < r_N; i++){
-        r[i] = r0 + i * step_size;
-    }
-
+    int r_N = r.size();
     for (int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
             std::vector<double> int1(r_N), int2(r_N);
@@ -293,25 +278,32 @@ int main(){
     
 
     // PART B:
-    int N = 30;
+    int N = 50;
     double r0 = 1.e-5;
-    double rmax = 20.;
+    double rmax = 50.;
     int k_spline = 7;
     int l = 0;
+
+    int r_N = 3000;
+    std::vector<double> r(r_N);
+    double step_size = (rmax - r0) / r_N;
+    for (int i = 0; i < r_N; i++){
+        r[i] = r0 + i * step_size;
+    }
 
     BSpline bspl(k_spline, N, r0, rmax);
 
     int N_red = N - 3;
     Matrix matrix_H(N_red, N_red);
     Matrix matrix_B(N_red, N_red);
-    populate_Hamiltonian(matrix_H, bspl, r0, rmax, l);
+    populate_Hamiltonian(matrix_H, r, bspl, l, &lithium_potential);
     // matrix_H.print_matrix();
-    populate_B_Matrix(matrix_B, bspl, r0, rmax);
+    populate_B_Matrix(matrix_B, r, bspl);
     
     MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
 
     // matandvec.print_matrix();
-    matandvec.print_vector();
+    matandvec.print_vector(10); // print first 10 elements in vector
     
 
     return 0;
