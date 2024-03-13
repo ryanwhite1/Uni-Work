@@ -109,6 +109,23 @@ void part_two(){
     std::vector<double> p_coeffs = get_expansion_coeffs(p_eval.mat, 0);
     std::vector<double> p_Pr = vec_radial_wavefunction(p_coeffs, bspl, r);
     output_1d_data(r, p_Pr*p_Pr, "B2_2p_states.txt");
+
+    std::vector<double> s2_coeffs = get_expansion_coeffs(s_eval.mat, 1); // get the expansion coefficients from the eigenvectors
+    std::vector<double> s2_Pr = vec_radial_wavefunction(s2_coeffs, bspl, r);  // calculate the radial wavefunction on our grid
+    double lifetime = state_lifetime(s2_Pr, r, p_Pr);
+    std::cout << "2p lifetime: " << lifetime << "ns" << std::endl;
+
+    std::vector<double> s1_coeffs = get_expansion_coeffs(s_eval.mat, 0); // get the expansion coefficients from the eigenvectors
+    std::vector<double> s1_Pr = vec_radial_wavefunction(s1_coeffs, bspl, r);  // calculate the radial wavefunction on our grid
+
+    double green_corr_2s = green_correction(s2_Pr, r);
+    double ee_corr_2s = ee_corection(s1_Pr, s2_Pr, r);
+    double corr_2s = ee_corr_2s - green_corr_2s;
+    double green_corr_2p = green_correction(p_Pr, r);
+    double ee_corr_2p = ee_corection(s1_Pr, p_Pr, r);
+    double corr_2p = ee_corr_2p - green_corr_2p;
+    std::cout << "2s energy correction: " << corr_2s << "\n2p energy correction: " << corr_2p << std::endl;
+    // std::cout << green_corr_2s << " " << green_corr_2p << std::endl;
 }
 
 

@@ -7,6 +7,7 @@
 # include "matrix.hpp"
 # include "linalgSolvers.hpp"
 # include "integrate.hpp"
+# include "calculateYK.hpp"
 
 double hydrogen_like_potential(double r, int l, double Z){
     // potential for our Hydrogen-like atoms
@@ -15,9 +16,11 @@ double hydrogen_like_potential(double r, int l, double Z){
 double hydrogen_potential(double r, int l){return hydrogen_like_potential(r, l, 1.);}
 double lithium_potential(double r, int l){return hydrogen_like_potential(r, l, 3.);}
 
+double green_potential(double r, double Z, double h, double d){
+    return ((Z - 1.) * h * (exp(r / d) - 1.)) / (r * (1. + h * (exp(r / d) - 1.)));
+}
 double gr_hydrogen_like_potential(double r, int l, double Z, double h, double d){
-    double V_gr = ((Z - 1.) * h * (exp(r / d) - 1.)) / (r * (1. + h * (exp(r / d) - 1.)));
-    return hydrogen_like_potential(r, l, Z) + V_gr;
+    return hydrogen_like_potential(r, l, Z) + green_potential(r, Z, h, d);
 }
 double gr_lithium_potential(double r, int l){return gr_hydrogen_like_potential(r, l, 3., 1., 0.2);}
 
@@ -107,4 +110,28 @@ double expectation_value(std::vector<double> A1, std::vector<double> r, std::vec
         y[i] = A1[i] * r[i] * A2[i];
     }
     return trapezoid_integration(r, y);
+}
+
+double state_lifetime(std::vector<double> A1, std::vector<double> r, std::vector<double> A2){
+    double Rab = expectation_value(A1, r, A2);
+    double freq = 0.06791;                      // experimental frequency
+    double gamma = 2./3. * Rab*Rab * freq*freq*freq * 1.071e10;     // decay rate in s
+    double lifetime = 1 / gamma;
+    return lifetime * 1.e9;     // return lifetime in ns
+}
+
+double green_correction(std::vector<double> Pa, std::vector<double> r){
+    // green correction for ***lithium***
+    std::vector<double> Vgr(r.size());
+    for (int i = 0; i < (int)r.size(); i++){ Vgr[i] = green_potential(r[i], 3., 1., 0.2); }
+    std::vector<double> y = Pa * Pa;
+    y = y * Vgr;
+    return trapezoid_integration(r, y);
+}
+
+double ee_corection(std::vector<double> Pa_1s, std::vector<double> Pa, std::vector<double> r){
+    std::vector<double> y1s1s = YK::ykab(0, Pa_1s, Pa_1s, r);
+    std::vector<double> y = Pa * Pa;
+    y = y * y1s1s;
+    return 2. * trapezoid_integration(r, y);
 }
