@@ -56,7 +56,7 @@ void populate_Hamiltonian_hartree(Matrix &mat, std::vector<double> r, BSpline bs
         }
     }
 }
-void populate_Hamiltonian_hartree_fock(Matrix &mat, std::vector<double> r, BSpline bspline, int l, std::vector<double> Pr_s1){
+void populate_Hamiltonian_hartree_fock(Matrix &mat, std::vector<double> r, BSpline bspline, int l, int k, std::vector<double> Pr_s1){
     double Lambda = 0.5;
     if (l == 1){
         Lambda = 1./6.;
@@ -71,11 +71,11 @@ void populate_Hamiltonian_hartree_fock(Matrix &mat, std::vector<double> r, BSpli
             for (int k = 0; k < r_N; k++){
                 bj[k] = bspline.b(j+2, r[k]);
             }
-            std::vector<double> ys1bj = YK::ykab(l, Pr_s1, bj, r);
+            std::vector<double> ys1bj = YK::ykab(k, Pr_s1, bj, r);
             for (int k = 0; k < r_N; k++){
                 int1[k] = Bspl_deriv(bspline, i+2, r[k]) * Bspl_deriv(bspline, j+2, r[k]);  // b'_i * b'_j
                 int2[k] = bspline.b(i+2, r[k]) * li_hartree_potential(r[k], l, ys1s1[k]) * bspline.b(j+2, r[k]); // b_i * V(r) * b_j
-                int3[k] = bspline.b(i+2, r[k]) * -2. * Lambda * ys1bj[k] * ys1s1[k];
+                int3[k] = bspline.b(i+2, r[k]) * -2. * Lambda * ys1bj[k] * Pr_s1[k];
             }
             mat.at(i, j) = 0.5 * trapezoid_integration(r, int1) + trapezoid_integration(r, int2) + trapezoid_integration(r, int3);
         }
@@ -158,6 +158,18 @@ MatrixAndVector solve_schrodinger_hartree(BSpline bspl, int l, int N_red, std::v
     MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
     return matandvec;
 }
+MatrixAndVector solve_schrodinger_hartree_fock(BSpline bspl, int l, int k, int N_red, std::vector<double> r, std::vector<double> P_s1){
+    // l = orbital state
+    // N_red = reduced number of b_splines (i.e. ignoring first 2 and last 1)
+    // r = integration grid of radii
+    Matrix matrix_H(N_red, N_red);
+    Matrix matrix_B(N_red, N_red);
+    populate_Hamiltonian_hartree_fock(matrix_H, r, bspl, l, k, P_s1);
+    populate_B_Matrix(matrix_B, r, bspl);
+    
+    MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
+    return matandvec;
+}
 
 
 double expectation_value(std::vector<double> A1, std::vector<double> r, std::vector<double> A2){
@@ -235,19 +247,20 @@ std::vector<double> hartree_procedure(BSpline bspl, int N_red, std::vector<doubl
     return s_Pr;
 }
 
-MatrixAndVector hartree_fock_step(BSpline bspl, Matrix &matrix_H, Matrix &matrix_B, MatrixAndVector &matandvec, std::vector<double> r, std::vector<double> &Pr_s1, int l){
+MatrixAndVector hartree_fock_step(BSpline bspl, Matrix &matrix_H, Matrix &matrix_B, MatrixAndVector &matandvec, std::vector<double> r, std::vector<double> &Pr_s1, int l, int k){
     int N_red = matrix_H.cols();
-    populate_Hamiltonian_hartree_fock(matrix_H, r, bspl, l, Pr_s1);
+    populate_Hamiltonian_hartree_fock(matrix_H, r, bspl, l, k, Pr_s1);
     matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
     return matandvec;
 }
 
 std::vector<double> hartree_fock_procedure(BSpline bspl, int N_red, std::vector<double> r, std::vector<double> &Pr_s1){
     std::cout << "Running Hartree-Fock procedure to convergence..." << std::endl;
+    int l = 0, k = 0;   // we only want to solve for Ps1
     Matrix matrix_H(N_red, N_red);
     Matrix matrix_B(N_red, N_red);
     std::vector<double> ys1s1 = YK::ykab(0, Pr_s1, Pr_s1, r);
-    populate_Hamiltonian_hartree(matrix_H, r, bspl, l, ykab);
+    populate_Hamiltonian_hartree(matrix_H, r, bspl, l, ys1s1);
     populate_B_Matrix(matrix_B, r, bspl);
     
     MatrixAndVector matandvec = solveEigenSystem_AveBv(matrix_H, matrix_B, N_red);
@@ -259,8 +272,8 @@ std::vector<double> hartree_fock_procedure(BSpline bspl, int N_red, std::vector<
     std::vector<double> iters(1);
     std::vector<double> energies = {energy};
     while (fabs(err) > 2.e-6){
-        // std::cout << "err = " << err << std::endl;
-        matandvec = hartree_step(bspl, matrix_H, matrix_B, matandvec, r, s_Pr);
+        std::cout << "err = " << err << std::endl;
+        matandvec = hartree_fock_step(bspl, matrix_H, matrix_B, matandvec, r, s_Pr, l, k);
         s_coeffs = get_expansion_coeffs(matandvec.mat, 0); // get the expansion coefficients from the eigenvectors
         s_Pr = vec_radial_wavefunction(s_coeffs, bspl, r);  // calculate the radial wavefunction on our grid
 
@@ -270,7 +283,7 @@ std::vector<double> hartree_fock_procedure(BSpline bspl, int N_red, std::vector<
         energies.push_back(energy);
     }
 
-    output_1d_data(iters, energies, "B3_core_energies.txt");
+    output_1d_data(iters, energies, "B4_core_energies.txt");
 
     std::cout << "Hartree-Fock procedure converged!" << std::endl;
 

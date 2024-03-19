@@ -113,8 +113,26 @@ void part_three(BSpline bspl, int N_red, std::vector<double> r){
     std::cout << "2p lifetime (Hartree): " << lifetime << "ns" << std::endl;
 }
 
-void part_four(){
+void part_four(BSpline bspl, int N_red, std::vector<double> r){
+    int s = 0, p = 1;
     std::vector<double> Pr_1s = load_vector("Hartree-1s.txt");
+    Pr_1s = hartree_fock_procedure(bspl, N_red, r, Pr_1s);
+    output_1d_data(r, Pr_1s*Pr_1s, "B4_1s_states.txt");
+    
+    // now we want to generate the 2s and 2p states and save them
+    MatrixAndVector eval_2s = solve_schrodinger_hartree_fock(bspl, s, 0, N_red, r, Pr_1s);
+    std::vector<double> eval_2s_coeffs = get_expansion_coeffs(eval_2s.mat, 1);
+    std::vector<double> Pr_2s = vec_radial_wavefunction(eval_2s_coeffs, bspl, r);
+    output_1d_data(r, Pr_2s*Pr_2s, "B4_2s_states.txt");
+    std::cout << "Hartree-Fock 2s energy: " << eval_2s.vec[1] << "au" << std::endl;
+    MatrixAndVector eval_2p = solve_schrodinger_hartree_fock(bspl, p, 1, N_red, r, Pr_1s);
+    std::vector<double> eval_2p_coeffs = get_expansion_coeffs(eval_2p.mat, 0);
+    std::vector<double> Pr_2p = vec_radial_wavefunction(eval_2p_coeffs, bspl, r);
+    output_1d_data(r, Pr_2p*Pr_2p, "B4_2p_states.txt");
+    std::cout << "Hartree-Fock 2p energy: " << eval_2p.vec[0] << "au" << std::endl;
+
+    double lifetime = state_lifetime(Pr_2s, r, Pr_2p);
+    std::cout << "2p lifetime (Hartree-Fock): " << lifetime << "ns" << std::endl;
 
 }
 
@@ -140,13 +158,13 @@ int main(){
     int N_red = N - 3;  // we ignore the first 2 and last 1 bspline, so our matrices will have dimension N_red
 
 
-    // std::cout << "Beginning part one: " << std::endl;
-    // part_one(bspl, N_red, r);
-    // std::cout << "Beginning part two: " << std::endl;
-    // part_two(bspl, N_red, r);
-    // std::cout << "Beginning part three: " << std::endl;
-    // part_three(bspl, N_red, r);
+    std::cout << "Beginning part one: " << std::endl;
+    part_one(bspl, N_red, r);
+    std::cout << "Beginning part two: " << std::endl;
+    part_two(bspl, N_red, r);
+    std::cout << "Beginning part three: " << std::endl;
+    part_three(bspl, N_red, r);
     std::cout << "Beginning part four: " << std::endl;
-    part_four();
+    part_four(bspl, N_red, r);
     return 0;
 }

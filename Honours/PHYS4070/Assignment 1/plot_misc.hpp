@@ -26,14 +26,10 @@ void save_vector(std::vector<double> x, std::string filename){
 
 std::vector<double> load_vector(std::string filename){
     std::vector<double> data;
-    int count;
     double tmp;
 
     std::ifstream input_file(filename, std::ios::in); 
-
-    input_file >> count;
-    for(int i = 0; i < count; i++) {
-        input_file >> tmp;
+    while (input_file >> tmp){
         data.push_back(tmp);
     }
     return data;
