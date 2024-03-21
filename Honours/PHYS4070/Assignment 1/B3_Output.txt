@@ -1,0 +1,3 @@
+Hartree 2s energy: -0.182675au
+Hartree 2p energy: -0.127073au
+2p lifetime (Hartree): 23.4975ns

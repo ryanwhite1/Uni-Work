@@ -1,0 +1,3 @@
+Hartree-Fock 2s energy: -0.195926au
+Hartree-Fock 2p energy: -0.12869au
+2p lifetime (Hartree-Fock): 26.2601ns

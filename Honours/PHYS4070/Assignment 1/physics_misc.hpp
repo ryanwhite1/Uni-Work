@@ -272,7 +272,7 @@ std::vector<double> hartree_fock_procedure(BSpline bspl, int N_red, std::vector<
     std::vector<double> iters(1);
     std::vector<double> energies = {energy};
     while (fabs(err) > 2.e-6){
-        std::cout << "err = " << err << std::endl;
+        // std::cout << "err = " << err << std::endl;
         matandvec = hartree_fock_step(bspl, matrix_H, matrix_B, matandvec, r, s_Pr, l, k);
         s_coeffs = get_expansion_coeffs(matandvec.mat, 0); // get the expansion coefficients from the eigenvectors
         s_Pr = vec_radial_wavefunction(s_coeffs, bspl, r);  // calculate the radial wavefunction on our grid

@@ -1,0 +1,25 @@
+First 10 's' eigenstates:
+-4.47852	-1.12229	-0.499187	-0.280906	-0.179824	-0.124898	-0.0917654	-0.069651	-0.0492529	-0.0238124	
+First 9 'p' eigenstates:
+-1.12499	-0.499998	-0.281249	-0.179999	-0.125	-0.0918306	-0.0697582	-0.0496628	-0.0246797	
+Expectation for the s states:
+1 s state: 0.50204
+2 s state: 2.00507
+3 s state: 4.50743
+4 s state: 8.00983
+5 s state: 12.5123
+6 s state: 18.0147
+7 s state: 24.4946
+8 s state: 30.6281
+9 s state: 31.8665
+10 s state: 30.6904
+Expectation for the p states:
+2 p state: 1.66669
+3 p state: 4.1667
+4 p state: 7.6667
+5 p state: 12.1667
+6 p state: 17.6667
+7 p state: 24.1475
+8 p state: 30.3822
+9 p state: 31.7816
+10 p state: 30.6091

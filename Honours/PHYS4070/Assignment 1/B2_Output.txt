@@ -1,0 +1,4 @@
+2s eigenstate:-0.15582
+2p eigenstate:-0.125413
+2p lifetime (Green's)19.0526ns
+2s energy correction: -0.0478682	2p energy correction: -0.00462283
