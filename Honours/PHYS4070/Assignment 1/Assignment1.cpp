@@ -113,6 +113,7 @@ void part_two(BSpline bspl, int N_red, std::vector<double> r){
 }
 
 void part_three(BSpline bspl, int N_red, std::vector<double> r){
+    // Looks at the Hartree procedure to approximate lithium binding energies/lifetimes/etc
     std::ofstream output_file;
     output_file.open("B3_Output.txt");
     int s = 0, p = 1;
@@ -142,6 +143,7 @@ void part_three(BSpline bspl, int N_red, std::vector<double> r){
 }
 
 void part_four(BSpline bspl, int N_red, std::vector<double> r){
+    // Hartree-Fock problem for lithium
     std::ofstream output_file;
     output_file.open("B4_Output.txt");
     int s = 0, p = 1;
