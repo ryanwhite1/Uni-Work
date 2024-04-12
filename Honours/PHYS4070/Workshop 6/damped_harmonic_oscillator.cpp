@@ -49,7 +49,6 @@ int main()
 	}
 
 	return 0;
-
 }
 
 //Computes the derivative of the system of ODEs from old_coords and puts the result in kn.
