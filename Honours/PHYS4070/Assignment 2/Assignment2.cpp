@@ -72,14 +72,23 @@ void part1_2(){
 }
 
 void part2_1(){
-    IsingLattice h(20, 20, 2, 20, "test_file.txt");
-    h.initialise_lattice();
-    h.print_lattice();
-    h.print_params();
-
-    h.run_monte_carlo(100*10*10);
-    h.print_lattice();
-    h.print_params();
+    int Ndim = 25, Ntemps = 30, Nlattices = 5;
+    double temp_min = 0., temp_max = 5.;
+    std::vector<double> temps(Ntemps, 0);
+    for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;}
+    std::string filename = "Ising_Datasets/Part2_1_run_X.txt";
+    for (int n = 0; n < Nlattices; n++){
+        filename[27] = '0' + n+1;
+        IsingLattice h(Ndim, Ndim, temp_max, n, filename);
+        h.initialise_lattice();
+        h.output_params();
+        for (int t = Ntemps - 1; t >= 0; t--){
+            h.change_temperature(temps[t]);
+            h.run_monte_carlo(1000*Ndim*Ndim);
+            h.output_params();
+        }
+        h.close_file();
+    }
 }
 
 void part2_2(){

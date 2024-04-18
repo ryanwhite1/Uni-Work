@@ -36,6 +36,12 @@ class IsingLattice {
         void print_params(){
             std::cout << "Energy = " << energy << "\nMagnetisation per dipole = " << magnetisation_per_s << std::endl;
         }
+        void output_params(){
+            output_file << temperature << "\t" << energy << "\t" << magnetisation_per_s << std::endl;
+        }
+        void close_file(){
+            output_file.close();
+        }
 
         void change_temperature(double temp){
             temperature = temp;
@@ -52,14 +58,12 @@ class IsingLattice {
         }
 
         void total_lattice_energy(){
-            double neighbour_val = 0.;
             for (int i = 0; i < Nrows; i++){
                 for (int j = 0; j < Ncols; j++){
+                    // we only want to sum the current monopole with that to the left of it and that above, so that we don't double count monopole pairs
                     std::vector<int> neighbours = neighbouring_indices(i, j);
-                    for (int k = 0; k < 2; k++){
-                        if (k == 0){neighbour_val = lattice(i, neighbours[k]);} else {neighbour_val = lattice(neighbours[k+1], j);}
-                        energy += - lattice(i, j) * neighbour_val;
-                    }
+                    double left_val = lattice(i, neighbours[0]), top_val = lattice(neighbours[2], j);
+                    energy += - lattice(i, j) * (left_val + top_val);
                 }
             }
         }
@@ -132,5 +136,4 @@ class IsingLattice {
                 monte_carlo_step();
             }
         }
-
 };
