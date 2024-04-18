@@ -3,6 +3,7 @@
 #include <vector>
 #include "integrator.hpp"
 #include "matrix.hpp"
+#include "isingmodel.hpp"
 
 void part1_1(){
     // start by shooting the projectile straight up at the moon!
@@ -70,11 +71,28 @@ void part1_2(){
     std::cout << "System energy after integration = " << nbody_energy(part1_26_particles, masses) << std::endl;
 }
 
+void part2_1(){
+    IsingLattice h(20, 20, 2, 20, "test_file.txt");
+    h.initialise_lattice();
+    h.print_lattice();
+    h.print_params();
+
+    h.run_monte_carlo(100*10*10);
+    h.print_lattice();
+    h.print_params();
+}
+
+void part2_2(){
+
+}
+
 int main(){
-    std::cout << "Beginning part 1.1..." << std::endl;
-    part1_1();
-    std::cout << "Beginning part 1.2..." << std::endl;
-    part1_2();
+    // std::cout << "Beginning part 1.1..." << std::endl;
+    // part1_1();
+    // std::cout << "Beginning part 1.2..." << std::endl;
+    // part1_2();
+    std::cout << "Beginning part 2.1..." << std::endl;
+    part2_1();
     return 0;
 }
 
