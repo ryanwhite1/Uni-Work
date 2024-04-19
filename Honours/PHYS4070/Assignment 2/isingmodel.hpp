@@ -131,9 +131,14 @@ class IsingLattice {
             }
         }
 
-        void run_monte_carlo(int steps){
-            for (int n = 0; n < steps; n++){
-                monte_carlo_step();
+        void run_monte_carlo(int sweeps, int output){
+            for (int s = 0; s < sweeps; s++){
+                for (int n = 0; n < 10*Ncols*Nrows; n++){
+                    monte_carlo_step();
+                }
+                if (output == 1){
+                    output_params();
+                }
             }
         }
 };

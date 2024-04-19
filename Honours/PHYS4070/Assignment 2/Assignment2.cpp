@@ -72,7 +72,7 @@ void part1_2(){
 }
 
 void part2_1(){
-    int Ndim = 25, Ntemps = 30, Nlattices = 5;
+    int Ndim = 20, Ntemps = 30, Nlattices = 1;
     double temp_min = 0., temp_max = 5.;
     std::vector<double> temps(Ntemps, 0);
     for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;}
@@ -84,8 +84,10 @@ void part2_1(){
         h.output_params();
         for (int t = Ntemps - 1; t >= 0; t--){
             h.change_temperature(temps[t]);
-            h.run_monte_carlo(1000*Ndim*Ndim);
-            h.output_params();
+            h.run_monte_carlo(1000, 1); // run for 1000 sweeps, and output the data on each sweep
+            std::cout << "Temperature = " << temps[t] << std::endl;
+            h.print_lattice();
+            
         }
         h.close_file();
     }
