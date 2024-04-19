@@ -21,7 +21,7 @@ N_s = 20 * 20
 
 for i, temp in enumerate(temperatures):
     subdata = data[np.where(data[:, 0] == temp), :][0, :, :]
-    sub_energies = subdata[:, 1] / N_s
+    sub_energies = subdata[:, 1]
     energies[i] = np.mean(sub_energies)
     energy_err[i] = np.sqrt(np.var(sub_energies) / len(sub_energies))
     
@@ -42,6 +42,7 @@ ax.errorbar(temperatures, np.abs(magnetisations), yerr=mag_errs, fmt='.', label=
 t_crit = (2 / np.log(1 + 2**0.5))
 true_temps = np.linspace(min(temperatures), max(temperatures), 100)
 true_mag = np.array([(1 - np.sinh(2 / temp)**-4)**(1/8) if temp < t_crit else 0 for temp in true_temps])
+
 ax.plot(true_temps, true_mag, label='Theoretical')
 ax.set(xlabel='Temperature, $T$', ylabel=r'Absolute Mean Magnetisation per spin, $\langle M \rangle$')
 ax.legend()

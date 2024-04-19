@@ -66,6 +66,7 @@ class IsingLattice {
                     energy += - lattice(i, j) * (left_val + top_val);
                 }
             }
+            energy /= Nrows * Ncols;
         }
         
         void initialise_lattice(){
@@ -113,7 +114,7 @@ class IsingLattice {
         void flip_monopole(int row, int col, double delta_E){
             lattice(row, col) *= -1;
             // factor of two in the below lines comes out from the expression being: quantity += new_spin - old_spin = new_spin - (- new_spin) = 2 * new_spin
-            energy += 2 * delta_E;
+            energy += delta_E / (Nrows * Ncols);
             magnetisation_per_s += 2 * lattice(row, col) / (Nrows * Ncols); 
         }
 

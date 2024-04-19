@@ -87,7 +87,6 @@ void part2_1(){
             h.run_monte_carlo(1000, 1); // run for 1000 sweeps, and output the data on each sweep
             std::cout << "Temperature = " << temps[t] << std::endl;
             h.print_lattice();
-            
         }
         h.close_file();
     }
