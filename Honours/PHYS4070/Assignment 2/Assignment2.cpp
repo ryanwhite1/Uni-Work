@@ -93,7 +93,44 @@ void part2_1(){
 }
 
 void part2_2(){
+    std::vector<int> dims = {10, 20, 40, 80};
+    std::vector<int> first_num = {1, 2, 4, 8}; // numbers for the output filenames
+    int Ntemps = 20;
+    double temp_min = 0.1, temp_max = 4.9;
+    std::vector<double> temps(Ntemps, 0);
+    for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;}
+    std::string filename = "Ising_Datasets/Part2_2_ndim=X0.txt";
+    int sweep_mult = 1;
+    for (int n = 0; n < 4; n++){
+        std::cout << "Running sim on lattice of size " << dims[n] << std::endl;
+        filename[28] = '0' + first_num[n];
+        IsingLattice h(dims[n], dims[n], temp_max, n, filename);
+        h.initialise_lattice();
+        h.output_params();
+        for (int t = Ntemps - 1; t >= 0; t--){
+            sweep_mult = (int)(1 + 19 * exp(-pow(((temps[t] - 2.269) / 0.3), 2))); // do 20x as many sweeps at the critical temperature, and do f(x) as many near it, where f(x) is a gaussian with STD 0.3
+            h.change_temperature(temps[t]);
+            h.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000 sweeps, and output the data on each sweep
+            std::cout << "Temperature = " << temps[t] << std::endl;
+            // h.print_lattice();
+        }
+        h.close_file();
+    }
 
+    std::cout << "Running sim on lattice near critical temperature" << std::endl;
+    int near_crit_num = 10, near_crit_dim = 40;
+    std::vector<double> near_crit_temps(near_crit_num, 0);
+    for (int i = 0; i < 10; i++){near_crit_temps[i] = 2 + i * (2.27 - 2) / near_crit_num;}
+    IsingLattice h(near_crit_dim, near_crit_dim, temp_max, 0, "Ising_Datasets/Part2_2_Power.txt");
+    h.initialise_lattice();
+    h.output_params();
+    for (int t = near_crit_num - 1; t >= 0; t--){
+        h.change_temperature(near_crit_temps[t]);
+        h.run_monte_carlo(10000, 1); // run for 10000 sweeps, and output the data on each sweep
+        std::cout << "Temperature = " << near_crit_temps[t] << std::endl;
+        // h.print_lattice();
+    }
+    h.close_file();
 }
 
 int main(){
@@ -101,8 +138,10 @@ int main(){
     // part1_1();
     // std::cout << "Beginning part 1.2..." << std::endl;
     // part1_2();
-    std::cout << "Beginning part 2.1..." << std::endl;
-    part2_1();
+    // std::cout << "Beginning part 2.1..." << std::endl;
+    // part2_1();
+    std::cout << "Beginning part 2.2..." << std::endl;
+    part2_2();
     return 0;
 }
 

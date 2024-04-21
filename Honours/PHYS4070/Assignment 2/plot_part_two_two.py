@@ -1,0 +1,116 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# set LaTeX font for our figures
+plt.rcParams.update({"text.usetex": True})
+plt.rcParams['font.family'] = 'serif'
+plt.rcParams['mathtext.fontset'] = 'cm'
+
+t_crit = (2 / np.log(1 + 2**0.5))
+
+dimensions = [10, 20, 40, 80]
+
+shfig, shax = plt.subplots()    ### specific heat figure
+msfig, msax = plt.subplots()    ### magnetic susceptibility figure
+
+re_shfig, re_shax = plt.subplots()    ### rescaled specific heat figure
+re_msfig, re_msax = plt.subplots()    ### rescaled magnetic susceptibility figure
+
+
+for i, dim in enumerate(dimensions):
+    
+
+    data = np.genfromtxt(f'Ising_Datasets/Part2_2_ndim={dim}.txt')
+    
+    temperatures = np.unique(data[:, 0])[:-1]
+    
+    energies = np.zeros(len(temperatures))
+    energy_err = np.zeros(len(temperatures))
+    magnetisations = np.zeros(len(temperatures))
+    mag_errs = np.zeros(len(temperatures))
+    spec_heat = np.zeros(len(temperatures))
+    mag_sus = np.zeros(len(temperatures))
+
+    N_s = dim*dim
+
+    for i, temp in enumerate(temperatures):
+        subdata = data[np.where(data[:, 0] == temp), :][0, :, :]
+        sub_energies = subdata[:, 1]
+        energies[i] = np.mean(sub_energies)
+        energy_err[i] = np.sqrt(np.var(sub_energies) / len(sub_energies))
+        
+        sub_mags = subdata[:, 2]
+        magnetisations[i] = np.mean(sub_mags)
+        mag_errs[i] = np.sqrt(np.var(sub_mags) / len(sub_mags))
+        
+        spec_heat[i] = np.var(sub_energies) * N_s / (temp**2)
+        mag_sus[i] = np.var(np.abs(sub_mags)) * N_s / temp
+    
+    shax.scatter(temperatures, spec_heat, label=fr'${dim}\times{dim}$')
+    msax.scatter(temperatures, mag_sus, label=fr'${dim}\times{dim}$')
+    
+    rescaled_temps = ((temperatures - t_crit) / t_crit) * dim
+    rescaled_spec_heat = spec_heat / np.log(dim)
+    rescaled_mag_sus = mag_sus / (dim**(7/4))
+    
+    re_shax.scatter(rescaled_temps, rescaled_spec_heat, label=fr'${dim}\times{dim}$')
+    re_msax.scatter(rescaled_temps, rescaled_mag_sus, label=fr'${dim}\times{dim}$')
+    
+    
+
+shax.axvline(t_crit, c='tab:red', ls='--')
+shax.set(xlabel='Temperature, $T$', ylabel=r'Specific Heat per spin')
+re_shax.set(xlabel='Rescaled Temperature, $t$', ylabel=r'Finite Size Specific Heat per spin')
+msax.set(xlabel='Temperature, $T$', ylabel=r'Magnetic Susceptibility per spin', yscale='log')
+re_msax.set(xlabel='Rescaled Temperature, $t$', ylabel=r'Finite Size Magnetic Susceptibility per spin')
+
+for ax in [shax, msax, re_shax, re_msax]:
+    ax.legend()
+    
+    
+    
+    
+    
+    
+    
+data = np.genfromtxt(f'Ising_Datasets/Part2_2_Power.txt')
+temperatures = np.unique(data[:, 0])[:-1]
+
+energies = np.zeros(len(temperatures))
+energy_err = np.zeros(len(temperatures))
+magnetisations = np.zeros(len(temperatures))
+mag_errs = np.zeros(len(temperatures))
+spec_heat = np.zeros(len(temperatures))
+mag_sus = np.zeros(len(temperatures))
+
+N_s = dim*dim
+
+for i, temp in enumerate(temperatures):
+    subdata = data[np.where(data[:, 0] == temp), :][0, :, :]
+    sub_energies = subdata[:, 1]
+    energies[i] = np.mean(sub_energies)
+    energy_err[i] = np.sqrt(np.var(sub_energies) / len(sub_energies))
+    
+    sub_mags = subdata[:, 2]
+    magnetisations[i] = np.mean(sub_mags)
+    mag_errs[i] = np.sqrt(np.var(sub_mags) / len(sub_mags))
+    
+    spec_heat[i] = np.var(sub_energies) * N_s / (temp**2)
+    mag_sus[i] = np.var(np.abs(sub_mags)) * N_s / temp
+    
+fig, ax = plt.subplots()
+ax.errorbar(np.abs(temperatures - t_crit), np.abs(magnetisations), yerr=mag_errs, fmt='.', label='Experiment')
+ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(1/8), label='Power Law')
+ax.set(xscale='log', yscale='log', xlabel='Rescaled Temperature, $|T - T_c|$', ylabel='Magnetisation per spin')
+ax.legend()
+
+fig, ax = plt.subplots()
+ax.scatter(np.abs(temperatures - t_crit), mag_sus, label='Experiment')
+ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(-7/4), label='Power Law')
+ax.set(xscale='log', yscale='log', xlabel='Rescaled Temperature, $|T - T_c|$', ylabel='Magnetic Susceptibility per spin')
+ax.legend()
+
+
+
+
+
