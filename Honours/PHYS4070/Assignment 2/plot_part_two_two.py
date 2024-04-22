@@ -98,15 +98,27 @@ for i, temp in enumerate(temperatures):
     spec_heat[i] = np.var(sub_energies) * N_s / (temp**2)
     mag_sus[i] = np.var(np.abs(sub_mags)) * N_s / temp
     
+### now calculate the vertical shifts required 
+import scipy.optimize as opt
+## define our fitting functions
+def vert_shift(c, x, y):
+    return c * x - y
+def log_vert_shift(c, x, y):
+    return np.log10(c * x) - np.log10(y)
+# now do a least squares regression to get our vertical shift multiplier for each plot
+mag_shift = opt.least_squares(vert_shift, 1., args=(np.abs(temperatures - t_crit)**(1/8), np.abs(magnetisations))).x
+magsus_shift = opt.least_squares(log_vert_shift, 1., args=(np.abs(temperatures - t_crit)**(-7/4), mag_sus)).x
+
+
 fig, ax = plt.subplots()
 ax.errorbar(np.abs(temperatures - t_crit), np.abs(magnetisations), yerr=mag_errs, fmt='.', label='Experiment')
-ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(1/8), label='Power Law')
+ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(1/8) * mag_shift, label='Power Law')
 ax.set(xscale='log', yscale='log', xlabel='Rescaled Temperature, $|T - T_c|$', ylabel='Magnetisation per spin')
 ax.legend()
 
 fig, ax = plt.subplots()
 ax.scatter(np.abs(temperatures - t_crit), mag_sus, label='Experiment')
-ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(-7/4), label='Power Law')
+ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(-7/4) * magsus_shift, label='Power Law')
 ax.set(xscale='log', yscale='log', xlabel='Rescaled Temperature, $|T - T_c|$', ylabel='Magnetic Susceptibility per spin')
 ax.legend()
 
