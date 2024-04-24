@@ -6,6 +6,8 @@
 #include <iostream>
 #include <fstream>
 #include <random>
+#include <omp.h>
+#include <cassert> // for assert(), used in matrix example
 #include "matrix.hpp"
 
 class IsingLattice {
@@ -139,6 +141,52 @@ class IsingLattice {
                 }
                 if (output == 1){
                     output_params();
+                }
+            }
+        }
+
+        void run_monte_carlo_parallel(int sweeps, int num_threads){
+            assert(Nrows%num_threads == 0);
+
+            omp_set_num_threads(num_threads);
+            int N = Ncols*Nrows;
+            #pragma omp parallel default(none) shared(lattice, sweeps, N)
+            {
+                std::mt19937 rand_generator((int)omp_get_wtime()); // random generator with wall time seed
+                for (int s = 0; s < sweeps; s++){
+                    for (int n = 0; n < N; n++){
+                        double delta_E = 0.;
+                        #pragma omp for
+                        for (int row = 0; row < Nrows - 2; row += 2){
+                            for (int col = 0; col < Ncols - 1; col++){
+                                delta_E = delta_energy(row, col);
+                                if (delta_E <= 0){
+                                    flip_monopole(row, col, delta_E);
+                                } else {
+                                    double rand_num = uniform_real(rand_generator);
+                                    double alpha = exp(-delta_E / temperature);
+                                    if (rand_num <= alpha){
+                                        flip_monopole(row, col, delta_E);
+                                    }
+                                }
+                            }
+                        }
+                        #pragma omp for
+                        for (int row = 1; row < Nrows - 1; row += 2){
+                            for (int col = 0; col < Ncols - 1; col++){
+                                delta_E = delta_energy(row, col);
+                                if (delta_E <= 0){
+                                    flip_monopole(row, col, delta_E);
+                                } else {
+                                    double rand_num = uniform_real(rand_generator);
+                                    double alpha = exp(-delta_E / temperature);
+                                    if (rand_num <= alpha){
+                                        flip_monopole(row, col, delta_E);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

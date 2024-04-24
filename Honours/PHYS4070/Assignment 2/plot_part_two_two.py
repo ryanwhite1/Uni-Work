@@ -62,11 +62,19 @@ shax.axvline(t_crit, c='tab:red', ls='--')
 shax.set(xlabel='Temperature, $T$', ylabel=r'Specific Heat per spin')
 re_shax.set(xlabel='Rescaled Temperature, $t$', ylabel=r'Finite Size Specific Heat per spin')
 msax.set(xlabel='Temperature, $T$', ylabel=r'Magnetic Susceptibility per spin', yscale='log')
-re_msax.set(xlabel='Rescaled Temperature, $t$', ylabel=r'Finite Size Magnetic Susceptibility per spin')
+re_msax.set(xlabel='Rescaled Temperature, $t$', ylabel=r'Finite Size Magnetic Susceptibility per spin', xlim=(-10, 20))
 
 for ax in [shax, msax, re_shax, re_msax]:
     ax.legend()
     
+shfig.savefig('Part_2_21_SpecHeat-Temp.png', dpi=400, bbox_inches='tight')
+shfig.savefig('Part_2_21_SpecHeat-Temp.pdf', dpi=400, bbox_inches='tight')
+msfig.savefig('Part_2_21_MagSus-Temp.png', dpi=400, bbox_inches='tight')
+msfig.savefig('Part_2_21_MagSus-Temp.pdf', dpi=400, bbox_inches='tight')
+re_shfig.savefig('Part_2_22_SpecHeat-Temp.png', dpi=400, bbox_inches='tight')
+re_shfig.savefig('Part_2_22_SpecHeat-Temp.pdf', dpi=400, bbox_inches='tight')
+re_msfig.savefig('Part_2_22_MagSus-Temp.png', dpi=400, bbox_inches='tight')
+re_msfig.savefig('Part_2_22_MagSus-Temp.pdf', dpi=400, bbox_inches='tight')
     
     
     
@@ -115,12 +123,16 @@ ax.errorbar(np.abs(temperatures - t_crit), np.abs(magnetisations), yerr=mag_errs
 ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(1/8) * mag_shift, label='Power Law')
 ax.set(xscale='log', yscale='log', xlabel='Rescaled Temperature, $|T - T_c|$', ylabel='Magnetisation per spin')
 ax.legend()
+fig.savefig('Part_2_23_Mag-Temp.png', dpi=400, bbox_inches='tight')
+fig.savefig('Part_2_23_Mag-Temp.pdf', dpi=400, bbox_inches='tight')
 
 fig, ax = plt.subplots()
 ax.scatter(np.abs(temperatures - t_crit), mag_sus, label='Experiment')
 ax.plot(np.abs(temperatures - t_crit), np.abs(temperatures - t_crit)**(-7/4) * magsus_shift, label='Power Law')
 ax.set(xscale='log', yscale='log', xlabel='Rescaled Temperature, $|T - T_c|$', ylabel='Magnetic Susceptibility per spin')
 ax.legend()
+fig.savefig('Part_2_23_MagSus-Temp.png', dpi=400, bbox_inches='tight')
+fig.savefig('Part_2_23_MagSus-Temp.pdf', dpi=400, bbox_inches='tight')
 
 
 

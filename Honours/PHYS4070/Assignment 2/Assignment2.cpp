@@ -1,6 +1,7 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include <omp.h>
 #include "integrator.hpp"
 #include "matrix.hpp"
 #include "isingmodel.hpp"
@@ -77,14 +78,16 @@ void part2_1(){
     std::vector<double> temps(Ntemps, 0);
     for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;}
     std::string filename = "Ising_Datasets/Part2_1_run_X.txt";
+    int sweep_mult = 1;
     for (int n = 0; n < Nlattices; n++){
         filename[27] = '0' + n+1;
         IsingLattice h(Ndim, Ndim, temp_max, n, filename);
         h.initialise_lattice();
         h.output_params();
         for (int t = Ntemps - 1; t >= 0; t--){
+            sweep_mult = (int)(1 + 19 * exp(-pow(((temps[t] - 2.269) / 0.3), 2))); // do 20x as many sweeps at the critical temperature, and do f(x) as many near it, where f(x) is a gaussian with STD 0.3
             h.change_temperature(temps[t]);
-            h.run_monte_carlo(1000, 1); // run for 1000 sweeps, and output the data on each sweep
+            h.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000*mult sweeps, and output the data on each sweep
             std::cout << "Temperature = " << temps[t] << std::endl;
             h.print_lattice();
         }
@@ -110,7 +113,7 @@ void part2_2(){
         for (int t = Ntemps - 1; t >= 0; t--){
             sweep_mult = (int)(1 + 19 * exp(-pow(((temps[t] - 2.269) / 0.3), 2))); // do 20x as many sweeps at the critical temperature, and do f(x) as many near it, where f(x) is a gaussian with STD 0.3
             h.change_temperature(temps[t]);
-            h.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000 sweeps, and output the data on each sweep
+            h.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000*mult sweeps, and output the data on each sweep
             std::cout << "Temperature = " << temps[t] << std::endl;
             // h.print_lattice();
         }
@@ -133,6 +136,23 @@ void part2_2(){
     h.close_file();
 }
 
+void part2_3(){
+    int Ndim = 64;
+    double temp = 3;
+    std::vector<int> num_threads = {1, 2, 4, 8, 16};
+    double t1 = 0., t2 = 0.;
+    int nsweeps = 20;
+    for (int i = 0; i < (int)num_threads.size(); i++){
+        IsingLattice h(Ndim, Ndim, temp, i, "");
+        h.initialise_lattice();
+        t1 = omp_get_wtime();
+        h.run_monte_carlo_parallel(nsweeps, num_threads[i]); // run for 1000*mult sweeps, and output the data on each sweep
+        t2 = omp_get_wtime();
+        std::cout << num_threads[i] << " threads completed " << nsweeps << " sweeps in " << t2 - t1 << " s" << std::endl;
+        h.close_file();
+    }
+}
+
 int main(){
     // std::cout << "Beginning part 1.1..." << std::endl;
     // part1_1();
@@ -140,8 +160,10 @@ int main(){
     // part1_2();
     // std::cout << "Beginning part 2.1..." << std::endl;
     // part2_1();
-    std::cout << "Beginning part 2.2..." << std::endl;
-    part2_2();
+    // std::cout << "Beginning part 2.2..." << std::endl;
+    // part2_2();
+    std::cout << "Beginning part 2.3..." << std::endl;
+    part2_3();
     return 0;
 }
 

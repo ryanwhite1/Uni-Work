@@ -35,6 +35,8 @@ for i, temp in enumerate(temperatures):
 fig, ax = plt.subplots()
 ax.errorbar(temperatures, energies, yerr=energy_err, fmt='.')
 ax.set(xlabel='Temperature, $T$', ylabel=r'Mean Energy per spin, $\langle E \rangle$')
+fig.savefig('Part_2_11_Energy-Temp.png', dpi=400, bbox_inches='tight')
+fig.savefig('Part_2_11_Energy-Temp.pdf', dpi=400, bbox_inches='tight')
 
 fig, ax = plt.subplots()
 ax.errorbar(temperatures, np.abs(magnetisations), yerr=mag_errs, fmt='.', label='Experimental')
@@ -46,12 +48,18 @@ true_mag = np.array([(1 - np.sinh(2 / temp)**-4)**(1/8) if temp < t_crit else 0 
 ax.plot(true_temps, true_mag, label='Theoretical')
 ax.set(xlabel='Temperature, $T$', ylabel=r'Absolute Mean Magnetisation per spin, $\langle M \rangle$')
 ax.legend()
+fig.savefig('Part_2_12_Magnetisation-Temp.png', dpi=400, bbox_inches='tight')
+fig.savefig('Part_2_12_Magnetisation-Temp.pdf', dpi=400, bbox_inches='tight')
 
 fig, ax = plt.subplots()
 ax.scatter(temperatures, spec_heat)
 ax.axvline(t_crit, c='tab:red', ls='--')
 ax.set(xlabel='Temperature, $T$', ylabel=r'Specific Heat per spin')
+fig.savefig('Part_2_13_SpecHeat-Temp.png', dpi=400, bbox_inches='tight')
+fig.savefig('Part_2_13_SpecHeat-Temp.pdf', dpi=400, bbox_inches='tight')
 
 fig, ax = plt.subplots()
 ax.scatter(temperatures, mag_sus)
 ax.set(xlabel='Temperature, $T$', ylabel=r'Magnetic Susceptibility per spin')
+fig.savefig('Part_2_14_MagSus-Temp.png', dpi=400, bbox_inches='tight')
+fig.savefig('Part_2_14_MagSus-Temp.pdf', dpi=400, bbox_inches='tight')

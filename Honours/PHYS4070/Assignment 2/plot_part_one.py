@@ -98,7 +98,7 @@ fig.savefig('Part_1_26_Trajectories.png', dpi=400, bbox_inches='tight')
 fig.savefig('Part_1_26_Trajectories.pdf', dpi=400, bbox_inches='tight')
 
 fig, ax = plt.subplots()
-ax.plot(proj_data[:, 0] - moon_data[:, 0], proj_data[:, 1] - moon_data[:, 1], rasterized=True, label='Projectile Trajectory')
+ax.plot(proj_data[:, 0] - moon_data[:, 0], proj_data[:, 1] - moon_data[:, 1], rasterized=True, label='Projectile\nTrajectory')
 ax.set(aspect='equal', xlabel='$x$ (non-dim units)', ylabel='$y$ (non-dim units)')
 ax.legend()
 
