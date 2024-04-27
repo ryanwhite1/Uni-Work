@@ -1,14 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# set LaTeX font for our figures
-plt.rcParams.update({"text.usetex": True})
-plt.rcParams['font.family'] = 'serif'
-plt.rcParams['mathtext.fontset'] = 'cm'
+# # set LaTeX font for our figures
+# plt.rcParams.update({"text.usetex": True})
+# plt.rcParams['font.family'] = 'serif'
+# plt.rcParams['mathtext.fontset'] = 'cm'
 
 t_crit = (2 / np.log(1 + 2**0.5))
 
-dimensions = [10, 20, 40, 80]
+file_dimensions = [10, 20, 40, 80]
+dimensions = [8, 16, 32, 64]
 
 shfig, shax = plt.subplots()    ### specific heat figure
 msfig, msax = plt.subplots()    ### magnetic susceptibility figure
@@ -20,7 +21,7 @@ re_msfig, re_msax = plt.subplots()    ### rescaled magnetic susceptibility figur
 for i, dim in enumerate(dimensions):
     
 
-    data = np.genfromtxt(f'Ising_Datasets/Part2_2_ndim={dim}.txt')
+    data = np.genfromtxt(f'Ising_Datasets/Part2_2_ndim={file_dimensions[i]}.txt')
     
     temperatures = np.unique(data[:, 0])[:-1]
     
@@ -71,6 +72,9 @@ shfig.savefig('Part_2_21_SpecHeat-Temp.png', dpi=400, bbox_inches='tight')
 shfig.savefig('Part_2_21_SpecHeat-Temp.pdf', dpi=400, bbox_inches='tight')
 msfig.savefig('Part_2_21_MagSus-Temp.png', dpi=400, bbox_inches='tight')
 msfig.savefig('Part_2_21_MagSus-Temp.pdf', dpi=400, bbox_inches='tight')
+re_shfig.savefig('Part_2_22_SpecHeat-Temp(Untrimmed).png', dpi=400, bbox_inches='tight')
+re_shfig.savefig('Part_2_22_SpecHeat-Temp(Untrimmed).pdf', dpi=400, bbox_inches='tight')
+re_shax.set(xlim=(-1, 2.5), ylim=(0.2, 0.6))
 re_shfig.savefig('Part_2_22_SpecHeat-Temp.png', dpi=400, bbox_inches='tight')
 re_shfig.savefig('Part_2_22_SpecHeat-Temp.pdf', dpi=400, bbox_inches='tight')
 re_msfig.savefig('Part_2_22_MagSus-Temp.png', dpi=400, bbox_inches='tight')
@@ -81,7 +85,7 @@ re_msfig.savefig('Part_2_22_MagSus-Temp.pdf', dpi=400, bbox_inches='tight')
     
     
     
-data = np.genfromtxt(f'Ising_Datasets/Part2_2_Power.txt')
+data = np.genfromtxt('Ising_Datasets/Part2_2_Power.txt')
 temperatures = np.unique(data[:, 0])[:-1]
 
 energies = np.zeros(len(temperatures))
@@ -135,6 +139,17 @@ fig.savefig('Part_2_23_MagSus-Temp.png', dpi=400, bbox_inches='tight')
 fig.savefig('Part_2_23_MagSus-Temp.pdf', dpi=400, bbox_inches='tight')
 
 
+import matplotlib as mpl
 
+
+threads_data = np.genfromtxt('Ising_Datasets/Part2_3_runs.txt', delimiter="\t")[:, :-1]
+
+fig, ax = plt.subplots()
+for i, thread in enumerate(threads_data[:, 0]):
+    ax.scatter(thread * np.ones(len(threads_data[i, 1:])), threads_data[i, 1:], s=5)
+ax.set(xlabel='Number of Threads', ylabel="Test Case Compute Time (s)", xscale=mpl.scale.LogScale(ax, base=2))
+
+fig.savefig("Part_2_3_Threads.png", dpi=400, bbox_inches='tight')
+fig.savefig("Part_2_3_Threads.pdf", dpi=400, bbox_inches='tight')
 
 

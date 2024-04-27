@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # set LaTeX font for our figures
-plt.rcParams.update({"text.usetex": True})
-plt.rcParams['font.family'] = 'serif'
-plt.rcParams['mathtext.fontset'] = 'cm'
+# plt.rcParams.update({"text.usetex": True})
+# plt.rcParams['font.family'] = 'serif'
+# plt.rcParams['mathtext.fontset'] = 'cm'
 
 data = np.genfromtxt('Ising_Datasets/Part2_1_run_1.txt')
 

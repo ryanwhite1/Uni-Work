@@ -15,7 +15,7 @@ void part1_1(){
     double moon_orb = 19.;
     double moon_period = 2. * M_PI * sqrt(moon_orb*moon_orb*moon_orb);
     double moon_vc = 1. / sqrt(moon_orb);
-    double pos_angle = (1. - 89.1 / moon_period) * 2. * M_PI;
+    double pos_angle = (1. - 88.75 / moon_period) * 2. * M_PI;
     std::cout << moon_period << " " << moon_vc << " " << pos_angle << std::endl;
     particles(1, 0) = moon_orb * cos(pos_angle);    // x
     particles(1, 1) = moon_orb * sin(pos_angle);    // y
@@ -41,7 +41,7 @@ void part1_2(){
     double moon_orb = 19.;
     double moon_period = 2. * M_PI * sqrt(moon_orb*moon_orb*moon_orb);
     double moon_vc = 1. / sqrt(moon_orb);
-    double pos_angle = (1. - 89.1 / moon_period) * 2. * M_PI;
+    double pos_angle = (1. - 88.75 / moon_period) * 2. * M_PI;
     std::cout << moon_period << " " << moon_vc << " " << pos_angle << std::endl;
     double min_dist = 0.5;
     
@@ -65,7 +65,7 @@ void part1_2(){
 
     std::cout << "Now performing integration including projectile velocity kick..." << std::endl;
     std::string kick_file = "part1_26.txt";
-    double kick_time = 75.2;    // required time to perform kick (found from the previous integration)
+    double kick_time = 74.9;    // required time to perform kick (found from the previous integration)
     double full_orbit_time = moon_period + kick_time;    // have 2nd integration go for a full moon orbit once capture has happened.
     std::cout << "System energy before integration = " << nbody_energy(part1_26_particles, masses) << std::endl;
     grav_Nbody(part1_26_particles, masses, dt, full_orbit_time, kick_file, 1, kick_time);
@@ -96,12 +96,11 @@ void part2_1(){
 }
 
 void part2_2(){
-    std::vector<int> dims = {10, 20, 40, 80};
+    std::vector<int> dims = {8, 16, 32, 64};
     std::vector<int> first_num = {1, 2, 4, 8}; // numbers for the output filenames
-    int Ntemps = 20;
+    
     double temp_min = 0.1, temp_max = 4.9;
-    std::vector<double> temps(Ntemps, 0);
-    for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;}
+    
     std::string filename = "Ising_Datasets/Part2_2_ndim=X0.txt";
     int sweep_mult = 1;
     for (int n = 0; n < 4; n++){
@@ -110,6 +109,11 @@ void part2_2(){
         IsingLattice h(dims[n], dims[n], temp_max, n, filename);
         h.initialise_lattice();
         h.output_params();
+
+        int Ntemps = (int) (20 + pow(dims[n], 0.8));
+        std::vector<double> temps(Ntemps, 0);
+        for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;}
+
         for (int t = Ntemps - 1; t >= 0; t--){
             sweep_mult = (int)(1 + 19 * exp(-pow(((temps[t] - 2.269) / 0.3), 2))); // do 20x as many sweeps at the critical temperature, and do f(x) as many near it, where f(x) is a gaussian with STD 0.3
             h.change_temperature(temps[t]);
@@ -138,32 +142,42 @@ void part2_2(){
 
 void part2_3(){
     int Ndim = 64;
-    double temp = 3;
-    std::vector<int> num_threads = {1, 2, 4, 8, 16};
+    double temp = 4;
+    std::vector<int> num_threads = {1, 2, 4, 8};
     double t1 = 0., t2 = 0.;
-    int nsweeps = 20;
+    int nsweeps = 1;
+    std::string filename = "Ising_Datasets/Part2_3_runs.txt";
+    std::ofstream output_file;
+    output_file.open(filename);
+
+    IsingLattice h(Ndim, Ndim, temp, 0, "");
+    h.initialise_lattice();
+    int num_runs = 20;
     for (int i = 0; i < (int)num_threads.size(); i++){
-        IsingLattice h(Ndim, Ndim, temp, i, "");
-        h.initialise_lattice();
-        t1 = omp_get_wtime();
-        h.run_monte_carlo_parallel(nsweeps, num_threads[i]); // run for 1000*mult sweeps, and output the data on each sweep
-        t2 = omp_get_wtime();
-        std::cout << num_threads[i] << " threads completed " << nsweeps << " sweeps in " << t2 - t1 << " s" << std::endl;
-        h.close_file();
+        output_file << num_threads[i] << "\t";
+        for (int r = 0; r < num_runs; r++){
+            t1 = omp_get_wtime();
+            h.run_monte_carlo_parallel(nsweeps, num_threads[i]); // run for 1000*mult sweeps, and output the data on each sweep
+            t2 = omp_get_wtime();
+            std::cout << num_threads[i] << " threads completed " << nsweeps << " sweeps in " << t2 - t1 << " s" << std::endl;
+            output_file << t2 - t1 << "\t";
+        }
+        output_file << std::endl;
     }
+    h.close_file();
 }
 
 int main(){
-    // std::cout << "Beginning part 1.1..." << std::endl;
-    // part1_1();
-    // std::cout << "Beginning part 1.2..." << std::endl;
-    // part1_2();
+    std::cout << "Beginning part 1.1..." << std::endl;
+    part1_1();
+    std::cout << "Beginning part 1.2..." << std::endl;
+    part1_2();
     // std::cout << "Beginning part 2.1..." << std::endl;
     // part2_1();
     // std::cout << "Beginning part 2.2..." << std::endl;
     // part2_2();
-    std::cout << "Beginning part 2.3..." << std::endl;
-    part2_3();
+    // std::cout << "Beginning part 2.3..." << std::endl;
+    // part2_3();
     return 0;
 }
 

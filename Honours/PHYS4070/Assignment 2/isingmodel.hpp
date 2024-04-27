@@ -157,7 +157,7 @@ class IsingLattice {
                     for (int n = 0; n < N; n++){
                         double delta_E = 0.;
                         #pragma omp for
-                        for (int row = 0; row < Nrows - 2; row += 2){
+                        for (int row = 0; row < Nrows - 1; row += 2){
                             for (int col = 0; col < Ncols - 1; col++){
                                 delta_E = delta_energy(row, col);
                                 if (delta_E <= 0){
@@ -172,7 +172,7 @@ class IsingLattice {
                             }
                         }
                         #pragma omp for
-                        for (int row = 1; row < Nrows - 1; row += 2){
+                        for (int row = 1; row < Nrows; row += 2){
                             for (int col = 0; col < Ncols - 1; col++){
                                 delta_E = delta_energy(row, col);
                                 if (delta_E <= 0){

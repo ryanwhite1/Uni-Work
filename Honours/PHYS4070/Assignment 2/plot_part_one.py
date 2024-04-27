@@ -1,6 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+# set LaTeX font for our figures
+# plt.rcParams.update({"text.usetex": True})
+# plt.rcParams['font.family'] = 'serif'
+# plt.rcParams['mathtext.fontset'] = 'cm'
+
 part_11_data = np.genfromtxt("part1_1.txt", delimiter='\t')
 
 data_shape = part_11_data.shape
