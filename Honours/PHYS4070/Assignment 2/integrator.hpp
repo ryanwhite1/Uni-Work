@@ -98,7 +98,7 @@ void grav_Nbody(Matrix &particles, std::vector<double> masses, double dt, double
                 double v_circ_moon = sqrt(masses[1] / kick_dist);    // calculate the orbital velocity around the moon at this radius
                 // double theta = atan((particles(1, 1) - particles(2, 1)) / (particles(1, 0) - particles(2, 0)));     // calculate the projectile-moon angular separation
                 // double theta = atan2((particles(1, 1) - particles(2, 1)), (particles(1, 0) - particles(2, 0))) + M_PI;     // calculate the projectile-moon angular separation
-                double theta = M_PI - atan2(-(particles(2, 1) - particles(1, 1)), -(particles(2, 0) - particles(1, 0)));     // calculate the projectile-moon angular separation
+                double theta = atan2(-(particles(2, 1) - particles(1, 1)), -(particles(2, 0) - particles(1, 0))) - M_PI;     // calculate the projectile-moon angular separation
                 std::cout << "Performing kick for v_circ = " << v_circ_moon << " given angular separation of "<< theta << " radians." << std::endl;
                 // now update velocities
                 particles(2, 2) += v_circ_moon * -sin(theta) - particles(2, 2) + particles(1, 2);      // vx = -v_circ sin(theta) - vx + vmoon
