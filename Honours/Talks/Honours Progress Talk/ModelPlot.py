@@ -540,7 +540,9 @@ def plot_spiral(X, Y, H):
     # import matplotlib.colors as cols
     # ax.pcolormesh(X, Y, H, norm=cols.LogNorm(vmin=1, vmax=H.max()))
     # ax.pcolormesh(X, Y, H, norm=cols.PowerNorm(gamma=1/2), cmap='hot')
-    ax.set(aspect='equal', xlabel='Relative RA (")', ylabel='Relative Dec (")')
+    ax.set(aspect='equal', xlabel='', ylabel='',
+           xticklabels=[], yticklabels=[])
+    
     fig.savefig('TestSystemHist.png', dpi=400, bbox_inches='tight')
 
 
@@ -603,7 +605,7 @@ def plot_3d(particles, weights):
     ax.scatter(particles[0, ::n], particles[1, ::n], particles[2, ::n], marker='.', s=100, alpha=0.5)
     ax.view_init(elev=-90, azim=0)
     ax.set_box_aspect([1.0, 1.0, 1.0])
-    ax.set(xlabel='Relative Dec', ylabel='Relative RA', 
+    ax.set(xlabel='', ylabel='', 
            xticklabels=[], yticklabels=[], zticklabels=[])
     fig.savefig('TestSystem3D.png', dpi=400, bbox_inches='tight')
     
@@ -690,7 +692,7 @@ fig = plt.figure()
 ax = fig.add_subplot(projection='3d')
 
 ax.plot3D(x, y, z, marker='.', ls='')
-ax.set(xlabel='X', ylabel='Y', zlabel='Z', 
+ax.set(xlabel='', ylabel='', zlabel='', 
        xticklabels=[], yticklabels=[], zticklabels=[],
        xlim=(0.5, 3))
 ax.set_box_aspect([1.0, 1.0, 1.0])
