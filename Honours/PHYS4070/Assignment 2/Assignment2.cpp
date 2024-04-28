@@ -73,25 +73,26 @@ void part1_2(){
 }
 
 void part2_1(){
+    // run over a 20x20 lattice, with 30 temperature samples, and 1 lattice (can change to more if wanted)
     int Ndim = 20, Ntemps = 30, Nlattices = 1;
     double temp_min = 0., temp_max = 5.;
     std::vector<double> temps(Ntemps, 0);
-    for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;}
-    std::string filename = "Ising_Datasets/Part2_1_run_X.txt";
+    for (int i = 0; i < Ntemps; i++){temps[i] = temp_min + i * (temp_max - temp_min) / Ntemps;} // fill out our temperature array
+    std::string filename = "Ising_Datasets/Part2_1_run_X.txt"; // initialise filename to save data to, where "X" can be changed based on the number of lattices we're doing
     int sweep_mult = 1;
     for (int n = 0; n < Nlattices; n++){
-        filename[27] = '0' + n+1;
-        IsingLattice h(Ndim, Ndim, temp_max, n, filename);
-        h.initialise_lattice();
-        h.output_params();
+        filename[27] = '0' + n+1; // update our filename to save to
+        IsingLattice lattice(Ndim, Ndim, temp_max, n, filename);
+        lattice.initialise_lattice();
+        lattice.output_params();
         for (int t = Ntemps - 1; t >= 0; t--){
             sweep_mult = (int)(1 + 19 * exp(-pow(((temps[t] - 2.269) / 0.3), 2))); // do 20x as many sweeps at the critical temperature, and do f(x) as many near it, where f(x) is a gaussian with STD 0.3
-            h.change_temperature(temps[t]);
-            h.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000*mult sweeps, and output the data on each sweep
+            lattice.change_temperature(temps[t]); // update our lattice bath temperature 
+            lattice.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000*mult sweeps, and output the data on each sweep
             std::cout << "Temperature = " << temps[t] << std::endl;
-            h.print_lattice();
+            lattice.print_lattice();
         }
-        h.close_file();
+        lattice.close_file();
     }
 }
 
@@ -106,9 +107,9 @@ void part2_2(){
     for (int n = 0; n < 4; n++){
         std::cout << "Running sim on lattice of size " << dims[n] << std::endl;
         filename[28] = '0' + first_num[n];
-        IsingLattice h(dims[n], dims[n], temp_max, n, filename);
-        h.initialise_lattice();
-        h.output_params();
+        IsingLattice lattice(dims[n], dims[n], temp_max, n, filename);
+        lattice.initialise_lattice();
+        lattice.output_params();
 
         int Ntemps = (int) (20 + pow(dims[n], 0.8));
         std::vector<double> temps(Ntemps, 0);
@@ -116,68 +117,71 @@ void part2_2(){
 
         for (int t = Ntemps - 1; t >= 0; t--){
             sweep_mult = (int)(1 + 19 * exp(-pow(((temps[t] - 2.269) / 0.3), 2))); // do 20x as many sweeps at the critical temperature, and do f(x) as many near it, where f(x) is a gaussian with STD 0.3
-            h.change_temperature(temps[t]);
-            h.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000*mult sweeps, and output the data on each sweep
+            lattice.change_temperature(temps[t]); // update our lattice bath temperature 
+            lattice.run_monte_carlo(1000 * sweep_mult, 1); // run for 1000*mult sweeps, and output the data on each sweep
             std::cout << "Temperature = " << temps[t] << std::endl;
             // h.print_lattice();
         }
-        h.close_file();
+        lattice.close_file();
     }
 
+    // now we want to run a lattice for some temperatures just near the critical temp to fit power models to
     std::cout << "Running sim on lattice near critical temperature" << std::endl;
-    int near_crit_num = 10, near_crit_dim = 40;
+    int near_crit_num = 10, near_crit_dim = 40; // number of temperatures and dimension of lattice
     std::vector<double> near_crit_temps(near_crit_num, 0);
     for (int i = 0; i < 10; i++){near_crit_temps[i] = 2 + i * (2.27 - 2) / near_crit_num;}
-    IsingLattice h(near_crit_dim, near_crit_dim, temp_max, 0, "Ising_Datasets/Part2_2_Power.txt");
-    h.initialise_lattice();
-    h.output_params();
+    IsingLattice lattice(near_crit_dim, near_crit_dim, temp_max, 0, "Ising_Datasets/Part2_2_Power.txt");
+    lattice.initialise_lattice();
+    lattice.output_params();
     for (int t = near_crit_num - 1; t >= 0; t--){
-        h.change_temperature(near_crit_temps[t]);
-        h.run_monte_carlo(10000, 1); // run for 10000 sweeps, and output the data on each sweep
+        lattice.change_temperature(near_crit_temps[t]); // update our lattice bath temperature 
+        lattice.run_monte_carlo(10000, 1); // run for 10000 sweeps, and output the data on each sweep
         std::cout << "Temperature = " << near_crit_temps[t] << std::endl;
         // h.print_lattice();
     }
-    h.close_file();
+    lattice.close_file();
 }
 
 void part2_3(){
+    // want to test the OpenMP code with a 64x64 lattice at one temperature and a variety of thread counts.
     int Ndim = 64;
     double temp = 4;
     std::vector<int> num_threads = {1, 2, 4, 8};
-    double t1 = 0., t2 = 0.;
-    int nsweeps = 1;
-    std::string filename = "Ising_Datasets/Part2_3_runs.txt";
+    double t1 = 0., t2 = 0.; // initialise our time variables to see how long the code takes
+    int nsweeps = 1;    // only performing one sweep
+    std::string filename = "Ising_Datasets/Part2_3_runs.txt"; // this is where we'll save our times
     std::ofstream output_file;
     output_file.open(filename);
 
-    IsingLattice h(Ndim, Ndim, temp, 0, "");
-    h.initialise_lattice();
-    int num_runs = 20;
-    for (int i = 0; i < (int)num_threads.size(); i++){
+    IsingLattice lattice(Ndim, Ndim, temp, 0, "");
+    lattice.initialise_lattice();
+    int num_runs = 20;  // we'll do this many runs for each of our thread counts to get a good idea of the averaged behaviour
+    for (int i = 0; i < (int)num_threads.size(); i++){  // iterate over our thread counts
         output_file << num_threads[i] << "\t";
-        for (int r = 0; r < num_runs; r++){
+        for (int r = 0; r < num_runs; r++){     // iterate over our runs
             t1 = omp_get_wtime();
-            h.run_monte_carlo_parallel(nsweeps, num_threads[i]); // run for 1000*mult sweeps, and output the data on each sweep
+            lattice.run_monte_carlo_parallel(nsweeps, num_threads[i]); // run for one sweep with our specified number of threads
             t2 = omp_get_wtime();
             std::cout << num_threads[i] << " threads completed " << nsweeps << " sweeps in " << t2 - t1 << " s" << std::endl;
             output_file << t2 - t1 << "\t";
         }
         output_file << std::endl;
     }
-    h.close_file();
+    lattice.close_file();
 }
 
 int main(){
+    // runs each assignment part on its own
     std::cout << "Beginning part 1.1..." << std::endl;
     part1_1();
     std::cout << "Beginning part 1.2..." << std::endl;
     part1_2();
-    // std::cout << "Beginning part 2.1..." << std::endl;
-    // part2_1();
-    // std::cout << "Beginning part 2.2..." << std::endl;
-    // part2_2();
-    // std::cout << "Beginning part 2.3..." << std::endl;
-    // part2_3();
+    std::cout << "Beginning part 2.1..." << std::endl;
+    part2_1();
+    std::cout << "Beginning part 2.2..." << std::endl;
+    part2_2();
+    std::cout << "Beginning part 2.3..." << std::endl;
+    part2_3();
     return 0;
 }
 

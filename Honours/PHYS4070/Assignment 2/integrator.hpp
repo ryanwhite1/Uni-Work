@@ -67,6 +67,7 @@ void Nbody_step(Matrix &particles, std::vector<double> masses, double dt){
 }
 
 void output_orbits(Matrix &particles, std::ofstream &output_file){
+    // saves the orbital data to file in the format x y vx vy t, where each row is for a different particle at a different time
     for (int i = 0; i < (int)particles.rows(); i++){
         for (int j = 0; j < (int)particles.cols(); j++){
             output_file << particles(i, j);
@@ -127,24 +128,3 @@ double nbody_energy(Matrix particles, std::vector<double> masses){
     }
     return energy;
 }
-
-
-
-
-
-// std::vector<double> operator+(std::vector<double> &a, std::vector<double> &b) {
-//     // overload matrix addition so we can easily add two matrices together
-//     std::vector<double> sum = a;
-//     for (int i = 0; i < (int)a.size(); i++) {
-//         sum[i] += b[i];
-//     }
-//     return sum;
-// }
-// std::vector<double> operator*(std::vector<double> &a, std::vector<double> &b) {
-//     // overload matrix addition so we can easily add two matrices together
-//     std::vector<double> mult = a;
-//     for (int i = 0; i < (int)a.size(); i++) {
-//         mult[i] *= b[i];
-//     }
-//     return mult;
-// }
