@@ -51,6 +51,10 @@ def rotate_z(angle):
                      [-jnp.sin(angle), jnp.cos(angle), 0],
                      [0, 0, 1]])
     return arr
+def euler_angles(coords, Omega, i, w):
+    return rotate_z(jnp.deg2rad(Omega)) @ (
+            rotate_x(jnp.deg2rad(i)) @ (
+            rotate_z(jnp.deg2rad(w)) @ coords))
 
 
 
@@ -136,7 +140,7 @@ def nonlinear_accel(x, t, rt, amax):
     t_est = (xuse * sqrtx + rt * jnp.arctanh(sqrtx)) * AU2km / jnp.sqrt(2 * amax/yr2s * rt * AU2km)
     return jnp.abs(t_est - t)
 
-def dust_circle(i_nu, stardata, theta, plume_direction, widths):
+def dust_circle(i_nu, stardata, theta, plume_direction, pos2, widths):
     '''
     '''
     i, nu = i_nu
@@ -190,7 +194,7 @@ def dust_circle(i_nu, stardata, theta, plume_direction, widths):
     circle += valid_dists * (dist_accel_lin + dist_accel_r2)
     
     ### now rotate the circle to account for the star orbit direction
-    angle_x = jnp.arctan2(direction[1], direction[0])
+    angle_x = -jnp.arctan2(direction[1], direction[0]) + jnp.pi
     circle = rotate_z(angle_x) @ circle
     
     # circle *= turned_on * turned_off
@@ -270,6 +274,8 @@ def dust_circle(i_nu, stardata, theta, plume_direction, widths):
     
     weights *= companion_dissociate
     
+    # circle = circle.at[:, :].add(jnp.tile(pos2[:, i], (len(theta), 1)).T)
+    
     circle = jnp.array([circle[0, :], 
                         circle[1, :], 
                         circle[2, :],
@@ -301,6 +307,8 @@ def dust_plume_sub(theta, times, n_orbits, period_s, stardata):
     
     E, true_anomaly = kepler(2 * jnp.pi * times / period_s, jnp.array([ecc]))
     
+    # true_times = period_s / (2*jnp.pi) * (E / 180 * jnp.pi - stardata["eccentricity"] * jnp.rad2deg(jnp.sin(E)));
+    
     a1, a2 = calculate_semi_major(period_s, stardata['m1'], stardata['m2'])
     r1 = a1 * (1 - ecc * jnp.cos(E)) * 1e-3     # radius in km 
     r2 = a2 * (1 - ecc * jnp.cos(E)) * 1e-3
@@ -310,15 +318,15 @@ def dust_plume_sub(theta, times, n_orbits, period_s, stardata):
                             jnp.sin(true_anomaly), 
                             jnp.zeros(n_time)])
     positions2 = jnp.copy(positions1)
-    positions1 *= -r1      # position in the orbital frame
-    positions2 *= r2     # position in the orbital frame
+    positions1 *= r1      # position in the orbital frame
+    positions2 *= -r2     # position in the orbital frame
     
     widths = stardata['windspeed1'] * period_s * (n_orbits - jnp.arange(n_time) / n_t)
     
     plume_direction = positions1 - positions2               # get the line of sight from first star to the second in the orbital frame
     
         
-    particles = vmap(lambda i_nu: dust_circle(i_nu, stardata, theta, plume_direction, widths))((jnp.arange(n_time), true_anomaly))
+    particles = vmap(lambda i_nu: dust_circle(i_nu, stardata, theta, plume_direction, positions2, widths))((jnp.arange(n_time), true_anomaly))
 
     weights = particles[:, 3, :].flatten()
     particles = particles[:, :3, :]
@@ -329,13 +337,18 @@ def dust_plume_sub(theta, times, n_orbits, period_s, stardata):
                            jnp.ravel(particles[:, 2, :])])
     
 
-    shock_start = plume_direction * (1 + stardata['nuc_dist'] * AU2km / jnp.max(jnp.abs(plume_direction))) + positions2
-    shock_start = jnp.repeat(shock_start, len(theta), axis=1)
+    # shock_start = plume_direction * (stardata['nuc_dist'] * AU2km / jnp.max(jnp.abs(plume_direction)))# + positions2
+    # shock_start = positions2
+    
+    ### the shock originates from the second star, not the WR, so we need to add its position to the spiral
+    shock_start = positions2
+    shock_start = jnp.repeat(shock_start, len(theta), axis=-1)
     particles += shock_start
 
-    particles = rotate_z(jnp.deg2rad(- stardata['asc_node'])) @ (
-            rotate_x(jnp.deg2rad(- stardata['inclination'])) @ (
-            rotate_z(jnp.deg2rad(- stardata['arg_peri'])) @ particles))
+    # particles = rotate_z(jnp.deg2rad(- stardata['asc_node'])) @ (
+    #         rotate_x(jnp.deg2rad(- stardata['inclination'])) @ (
+    #         rotate_z(jnp.deg2rad(- stardata['arg_peri'])) @ particles))
+    particles = euler_angles(particles, stardata['asc_node'], stardata['inclination'], stardata['arg_peri'])
 
     return 60 * 60 * 180 / jnp.pi * jnp.arctan(particles / (stardata['distance'] * 3.086e13)), weights
 
@@ -533,7 +546,7 @@ def spiral_grid_w_bins(particles, weights, stardata, xbins, ybins):
     
     weights = jnp.where((x != 0) & (y != 0), weights, 0)
     
-    H, xedges, yedges = jnp.histogram2d(y, x, bins=[xbins, ybins], weights=weights)
+    H, xedges, yedges = jnp.histogram2d(x, y, bins=[xbins, ybins], weights=weights)
     X, Y = jnp.meshgrid(xedges, yedges)
     H = H.T
     H /= jnp.max(H)
@@ -757,12 +770,8 @@ def orbital_positions(stardata):
     return positions1, positions2
 
 def transform_orbits(pos1, pos2, stardata):
-    pos1 = rotate_z(jnp.deg2rad(- stardata['asc_node'])) @ (
-            rotate_x(jnp.deg2rad(- stardata['inclination'])) @ (
-            rotate_z(jnp.deg2rad(- stardata['arg_peri'])) @ pos1))
-    pos2 = rotate_z(jnp.deg2rad(- stardata['asc_node'])) @ (
-            rotate_x(jnp.deg2rad(- stardata['inclination'])) @ (
-            rotate_z(jnp.deg2rad(- stardata['arg_peri'])) @ pos2))
+    pos1 = euler_angles(pos1, stardata['asc_node'], stardata['inclination'], stardata['arg_peri'])
+    pos2 = euler_angles(pos2, stardata['asc_node'], stardata['inclination'], stardata['arg_peri'])
     pos1 = 60 * 60 * 180 / jnp.pi * jnp.arctan(pos1 / (stardata['distance'] * 3.086e13))
     pos2 = 60 * 60 * 180 / jnp.pi * jnp.arctan(pos2 / (stardata['distance'] * 3.086e13))
     return pos1, pos2
@@ -785,12 +794,13 @@ def orbit_spiral_gif(stardata):
     
     phases = jnp.linspace(0, 1, nt)
     pos1, pos2 = orbital_positions(test_system)
-    pos1, pos2 = transform_orbits(pos1, pos2, stardata)
+    pos1, pos2 = transform_orbits(pos1, pos2, starcopy)
     
     
-    lim = 2 * max(np.max(np.abs(pos1)), np.max(np.abs(pos1)))
+    lim = 2 * max(np.max(np.abs(pos1)), np.max(np.abs(pos2)))
     xbins = np.linspace(-lim, lim, 257)
     ybins = np.linspace(-lim, lim, 257)
+    ax.set_aspect('equal')
     
     # @jit
     def animate(i):
@@ -798,14 +808,12 @@ def orbit_spiral_gif(stardata):
         print(i)
         starcopy['phase'] = phases[i] + 0.5
         particles, weights = dust_plume_for_gif(starcopy)
-        particles /= 1e2
         
         pos1, pos2 = orbital_positions(starcopy)
         pos1, pos2 = transform_orbits(pos1, pos2, starcopy)
-        
+
         X, Y, H = spiral_grid_w_bins(particles, weights, starcopy, xbins, ybins)
         ax.pcolormesh(X, Y, H, cmap='hot')
-        # ax.pcolormesh(X+pos2[0, -1], Y+pos2[1, -1], H, cmap='hot')
         
         
         ax.plot(pos1[0, :], pos1[1, :], c='w')
@@ -821,24 +829,24 @@ def orbit_spiral_gif(stardata):
 
 test_system = {"m1":22.,                # solar masses
         "m2":10.,                # solar masses
-        "eccentricity":0.6, 
-        "inclination":5.,       # degrees
+        "eccentricity":0.5, 
+        "inclination":0.,       # degrees
         "asc_node":254.1,         # degrees
         "arg_peri":10.6,           # degrees
         "open_angle":40.,       # degrees (full opening angle)
         "period":1.,           # years
         "distance":10.,        # pc
-        "windspeed1":10.,       # km/s
+        "windspeed1":0.1,       # km/s
         "windspeed2":2400.,      # km/s
-        "turn_on":-150.,         # true anomaly (degrees)
-        "turn_off":150.,         # true anomaly (degrees)
+        "turn_on":-180.,         # true anomaly (degrees)
+        "turn_off":180.,         # true anomaly (degrees)
         "oblate":0.,
         "nuc_dist":0.0001, "opt_thin_dist":2.,           # nucleation and optically thin distance (AU)
         "acc_max":0.1,                                 # maximum acceleration (km/s/yr)
         "orb_sd":0., "orb_amp":0., "orb_min":180., "az_sd":30., "az_amp":0., "az_min":270.,
         "comp_incl":127.1, "comp_az":116.5, "comp_open":0., "comp_reduction":0., "comp_plume":1.,
         "phase":0.6, 
-        "sigma":5.,              # sigma for gaussian blur
+        "sigma":1.5,              # sigma for gaussian blur
         "histmax":1.}
 orbit_spiral_gif(test_system)
     
