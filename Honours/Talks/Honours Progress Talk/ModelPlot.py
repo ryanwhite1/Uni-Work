@@ -781,13 +781,13 @@ def orbit_spiral_gif(stardata):
     '''
     '''
     starcopy = stardata.copy()
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(figsize=(6, 6))
     
     every = 1
     length = 10
     # now calculate some parameters for the animation frames and timing
     # nt = int(stardata['period'])    # roughly one year per frame
-    nt = 50
+    nt = 100
     # nt = 10
     frames = jnp.arange(0, nt, every)    # iterable for the animation function. Chooses which frames (indices) to animate.
     fps = len(frames) // length  # fps for the final animation
@@ -802,10 +802,12 @@ def orbit_spiral_gif(stardata):
     ybins = np.linspace(-lim, lim, 257)
     ax.set_aspect('equal')
     
+    
     # @jit
     def animate(i):
         ax.cla()
-        print(i)
+        if i%20 == 0:
+            print(i)
         starcopy['phase'] = phases[i] + 0.5
         particles, weights = dust_plume_for_gif(starcopy)
         
@@ -822,6 +824,9 @@ def orbit_spiral_gif(stardata):
         
         ax.set(xlim=(-lim, lim), ylim=(-lim, lim))
         ax.set_facecolor('k')
+        ax.set_axis_off()
+        ax.text(0.3 * lim, -0.8 * lim, f"Phase = {starcopy['phase']%1:.2f}", c='w', fontsize=14)
+        fig.subplots_adjust(left=0, bottom=0, right=1, top=1, wspace=None, hspace=None)
         return fig, 
 
     ani = animation.FuncAnimation(fig, animate, frames=frames, blit=True, repeat=False)
@@ -830,7 +835,7 @@ def orbit_spiral_gif(stardata):
 test_system = {"m1":22.,                # solar masses
         "m2":10.,                # solar masses
         "eccentricity":0.5, 
-        "inclination":0.,       # degrees
+        "inclination":60.,       # degrees
         "asc_node":254.1,         # degrees
         "arg_peri":10.6,           # degrees
         "open_angle":40.,       # degrees (full opening angle)
