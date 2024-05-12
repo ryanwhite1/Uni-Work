@@ -1,10 +1,11 @@
-#pragma once
+// #pragma once
 #include <cmath>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <complex>
 #include "RK4.hpp"
+#include "ising.hpp"
 
 
 void part_one(){
@@ -28,7 +29,14 @@ void part_one(){
     
 }
 
+void part_two(){
+    int N = 3;
+    Matrix hamiltonian = hamiltonian_matrix(N, 0.);
+    hamiltonian.print_matrix();
+}
+
 int main(){
-    part_one();
+    // part_one();
+    part_two();
     return 0;
 }

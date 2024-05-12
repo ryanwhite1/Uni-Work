@@ -1,4 +1,4 @@
-# pragma once
+// # pragma once
 # include <vector>
 # include <cmath>
 # include <iostream>
@@ -51,16 +51,44 @@ class Matrix {
         }
 };
 
-Matrix operator+(Matrix &a, Matrix &b) {
+Matrix operator+(Matrix a, Matrix b) {
     // overload matrix addition so we can easily add two matrices together
     Matrix sum = a;
     for (int i = 0; i < b.rows(); i++) {
         for (int j = 0; j < b.cols(); j++) {
-        sum(i, j) += b(i, j);
+            sum(i, j) += b(i, j);
         }
     }
     return sum;
 }
+Matrix operator+(Matrix a, double b){
+    Matrix new_mat(a.rows(), a.cols());
+    for (int i = 0; i < new_mat.rows(); i++){
+        for (int j = 0; j < new_mat.cols(); j++){
+            new_mat(i, j) = b;
+        }
+    }
+    return a + new_mat;
+}
+Matrix operator*(Matrix a, double b) {
+    Matrix new_mat = a;
+    // overload matrix addition so we can easily add two matrices together
+    for (int i = 0; i < a.rows(); i++) {
+        for (int j = 0; j < a.cols(); j++) {
+            new_mat(i, j) = new_mat(i, j) * b;
+        }
+    }
+    return new_mat;
+}
+Matrix operator*(double b, Matrix a){return a * b;}
+Matrix operator/(Matrix a, double b){return a * (1. / b);}
+Matrix operator/(double b, Matrix a){return a * (1. / b);}
+Matrix operator+(double b, Matrix a){return a + b;}
+Matrix operator-(Matrix a, Matrix b){return a + (-1.*b);}
+Matrix operator-(Matrix a, double b){return a + (-1. * b);}
+Matrix operator-(double b, Matrix a){return a - b;}
+
+
 
 class MatrixAndVector{
     private:
