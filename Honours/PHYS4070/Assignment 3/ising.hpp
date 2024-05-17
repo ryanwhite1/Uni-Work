@@ -84,3 +84,40 @@ Matrix hamiltonian_matrix(int N, double g){
     }
     return hamiltonian;
 }
+// dsyev_ is a symbol in the LAPACK library files
+// Documentation: http://www.netlib.org/lapack/explore-html/index.html
+extern "C" {
+extern int dsyev_(char *jobz, char *uplo, int *dimension, double *in_out_matrix,
+                  int *dimension2, double *out_e_values,
+                  double *workspace_array, int *workspace_size, int *info);
+// The variable names in the declaration here are not required, but I find them
+// helpful
+//   extern int dsyev_(char *, char *, int *, double *, int *, double *,
+//                     double *, int *, int *);
+// LAPACK uses fortran, and in order to get c++ to talk to fortran we need to
+// pass raw pointers to the data - LAPACK takes all values as pointers.
+// extern "C"  essentially means we are calling an external (non c++) function
+}
+
+MatrixAndVector solveEigenSystem(Matrix matrix, int dimension){
+    Matrix matcopy = matrix;
+    char jobz{'V'};
+    char uplo{'U'};
+    // create a blank vector to store calculated eigenvalues:
+    std::vector<double> evals(dimension);
+    int lwork = 6 * dimension;
+    int info = 0; // will hold potential error message
+    std::vector<double> work(lwork);
+    dsyev_(&jobz, &uplo, &dimension, matcopy.data(), &dimension, evals.data(), work.data(), &lwork, &info);   
+    MatrixAndVector mat_and_vec(dimension, dimension);
+
+    mat_and_vec.mat = matcopy;
+    mat_and_vec.vec = evals;
+
+    if (info != 0){
+        std::cout << info << std::endl;
+    }
+    
+    return mat_and_vec;
+}
+
