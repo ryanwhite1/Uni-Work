@@ -87,7 +87,28 @@ Matrix operator+(double b, Matrix a){return a + b;}
 Matrix operator-(Matrix a, Matrix b){return a + (-1.*b);}
 Matrix operator-(Matrix a, double b){return a + (-1. * b);}
 Matrix operator-(double b, Matrix a){return a - b;}
-
+Matrix operator*(Matrix a, Matrix b){
+    assert(a.rows() == b.rows() && a.cols() == b.cols());
+    Matrix new_mat(a.rows(), a.cols());
+    for (int i = 0; i < a.rows(); i++){
+        for (int j = 0; j < a.cols(); j++){
+            for (int k = 0; k < a.rows(); k++){
+                new_mat(i, j) += a(i, k) * b(k, j);
+            }
+        }
+    }
+    return new_mat;
+}
+Matrix transpose(Matrix a){
+    int Nrows = a.rows(), Ncols = a.cols();
+    Matrix new_mat(Ncols, Nrows);
+    for (int i = 0; i < Nrows; i++){
+        for (int j = 0; j < Ncols; j++){
+            new_mat(j, i) = a(i, j);
+        }
+    }
+    return new_mat;
+}
 
 
 class MatrixAndVector{
@@ -132,4 +153,117 @@ std::vector<double> operator*(std::vector<double> &a, std::vector<double> &b) {
         mult[i] *= b[i];
     }
     return mult;
+}
+std::vector<std::complex<double>> operator*(std::vector<std::complex<double>> a, std::vector<std::complex<double>> &b) {
+    // overload matrix addition so we can easily add two matrices together
+    std::vector<std::complex<double>> mult = a;
+    for (int i = 0; i < (int)a.size(); i++) {
+        mult[i] *= b[i];
+    }
+    return mult;
+}
+std::vector<double> operator*(Matrix a, std::vector<double> b){
+    // square matrix * column vector multiplication
+    int vec_size = (int)b.size();
+    assert(a.cols() == vec_size);
+    std::vector<double> new_vec(vec_size, 0.);
+    for (int i = 0; i < vec_size; i++){
+        for (int k = 0; k < vec_size; k++){
+            new_vec[i] += a(i, k) * b[k];
+        }
+    }
+    return new_vec;
+}
+std::vector<std::complex<double>> operator*(Matrix a, std::vector<std::complex<double>> b){
+    // square matrix * column vector multiplication
+    int vec_size = (int)b.size();
+    assert(a.cols() == vec_size);
+    std::vector<std::complex<double>> new_vec(vec_size, 0.);
+    for (int i = 0; i < vec_size; i++){
+        for (int k = 0; k < vec_size; k++){
+            new_vec[i] += a(i, k) * b[k];
+        }
+    }
+    return new_vec;
+}
+std::vector<double> operator*(std::vector<double> a, Matrix b){
+    // row vector * square matrix multiplication
+    int vec_size = (int)a.size();
+    assert(b.rows() == vec_size);
+    std::vector<double> new_vec(vec_size, 0.);
+    for (int i = 0; i < vec_size; i++){
+        for (int k = 0; k < vec_size; k++){
+            new_vec[i] += a[k] * b(k, i);
+        }
+    }
+    return new_vec;
+}
+std::vector<std::complex<double>> operator*(std::vector<std::complex<double>> a, Matrix b){
+    // row vector * square matrix multiplication
+    int vec_size = (int)a.size();
+    assert(b.rows() == vec_size);
+    std::vector<std::complex<double>> new_vec(vec_size, 0.);
+    for (int i = 0; i < vec_size; i++){
+        for (int k = 0; k < vec_size; k++){
+            new_vec[i] += a[k] * b(k, i);
+        }
+    }
+    return new_vec;
+}
+double dot_product(std::vector<double> a, std::vector<double> b){
+    assert((int)a.size() == (int)b.size());
+    double sum = 0.;
+    for (int i = 0; i < (int)a.size(); i++){
+        sum += a[i] * b[i];
+    }
+    return sum;
+}
+double dot_product(std::vector<std::complex<double>> a, std::vector<std::complex<double>> b){
+    int a_size = (int)a.size();
+    assert(a_size == (int)b.size());
+    std::complex<double> sum = 0.;
+    for (int i = 0; i < a_size; i++){
+        sum += conj(a[i]) * b[i];
+    }
+    // double sum_double = norm(sum);
+    double sum_double = sum.real();
+    return sum_double;
+}
+
+
+std::vector<std::vector<std::complex<double>>> operator*(Matrix a, std::vector<std::vector<std::complex<double>>> b){
+    assert(a.rows() == (int)b.size() && a.cols() == (int)b[0].size());
+    std::vector<std::vector<std::complex<double>>> new_mat((int)b.size(), std::vector<std::complex<double>> ((int)b[0].size(), 0.));
+    for (int i = 0; i < a.rows(); i++){
+        for (int j = 0; j < a.cols(); j++){
+            for (int k = 0; k < a.rows(); k++){
+                new_mat[i][j] += a(i, k) * b[k][j];
+            }
+        }
+    }
+    return new_mat;
+}
+std::vector<std::vector<std::complex<double>>> operator*(std::vector<std::vector<std::complex<double>>> a, Matrix b){
+    assert(b.rows() == (int)a.size() && b.cols() == (int)a[0].size());
+    std::vector<std::vector<std::complex<double>>> new_mat((int)a.size(), std::vector<std::complex<double>> ((int)a[0].size(), 0.));
+    for (int i = 0; i < b.rows(); i++){
+        for (int j = 0; j < b.cols(); j++){
+            for (int k = 0; k < b.rows(); k++){
+                new_mat[i][j] += a[i][k] * b(k, j);
+            }
+        }
+    }
+    return new_mat;
+}
+std::vector<std::complex<double>> operator*(std::vector<std::vector<std::complex<double>>> a, std::vector<std::complex<double>> b){
+    // square matrix * column vector multiplication
+    int vec_size = (int)b.size();
+    assert((int)a.size() == vec_size);
+    std::vector<std::complex<double>> new_vec(vec_size, 0.);
+    for (int i = 0; i < vec_size; i++){
+        for (int k = 0; k < vec_size; k++){
+            new_vec[i] += a[i][k] * b[k];
+        }
+    }
+    return new_vec;
 }

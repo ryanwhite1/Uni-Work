@@ -121,3 +121,18 @@ MatrixAndVector solveEigenSystem(Matrix matrix, int dimension){
     return mat_and_vec;
 }
 
+void timestep(std::vector<std::complex<double>> &wavefunc, Matrix U, std::vector<std::complex<double>> energy_timestep){
+    wavefunc = transpose(U) * wavefunc;
+    wavefunc = energy_timestep * wavefunc;
+    wavefunc = U * wavefunc;
+
+    // wavefunc = U * energy_timestep * transpose(U) * wavefunc;
+}
+
+void timestep(std::vector<std::complex<double>> &wavefunc, Matrix U, std::vector<std::vector<std::complex<double>>> energy_matrix){
+    // wavefunc = transpose(U) * wavefunc;
+    // wavefunc = energy_matrix * wavefunc;
+    // wavefunc = U * wavefunc;
+
+    wavefunc = U * energy_matrix * transpose(U) * wavefunc;
+}

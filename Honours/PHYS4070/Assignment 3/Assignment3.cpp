@@ -138,10 +138,58 @@ void part_two(){
 
 
     // PART c)
+    double dt = 0.01, time = 10., t = 0.;
+    int nsteps = time / dt;
+    std::cout << "Evolving N=8 system in time..." << std::endl;
+    Matrix hamiltonian = hamiltonian_matrix(8, 0.);
+    MatrixAndVector initial_sol = solveEigenSystem(hamiltonian, hamiltonian.rows());
+    Matrix hamiltonian_g4 = hamiltonian_matrix(8, 4.);
+    MatrixAndVector quench_sol = solveEigenSystem(hamiltonian_g4, hamiltonian_g4.rows());
+    std::vector<double> eigenvalues = quench_sol.vec;
+    std::vector<std::complex<double>> ground_state_wavefunc(initial_sol.mat.rows(), 0.);
+    for (int i = 0; i < initial_sol.mat.rows(); i++){ground_state_wavefunc[i] = initial_sol.mat(0, i);} // get the ground state eigenvector
+    std::vector<std::complex<double>> energy_timestep((int)eigenvalues.size(), 0.), wavefunc = ground_state_wavefunc;
+    for (int i = 0; i < (int)eigenvalues.size(); i++){energy_timestep[i] = exp(-imag * eigenvalues[i] * dt);}
+    quench_sol.mat = transpose(quench_sol.mat);
+
+    std::vector<std::vector<std::complex<double>>> energy_matrix((int)eigenvalues.size(), std::vector<std::complex<double>> ((int)eigenvalues.size(), 0.));
+    for (int i = 0; i < (int)eigenvalues.size(); i++){energy_matrix[i][i] = exp(-imag * eigenvalues[i] * dt);}
+
+    Matrix Sx = pauli_x(N, 0), Sz = pauli_z(N, 0), Cxx = pauli_x(N, 0) * pauli_x(N, 1);
+    for (int m = 1; m < N; m++){
+        Sx = Sx + pauli_x(N, m);
+        Sz = Sz + pauli_z(N, m);
+        for (int n = 0; n < N; n++){
+            if (n != m){
+                Cxx = Cxx + pauli_x(N, m) * pauli_x(N, n);
+            }
+        }
+    }
+
+    std::vector<std::vector<std::complex<double>>> time_evolution = quench_sol.mat * energy_matrix * transpose(quench_sol.mat);
+    
+    std::ofstream part_c_file;
+    part_c_file.open("Part2c_g=4_evolution.txt");
+    double temp_Sz = dot_product(wavefunc, Sz * wavefunc); 
+    double temp_Sx = dot_product(wavefunc, Sx * wavefunc); 
+    double temp_Cxx = dot_product(wavefunc, Cxx * wavefunc); 
+    part_c_file << t << "\t" << temp_Sz << "\t" << temp_Sx << "\t" << temp_Cxx << std::endl;
+    for (int i = 0; i < nsteps; i++){
+        // timestep(wavefunc, quench_sol.mat, energy_timestep);
+        // timestep(wavefunc, transpose(quench_sol.mat), energy_matrix);
+        wavefunc = time_evolution * wavefunc;
+        double temp_Sz = dot_product(wavefunc, Sz * wavefunc); 
+        double temp_Sx = dot_product(wavefunc, Sx * wavefunc); 
+        double temp_Cxx = dot_product(wavefunc, Cxx * wavefunc); 
+        // std::cout << temp_Cxx << " " << energy_timestep[1] << std::endl;
+        t += dt;
+        part_c_file << t << "\t" << temp_Sz << "\t" << temp_Sx << "\t" << temp_Cxx << std::endl;
+    }
+    part_c_file.close();
 }
 
 int main(){
-    part_one();
-    // part_two();
+    // part_one();
+    part_two();
     return 0;
 }

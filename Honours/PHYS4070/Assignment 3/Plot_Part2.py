@@ -41,3 +41,17 @@ for i, ax in enumerate(axes):
     ax.grid(axis='x')
 fig.savefig('Part2b_ground_states.png', bbox_inches='tight')
 fig.savefig('Part2b_ground_states.pdf', bbox_inches='tight')
+
+
+
+time_evolution = np.genfromtxt('Part2c_g=4_evolution.txt', delimiter='\t')
+times = time_evolution[:, 0]
+
+fig, ax = plt.subplots()
+ax.plot(times, time_evolution[:, 1], label='$S_z$')
+ax.plot(times, time_evolution[:, 2], label='$S_x$')
+ax.plot(times, time_evolution[:, 3], label='$C_{xx}$')
+ax.legend()
+ax.set(xlabel='Time', ylabel='')
+fig.savefig('Part2c_g=4_time_evolution.png', bbox_inches='tight')
+fig.savefig('Part2c_g=4_time_evolution.pdf', bbox_inches='tight')
