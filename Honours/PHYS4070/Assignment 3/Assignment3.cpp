@@ -93,7 +93,7 @@ void part_two(){
     std::vector<int> atom_nums = {2, 3, 4, 5, 6, 7, 8};
     for (int i = 0; i < (int)atom_nums.size(); i++){
         part_a_file << atom_nums[i] << "\t";
-        for (int j = 0; j < 10; j++){ // run for 10 iterations to get some idea of the variance
+        for (int j = 0; j < 20; j++){ // run for 20 iterations to get some idea of the variance
             auto start = std::chrono::steady_clock::now();
             Matrix hamiltonian = hamiltonian_matrix(atom_nums[i], 10.);
             MatrixAndVector sols = solveEigenSystem(hamiltonian, hamiltonian.rows());
@@ -138,7 +138,7 @@ void part_two(){
 
 
     // PART c)
-    double dt = 0.01, time = 10., t = 0.;
+    double dt = 0.01, time = 20., t = 0.;
     int nsteps = time / dt;
     std::cout << "Evolving N=8 system in time..." << std::endl;
     Matrix hamiltonian = hamiltonian_matrix(8, 0.);
@@ -189,7 +189,9 @@ void part_two(){
 }
 
 int main(){
-    // part_one();
+    std::cout << "Beginning Part I..." << std::endl;
+    part_one();
+    std::cout << "Beginning Part II..." << std::endl;
     part_two();
     return 0;
 }

@@ -2,104 +2,104 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import animation
 
-# print("Generating animation for plane wave evolution...")
-# g_vals = [0, 0.5, 1, 5, 20]
-# data_arrays = []
+print("Generating animation for plane wave evolution...")
+g_vals = [0, 0.5, 1, 5, 20]
+data_arrays = []
 
-# for i in range(len(g_vals)):
-#     temp_array = np.genfromtxt(f'g={g_vals[i]}_plane_wave_evol.txt', delimiter='\t')
-#     data_arrays.append(temp_array[:, 1:])
-# times = temp_array[:, 0]
+for i in range(len(g_vals)):
+    temp_array = np.genfromtxt(f'g={g_vals[i]}_plane_wave_evol.txt', delimiter='\t')
+    data_arrays.append(temp_array[:, 1:])
+times = temp_array[:, 0]
 
-# L = 20
-# xs = np.linspace(-L/2, L/2, data_arrays[0].shape[1])
+L = 20
+xs = np.linspace(-L/2, L/2, data_arrays[0].shape[1])
 
-# fig, ax = plt.subplots()
-# every = 10
-# frames = np.arange(0, data_arrays[0].shape[0], every)
-# length = 5
-# fps = len(frames) / length
+fig, ax = plt.subplots()
+every = 10
+frames = np.arange(0, data_arrays[0].shape[0], every)
+length = 5
+fps = len(frames) / length
 
-# limit = 1.1 * np.max(np.array(data_arrays).flatten())
+limit = 1.1 * np.max(np.array(data_arrays).flatten())
 
-# plots = [0, 0, 0, 0, 0]
-# for j in range(len(g_vals)):
-#     plots[j] = ax.plot(xs, data_arrays[j][0, :], label=f'$g={g_vals[j]}$')
-# ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
-# ax.legend(loc='upper right')
+plots = [0, 0, 0, 0, 0]
+for j in range(len(g_vals)):
+    plots[j] = ax.plot(xs, data_arrays[j][0, :], label=f'$g={g_vals[j]}$')
+ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
+ax.legend(loc='upper right')
 
-# def animate(i):
-#     for j in range(len(g_vals)):
-#         plots[j][0].set_data(xs, data_arrays[j][i, :])
-#     ax.set(title=f'Time = {times[i]:.2f}')
-#     return [fig, ax]
+def animate(i):
+    for j in range(len(g_vals)):
+        plots[j][0].set_data(xs, data_arrays[j][i, :])
+    ax.set(title=f'Time = {times[i]:.2f}')
+    return [fig, ax]
     
-# ani = animation.FuncAnimation(fig, animate, frames=frames)
-# ani.save(f"Part1b_Plane_Wave_Evolution.gif", writer='pillow', fps=fps)
+ani = animation.FuncAnimation(fig, animate, frames=frames)
+ani.save(f"Part1b_Plane_Wave_Evolution.gif", writer='pillow', fps=fps)
 
-# fig, ax = plt.subplots()
-# for i in range(len(g_vals)):
-#     ax.plot(xs, data_arrays[i][data_arrays[0].shape[0]//2, :], label=f'$g={g_vals[i]}$')
-# ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
-# ax.legend(loc='upper right')
-# fig.savefig('Part1b_PlaneWave_snapshot.png', bbox_inches = 'tight')
-# fig.savefig('Part1b_PlaneWave_snapshot.pdf', bbox_inches = 'tight')
-
-
+fig, ax = plt.subplots()
+for i in range(len(g_vals)):
+    ax.plot(xs, data_arrays[i][data_arrays[0].shape[0]//2, :], label=f'$g={g_vals[i]}$')
+ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
+ax.legend(loc='upper right')
+fig.savefig('Part1b_PlaneWave_snapshot.png', bbox_inches = 'tight')
+fig.savefig('Part1b_PlaneWave_snapshot.pdf', bbox_inches = 'tight')
 
 
 
-# print("Generating animation and peak plot for single soliton evolution...")
 
-# u_vals = [-5, -1, 0, 1, 5]
-# data_arrays = []
-# for i in range(len(u_vals)):
-#     temp_array = np.genfromtxt(f'u={u_vals[i]}_soliton.txt', delimiter='\t')
-#     data_arrays.append(temp_array[:, 1:])
-# data_arrays = np.array(data_arrays)
-# times = temp_array[:, 0]
 
-# L = 20
-# xs = np.linspace(-L/2, L/2, data_arrays.shape[2])
+print("Generating animation and peak plot for single soliton evolution...")
 
-# fig, ax = plt.subplots()
-# every = 10
-# frames = np.arange(0, data_arrays[0].shape[0], every)
-# length = 5
-# fps = len(frames) / length
+u_vals = [-5, -1, 0, 1, 5]
+data_arrays = []
+for i in range(len(u_vals)):
+    temp_array = np.genfromtxt(f'u={u_vals[i]}_soliton.txt', delimiter='\t')
+    data_arrays.append(temp_array[:, 1:])
+data_arrays = np.array(data_arrays)
+times = temp_array[:, 0]
 
-# limit = 1.1 * np.max(np.array(data_arrays).flatten())
+L = 20
+xs = np.linspace(-L/2, L/2, data_arrays.shape[2])
 
-# plots = [0, 0, 0, 0, 0]
-# for j in range(len(u_vals)):
-#     plots[j] = ax.plot(xs, data_arrays[j, 0, :], label=f'$u={u_vals[j]}$')
-# ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
-# ax.legend(loc='upper right')
+fig, ax = plt.subplots()
+every = 10
+frames = np.arange(0, data_arrays[0].shape[0], every)
+length = 5
+fps = len(frames) / length
 
-# def animate(i):
-#     for j in range(len(u_vals)):
-#         plots[j][0].set_data(xs, data_arrays[j, i, :])
-#     ax.set(title=f'Time = {times[i]:.2f}')
-#     return [fig, ax]
-# ani = animation.FuncAnimation(fig, animate, frames=frames)
-# ani.save(f"Part1c_Soliton_Evolution.gif", writer='pillow', fps=fps)
+limit = 1.1 * np.max(np.array(data_arrays).flatten())
 
-# fig, ax = plt.subplots()
-# for i in range(len(u_vals)):
-#     ax.plot(xs, data_arrays[i, data_arrays.shape[1]//2, :], label=f'$u={u_vals[i]}$')
-# ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
-# ax.legend(loc='upper right')
-# fig.savefig('Part1c_soliton_snapshot.png', bbox_inches = 'tight')
-# fig.savefig('Part1c_soliton_snapshot.pdf', bbox_inches = 'tight')
+plots = [0, 0, 0, 0, 0]
+for j in range(len(u_vals)):
+    plots[j] = ax.plot(xs, data_arrays[j, 0, :], label=f'$u={u_vals[j]}$')
+ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
+ax.legend(loc='upper right')
 
-# peak_positions = np.genfromtxt('Part1c_peak_pos.txt', delimiter='\t')
-# fig, ax = plt.subplots()
-# for i in range(len(u_vals)):
-#     ax.plot(peak_positions[:, 0], peak_positions[:, i+1], label=f'$u={u_vals[i]}$')
-# ax.legend()
-# ax.set(xlabel='Time ($t$)', ylabel=r'Soliton $|\psi|^2$ Peak Position ($x$)')
-# fig.savefig('Part1c_Peak_Positions.png', bbox_inches = 'tight')
-# fig.savefig('Part1c_Peak_Positions.pdf', bbox_inches = 'tight')
+def animate(i):
+    for j in range(len(u_vals)):
+        plots[j][0].set_data(xs, data_arrays[j, i, :])
+    ax.set(title=f'Time = {times[i]:.2f}')
+    return [fig, ax]
+ani = animation.FuncAnimation(fig, animate, frames=frames)
+ani.save(f"Part1c_Soliton_Evolution.gif", writer='pillow', fps=fps)
+
+fig, ax = plt.subplots()
+for i in range(len(u_vals)):
+    ax.plot(xs, data_arrays[i, data_arrays.shape[1]//2, :], label=f'$u={u_vals[i]}$')
+ax.set(ylim=(0, limit), ylabel=r'$|\psi|^2$', xlabel='$x$')
+ax.legend(loc='upper right')
+fig.savefig('Part1c_soliton_snapshot.png', bbox_inches = 'tight')
+fig.savefig('Part1c_soliton_snapshot.pdf', bbox_inches = 'tight')
+
+peak_positions = np.genfromtxt('Part1c_peak_pos.txt', delimiter='\t')
+fig, ax = plt.subplots()
+for i in range(len(u_vals)):
+    ax.plot(peak_positions[:, 0], peak_positions[:, i+1], label=f'$u={u_vals[i]}$')
+ax.legend()
+ax.set(xlabel='Time ($t$)', ylabel=r'Soliton $|\psi|^2$ Peak Position ($x$)')
+fig.savefig('Part1c_Peak_Positions.png', bbox_inches = 'tight')
+fig.savefig('Part1c_Peak_Positions.pdf', bbox_inches = 'tight')
 
 
 
