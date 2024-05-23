@@ -219,7 +219,8 @@ double dot_product(std::vector<double> a, std::vector<double> b){
     }
     return sum;
 }
-double dot_product(std::vector<std::complex<double>> a, std::vector<std::complex<double>> b){
+double expect_value(std::vector<std::complex<double>> a, std::vector<std::complex<double>> b){
+    // calculates the expectation value <a|b>
     int a_size = (int)a.size();
     assert(a_size == (int)b.size());
     std::complex<double> sum = 0.;

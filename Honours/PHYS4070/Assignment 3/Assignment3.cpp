@@ -186,15 +186,15 @@ void part_two(){
     std::ofstream part_c_file;
     part_c_file.open("Part2c_g=4_evolution.txt");
     // initialise our Sz, Sx, and Cxx observables with the current state, and save them to file
-    double temp_Sz = dot_product(wavefunc, Sz * wavefunc); 
-    double temp_Sx = dot_product(wavefunc, Sx * wavefunc); 
-    double temp_Cxx = dot_product(wavefunc, Cxx * wavefunc); 
+    double temp_Sz = expect_value(wavefunc, Sz * wavefunc); 
+    double temp_Sx = expect_value(wavefunc, Sx * wavefunc); 
+    double temp_Cxx = expect_value(wavefunc, Cxx * wavefunc); 
     part_c_file << t << "\t" << temp_Sz << "\t" << temp_Sx << "\t" << temp_Cxx << std::endl;
     for (int i = 0; i < nsteps; i++){ // for each step in our time evolution...
         wavefunc = time_evolution * wavefunc; // evolve the wave function, and...
-        double temp_Sz = dot_product(wavefunc, Sz * wavefunc); // compute the observables:
-        double temp_Sx = dot_product(wavefunc, Sx * wavefunc); 
-        double temp_Cxx = dot_product(wavefunc, Cxx * wavefunc); 
+        double temp_Sz = expect_value(wavefunc, Sz * wavefunc); // compute the observables:
+        double temp_Sx = expect_value(wavefunc, Sx * wavefunc); 
+        double temp_Cxx = expect_value(wavefunc, Cxx * wavefunc); 
         t += dt;
         // now output observables to file
         part_c_file << t << "\t" << temp_Sz << "\t" << temp_Sx << "\t" << temp_Cxx << std::endl;
