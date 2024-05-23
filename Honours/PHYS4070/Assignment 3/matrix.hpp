@@ -51,6 +51,7 @@ class Matrix {
         }
 };
 
+// now overload operators so that we can do cursed Matrix/vector operations
 Matrix operator+(Matrix a, Matrix b) {
     // overload matrix addition so we can easily add two matrices together
     Matrix sum = a;
