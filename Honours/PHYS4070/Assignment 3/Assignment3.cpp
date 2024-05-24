@@ -225,8 +225,8 @@ void part_two(){
 }
 
 int main(){
-    // std::cout << "Beginning Part I..." << std::endl;
-    // part_one();
+    std::cout << "Beginning Part I..." << std::endl;
+    part_one();
     std::cout << "Beginning Part II..." << std::endl;
     part_two();
     return 0;
