@@ -55,15 +55,22 @@ fig.savefig('Part2b_ground_states.png', bbox_inches='tight')
 fig.savefig('Part2b_ground_states.pdf', bbox_inches='tight')
 
 
-
-time_evolution = np.genfromtxt('Part2c_g=4_evolution.txt', delimiter='\t')
-times = time_evolution[:, 0]
-
-fig, ax = plt.subplots(figsize=(10, 4))
-ax.plot(times, time_evolution[:, 1], label='$S_z$')
-ax.plot(times, time_evolution[:, 2], label='$S_x$')
-ax.plot(times, time_evolution[:, 3], label='$C_{xx}$')
-ax.legend()
-ax.set(xlabel='Time', ylabel='Observable Value')
-fig.savefig('Part2c_g=4_time_evolution.png', bbox_inches='tight')
-fig.savefig('Part2c_g=4_time_evolution.pdf', bbox_inches='tight')
+filenames = ['Part2c_g=1_evolution.txt', 'Part2c_g=4_evolution.txt', 'Part2c_g=20_evolution.txt']
+gvals = [1, 4, 20]
+fig, axes = plt.subplots(figsize=(10, 12), nrows=3, gridspec_kw={'hspace':0}, sharex=True)
+for i, g in enumerate(gvals):
+    time_evolution = np.genfromtxt(filenames[i], delimiter='\t')
+    times = time_evolution[:, 0]
+    
+    axes[i].plot(times, time_evolution[:, 1], label='$S_z$')
+    axes[i].plot(times, time_evolution[:, 2], label='$S_x$')
+    axes[i].plot(times, time_evolution[:, 3], label='$C_{xx}$')
+    if i == 0:
+        axes[i].legend()
+    else:
+        axes[i].axhline(2, ls=':', c='k', alpha=0.7)
+    xlabel = 'Time' if i == len(gvals) - 1 else ''
+    axes[i].set(xlabel=xlabel, ylabel='Observable Value')
+    axes[i].text(18, 3.5, fr'$g = {gvals[i]}$', fontsize=14)
+fig.savefig('Part2c_time_evolution.png', bbox_inches='tight')
+fig.savefig('Part2c_time_evolution.pdf', bbox_inches='tight')

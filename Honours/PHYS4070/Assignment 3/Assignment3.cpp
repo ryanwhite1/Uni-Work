@@ -152,22 +152,13 @@ void part_two(){
 
     // PART c)
     // in this final section we want to construct a system at g=0, then evolve it in a g=4 state
-    double dt = 0.01, time = 20., t = 0.; // time step, max time, initial time
+    double dt = 0.01, time = 20.; // time step, max time
     int nsteps = time / dt;
     std::cout << "Evolving N=8 system in time..." << std::endl;
     Matrix hamiltonian = hamiltonian_matrix(8, 0.); // construct N = 8 system at g = 0
     MatrixAndVector initial_sol = solveEigenSystem(hamiltonian, hamiltonian.rows()); // get initial eigenvectors/values
-    Matrix hamiltonian_g4 = hamiltonian_matrix(8, 4.); // now construct our hamiltonian for the g = 4 case
-    MatrixAndVector quench_sol = solveEigenSystem(hamiltonian_g4, hamiltonian_g4.rows()); // get the eigenvectors/values for the g = 4 case
-    std::vector<double> eigenvalues = quench_sol.vec; // eigenvalues of g = 4 hamiltonian
     std::vector<std::complex<double>> ground_state_wavefunc(initial_sol.mat.rows(), 0.); // initialise vector to store our initial wavefunction at the ground state of g=0
     for (int i = 0; i < initial_sol.mat.rows(); i++){ground_state_wavefunc[i] = initial_sol.mat(0, i);} // get the ground state eigenvector
-    std::vector<std::complex<double>> wavefunc = ground_state_wavefunc; // treat the exponential diagonal matrix as just a vector
-    quench_sol.mat = transpose(quench_sol.mat); // transpose our g=4 matrix because of the way dsyev does things
-
-    // now create 2d complex vector to store our matrices
-    std::vector<std::vector<std::complex<double>>> energy_matrix((int)eigenvalues.size(), std::vector<std::complex<double>> ((int)eigenvalues.size(), 0.));
-    for (int i = 0; i < (int)eigenvalues.size(); i++){energy_matrix[i][i] = exp(-imag * eigenvalues[i] * dt);} // populate the diagonal with the complex exponential terms
 
     // now calculate the pauli spin matrices once for our N = 8 system
     Matrix Sx = pauli_x(N, 0), Sz = pauli_z(N, 0), Cxx = pauli_x(N, 0) * pauli_x(N, 1);
@@ -180,32 +171,62 @@ void part_two(){
             }
         }
     }
-    // now calculate our time evolution matrix just once: U * e^(-iD dt) * U^dagger
-    std::vector<std::vector<std::complex<double>>> time_evolution = quench_sol.mat * energy_matrix * transpose(quench_sol.mat);
+
+    // we want to test the time evolution for a few diff vals of g
+    std::vector<std::vector<std::vector<std::complex<double>>>> time_evols = {}; // initialise vector to store our time evolution matrices
+    std::vector<double> gvals = {1., 4., 20.}; // these are the g values we want to test
+
+    // now we need to construct the time evolution matrices for each g value hamiltonian
+    for (int j = 0; j < (int)gvals.size(); j++){
+        Matrix hamiltonian_gval = hamiltonian_matrix(8, gvals[j]); // now construct our hamiltonian for the non zero g case
+        MatrixAndVector quench_sol_gval = solveEigenSystem(hamiltonian_gval, hamiltonian_gval.rows()); // get the eigenvectors/values for the non zero g case
+        std::vector<double> eigenvalues_gval = quench_sol_gval.vec; // eigenvalues of the non zero g hamiltonian
+
+        quench_sol_gval.mat = transpose(quench_sol_gval.mat); // transpose our eigenvector matrix because of the way dsyev does things
+
+        // now create 2d complex vector to store our matrices
+        std::vector<std::vector<std::complex<double>>> energy_matrix_gval((int)eigenvalues_gval.size(), std::vector<std::complex<double>> ((int)eigenvalues_gval.size(), 0.));
+        for (int i = 0; i < (int)eigenvalues_gval.size(); i++){energy_matrix_gval[i][i] = exp(-imag * eigenvalues_gval[i] * dt);} // populate the diagonal with the complex exponential terms
+
+        
+        // now calculate our time evolution matrix just once: U * e^(-iD dt) * U^dagger
+        std::vector<std::vector<std::complex<double>>> time_evolution_gval = quench_sol_gval.mat * energy_matrix_gval * transpose(quench_sol_gval.mat);
+        time_evols.push_back(time_evolution_gval);
+    }
+
+    // we want to save each run to a different file, so construct a vector so that we can do it easily within a for loop
+    std::vector<std::string> filenames = {"Part2c_g=1_evolution.txt", "Part2c_g=4_evolution.txt", "Part2c_g=20_evolution.txt"};
     
-    std::ofstream part_c_file;
-    part_c_file.open("Part2c_g=4_evolution.txt");
-    // initialise our Sz, Sx, and Cxx observables with the current state, and save them to file
-    double temp_Sz = expect_value(wavefunc, Sz * wavefunc); 
-    double temp_Sx = expect_value(wavefunc, Sx * wavefunc); 
-    double temp_Cxx = expect_value(wavefunc, Cxx * wavefunc); 
-    part_c_file << t << "\t" << temp_Sz << "\t" << temp_Sx << "\t" << temp_Cxx << std::endl;
-    for (int i = 0; i < nsteps; i++){ // for each step in our time evolution...
-        wavefunc = time_evolution * wavefunc; // evolve the wave function, and...
-        double temp_Sz = expect_value(wavefunc, Sz * wavefunc); // compute the observables:
+    // now iterate over our different runs
+    for (int j = 0; j < (int)filenames.size(); j++){
+        double t = 0.; // set current time to 0
+        std::vector<std::complex<double>> wavefunc = ground_state_wavefunc; // set our g wavefunc initial state to be the groundstate of g=0
+        // open our file:
+        std::ofstream part_c_file;
+        part_c_file.open(filenames[j]);
+        // initialise our Sz, Sx, and Cxx observables with the current state, and save them to file
+        double temp_Sz = expect_value(wavefunc, Sz * wavefunc); 
         double temp_Sx = expect_value(wavefunc, Sx * wavefunc); 
         double temp_Cxx = expect_value(wavefunc, Cxx * wavefunc); 
-        t += dt;
-        // now output observables to file
         part_c_file << t << "\t" << temp_Sz << "\t" << temp_Sx << "\t" << temp_Cxx << std::endl;
+        for (int i = 0; i < nsteps; i++){ // for each step in our time evolution...
+            wavefunc = time_evols[j] * wavefunc; // evolve the wave function, and...
+            double temp_Sz = expect_value(wavefunc, Sz * wavefunc); // compute the observables:
+            double temp_Sx = expect_value(wavefunc, Sx * wavefunc); 
+            double temp_Cxx = expect_value(wavefunc, Cxx * wavefunc); 
+            t += dt;
+            // now output observables to file
+            part_c_file << t << "\t" << temp_Sz << "\t" << temp_Sx << "\t" << temp_Cxx << std::endl;
+        }
+        part_c_file.close();
     }
-    part_c_file.close();
+    
     // done!
 }
 
 int main(){
-    std::cout << "Beginning Part I..." << std::endl;
-    part_one();
+    // std::cout << "Beginning Part I..." << std::endl;
+    // part_one();
     std::cout << "Beginning Part II..." << std::endl;
     part_two();
     return 0;
