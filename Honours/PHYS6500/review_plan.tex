@@ -1,0 +1,102 @@
+\documentclass{article} 
+\usepackage{macros}
+\usepackage{fullpage} \usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+\usepackage{color} \usepackage{listings} \usepackage{graphicx, caption, subcaption, wrapfig}
+\usepackage{float} \usepackage{amsmath, amssymb, mathtools, empheq, bm} \usepackage{multicol, multirow}
+\usepackage{enumitem} \usepackage{dirtytalk} \usepackage{hhline} \usepackage{tikz}
+\usepackage{pdfpages} \usetikzlibrary{decorations.markings} \usepackage{hyperref}
+\usepackage[version=4]{mhchem} \usepackage[margin=14mm]{geometry} 
+\usepackage{verbatim} \usepackage[export]{adjustbox}
+\usepackage[normalem]{ulem} %this is to strike out text
+\usepackage{sidecap}
+\usepackage[colorinlistoftodos, prependcaption]{todonotes}
+\usepackage{fancyhdr} \usepackage{lipsum}
+\AfterEndEnvironment{figure}{\noindent\ignorespaces}
+\AfterEndEnvironment{figure*}{\noindent\ignorespaces}
+\AfterEndEnvironment{table}{\noindent\ignorespaces}
+
+\allowdisplaybreaks
+
+\sloppy
+
+\usepackage{nicematrix} %this fixes cell colour issues
+
+% \usepackage[backend=biber, sorting=nyt]{biblatex}
+\usepackage{natbib}
+\bibliographystyle{abbrvnat}
+
+
+
+\begin{document}
+
+\noindent{\Huge PHYS6500 Literature Review Plan} 
+\\\\
+{\large Discs in Binary Star Systems and Around Extrasolar Planets}\\
+{\large Ryan White, with supervisor Dr Benjamin Pope}\\
+
+\section{Introduction}
+Discs are commonly seen in star systems throughout all stages of stellar evolution. At the moment of birth, stars are enshrouded in a protostellar disc that fuels their growth, often transitioning to a protoplanetary disc where planet formation occurs. As stars within binary systems evolve, they can enter a stage of mass transfer between the primary and secondary stellar components which produces an accretion disc. Accretion discs are also seen around stellar remnants such as black holes, neutron stars, and white dwarfs and are some of the brightest transient phenomena. Dusty debris discs are also seen around young planet forming stars, and similarly dusty ring systems have been seen around exoplanets giving indications of so called `exomoons'. One of our best tools to study these discs and rings are through the observed dips in the stellar light curves as these discs transit the face of the star. In particular, these discs reveal themselves through especially broad transit profiles, often lasting several weeks or more and featuring multiple flux minima \citep{Hoard2010ApJ, Mamajek2012AJ, Bernhard2024arXiv}.
+
+% Light curves in astronomy are one of the most ubiquitous tools to understand the underlying physics of astrophysical phenomena. Light curves are used to study supermassive black holes, supernova explosions, stellar cycles, stellar binarity, and much more, offering a observationally cheap way to study time series behaviour. In particular, observing the brightness of individual stars over time can sometimes reveal deep dips in their light curves; this is usually observational evidence of a transit of an exoplanet or a stellar companion, depending on the depth and breadth of the transit curve. For this to happen, the plane of the orbit has to be extremely close to being along the line of sight so that a transit on the face of the star is actually observed, making these transits somewhat rare among the entire observed stellar population. Rarer still are a subset of these systems who show much broader transits in the stellar light curves; transiting companion dust discs and planetary ring systems are understood to be a cause of these especially wide transits, often producing light curves with several flux minima during the same transit \citep{Hoard2010ApJ, Mamajek2012AJ, Bernhard2024arXiv}. 
+
+The physical parameters of these systems can be inferred from the observed transit profile, especially when combined with spectra. Many of the discovered disc-eclipsing systems to date are composed of at least one evolved star \citep{Torres2022MNRAS} including the prototype disc-eclipser $\varepsilon$ Aurigae \citep{Hoard2010ApJ}, whose Roche-lobe overflow likely powers the secondary's disc. As a result, this system and others like it offer a unique view into the evolutionary history of supernovae (both core collapse and Type~Ia) and gravitational wave (GW) progenitors and are invaluable to population synthesis models through our developing understanding of binary mass transfer. Eclipsing discs have also been observed in hierarchical multiple systems \citep{Kenworthy2022A&A}, cementing them as a key observational probe into the dynamics and behaviour of hierarchical GW progenitors as a path to intermediate mass black holes such as GW190521.
+
+Ring eclipsing systems are emerging as powerful laboratories in the study of exomoon formation and stability around gas giant planets. The most researched ring eclipsing system so far, V1400 Centauri, hints at a highly complex and extended ring structure \citep{Mamajek2012AJ} that is entirely unlike those in our solar system gas giants. By studying this and similar systems, we can better understand in which environments ring systems form and compare these to our own solar system, including the population and properties of moons embedded in the ring system \citep{Kenworthy2015ApJ}. 
+
+% A significant proportion of star systems are composed of two or more stars which often have interesting interactions dynamically and which affect their stellar evolution. One hierarchical triple system, Apep (aptly named after the Egyptian god of chaos), hosts 3 massive stars; the inner binary of this system is believed to be of Wolf-Rayet (WR) classification \citep{Callingham2020MNRAS} and the only known WR-WR binary in the Galaxy. The WR stage of massive end-of-life stellar evolution is a short-lived and violent phase, which makes it surprising that two stars so close are at this stage at the same time. Further, the inner binary \emph{may} prove to be a Long Gamma Ray Burst (LGRB) progenitor - a class of Type Ic supernova that should be exceedingly rare in the current cosmic epoch of the Milky Way \citep{Callingham2019NatAs}.
+
+% As a result of WR-WR proximity, the two WR stars are what's called a colliding-wind-binary (CWB) which produces a spiral dust nebula \citep{Callingham2019NatAs}. CWB dust is an important contributor to enriching the interstellar medium (ISM) with metals, particularly in the early universe, seeding the chemistry for early generations of stars. 
+
+
+\section{Review Plan}
+To date, there does not appear to be a published literature review on either eclipsing disc binaries or eclipsing planetary ring systems. Their related observational clues in an extended transit profile makes for a good case of a combined review, despite their unrelated physical processes. 
+
+% We have already begun searching the literature for relevant publications, learning what needs further research in the field. There is ample material published to write a review on the observational characteristics of these systems and the tools to analyse them, as well as the population of systems and their physics. 
+We have already compiled a substantial body of literature on eclipsing disc and ring systems, learning where the field is and what open questions there are.
+So far, we believe more work needs to be done particularly on
+\begin{itemize}
+    \item understanding the stellar evolution history (both past and future) of the disc-eclipsing systems,
+    \item inferring the geometry of the transiting disc and why the discs are apparently long lived which often cannot be reproduced in simulations  \citep[e.g.][]{Zhou2018ApJ}, and
+    \item understanding the origins, population and composition of exoplanet rings, 
+\end{itemize}
+and the literature on these topics will be discussed with mention of areas of further study.
+% Previous work has been successful in fitting a geometric model to the dust plume of Apep \citep{Han2020MNRAS}, but without uncertainty quantification with modern statistical methods. The main goal of my Honours project is to create a similar model in Python/JAX that will allow us to perform a Markov Chain Monte Carlo (MCMC) fit to the data. At the outset, we already have a wealth of data from the Very Large Telescope (VLT) and the Very Large Telescope Interferometer (VLTI). We are also scheduled to observe again for 6 hours with the VLTI in March, giving us high resolution measurements to resolve the inner WR-WR binary in imaging for the first time. 
+
+% The dust plume geometry encodes the WR binary's orbital properties, and MCMC will determine the binary orbit \textit{with uncertainties}. Investigating this is essential in determining how a WR-WR binary originated in the first place.
+
+
+% We aim to support this investigation with the population synthesis code COMPAS, which uses current state-of-the-art stellar evolution models to synthesise a stellar population \citep{COMPAS}, to answer the question: can stellar evolution models produce a WR-WR binary? \\
+% As a stretch-goal of the project, we aim to fit the geometric model with MCMC to other WR CWBs. While Apep is the only known WR-WR binary, unique dust plumes are also observed with WR-O/B binaries \citep{Lau2017ApJ}, which have never been previously studied with uncertainty quantification and where there is potential to infer dust formation and acceleration physics from JWST and other data.
+
+
+% The timeline of the project and expected duration of each component is outlined below (Table \ref{tab:timeline}).
+% \begin{table}[H]
+%     \centering
+%     \begin{NiceTabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+%     \hline
+%          \multirow{2}{*}{Task} & \multicolumn{15}{c|}{Project Week} \\
+%          \cline{2-16} & 0 & 2 & 4 & 6 & 8 & 10 & 12 & 14 & 16 & 18 & 20 & 22 & 24 & 26 & 28\\
+%          \hline Project Plan & x\cellcolor{blue!25} & & & & & & & & & & & \\ 
+%          Literature Review (readings) & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & & & & & & \\
+%          Translating Model to Python/JAX & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & & & & & & & & & \\ 
+%          VLTI Observing and Data Processing & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} \\
+%          MCMC on Model & & & & & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & & & & \\ 
+%          Population Synthesis & & & & & & & & & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} \\
+%          Fit other WR Binaries (time permitting) & & & & & & & & & & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} \\
+%          Progress Talk & & & & & \cellcolor{blue!25} & \cellcolor{blue!25} & x\cellcolor{blue!25} & & & \\ 
+%          Progress Report / Literature Review & & & & & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & x\cellcolor{blue!25} \\
+%          Thesis Preparation & & & & & & & & & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & \cellcolor{blue!25} & x\cellcolor{blue!25} \\ 
+%          Final Talk (incl. Preparation) & & & & & & & & & & & & \cellcolor{blue!25} & \cellcolor{blue!25} & x\cellcolor{blue!25} \\ 
+%          Oral Examination & & & & & & & & & & & & & & & x\cellcolor{blue!25} \\
+%          \hline
+%     \end{NiceTabular}
+%     \caption{Estimated Project Timeline and Milestones. Crosses indicate a rough due date ($\pm 1$ week) of that assessment piece.}
+%     \label{tab:timeline}
+% \end{table}
+
+
+\bibliography{references}
+
+
+\end{document}
