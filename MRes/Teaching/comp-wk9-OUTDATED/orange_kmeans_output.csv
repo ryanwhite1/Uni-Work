@@ -1,0 +1,27 @@
+Selected,student_id,project_progress,mood,week,cohort,passed_quiz,Cluster,Silhouette,prep_minutes,dropin_visits,practice_quiz_attempts,quiz3_score
+No Yes,string,continuous,continuous,continuous,Postgrad Undergrad,0 1,C1 C2 C3,continuous,continuous,continuous,continuous,continuous
+class,meta,meta,meta,meta,meta,meta,meta,meta,,,,
+No,S01,45,3,7,Undergrad,1,C3,0.671677,-0.087,0.0,-0.263,-0.267
+No,S02,30,3,7,Undergrad,0,C2,0.652634,-1.654,-1.225,-1.423,-1.495
+No,S03,55,4,7,Undergrad,1,C1,0.552245,0.853,0.0,0.896,0.347
+No,S04,48,3,8,Undergrad,0,C3,0.620306,-0.714,0.0,-0.263,-0.881
+No,S05,60,5,8,Undergrad,1,C1,0.658121,1.480,1.225,2.055,0.961
+No,S06,28,2,8,Undergrad,0,C2,0.591014,0.0,-1.225,-1.423,-2.109
+No,S07,65,4,9,Undergrad,1,C1,0.610976,0.540,1.225,0.896,0.347
+No,S08,52,3,9,Undergrad,0,C3,0.612055,-1.028,0.0,0.0,-0.881
+No,S09,72,5,9,Undergrad,1,C1,0.644502,1.793,2.449,2.055,1.575
+No,S10,46,3,7,Undergrad,1,C3,0.621815,-0.401,-1.225,-0.263,-0.267
+No,S11,35,2,8,Undergrad,0,C2,0.590381,-1.341,0.0,-1.423,-1.495
+No,S12,58,4,7,Undergrad,1,C1,0.665885,1.167,1.225,0.896,0.961
+No,S13,62,4,7,Postgrad,1,C3,0.631381,0.226,0.0,-0.263,0.347
+No,S14,50,3,7,Postgrad,1,C3,0.613522,-0.714,-1.225,-0.263,-0.267
+No,S15,68,5,7,Postgrad,1,C1,0.629926,1.605,0.0,0.896,1.575
+No,S16,58,3,8,Postgrad,1,C3,0.674177,-0.401,0.0,-0.263,-0.267
+No,S17,70,4,8,Postgrad,1,C1,0.653852,0.728,1.225,0.896,0.961
+No,S18,45,3,8,Postgrad,0,C2,0.639583,-1.153,-1.225,-1.423,-0.881
+No,S19,75,5,9,Postgrad,1,C1,0.628507,1.355,1.225,0.0,1.575
+No,S20,63,4,9,Postgrad,1,C3,0.652727,-0.025,0.0,-0.263,0.347
+No,S21,54,3,9,Postgrad,1,C3,0.600038,-0.902,-1.225,-0.263,-0.267
+No,S22,65,4,7,Postgrad,1,C1,0.565521,0.477,0.0,0.896,0.961
+No,S23,57,3,8,Postgrad,1,C3,0.673872,-0.526,0.0,-0.263,0.0
+No,S24,49,2,9,Postgrad,0,C2,0.642906,-1.278,-1.225,-1.423,-0.881
