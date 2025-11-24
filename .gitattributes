@@ -1,3 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 MRes/Talks/Stars-In-Newcastle.pptx filter=lfs diff=lfs merge=lfs -text
+MRes/Talks/QLD-Seminars.pptx filter=lfs diff=lfs merge=lfs -text
