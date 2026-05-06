@@ -1,0 +1,501 @@
+move1,move2,move3,move4,move5,move6,move7,move8,move9,result
+W,NW,NE,C,SE,N,S,SW,E,X win
+S,SE,N,C,SW,NE,NW,E,,O win
+C,NW,S,SE,W,NE,SW,E,,O win
+NW,NE,E,SW,SE,W,N,C,,O win
+NE,W,NW,N,SE,C,SW,E,,O win
+W,E,SE,SW,NE,C,N,S,NW,X win
+SW,SE,NW,W,C,N,S,NE,E,draw
+E,W,S,SW,C,N,NW,NE,SE,X win
+SE,E,C,N,S,NE,SW,,,X win
+NE,N,E,W,NW,SE,C,SW,S,draw
+SW,NW,W,E,N,NE,SE,S,C,draw
+E,NE,C,SE,S,NW,W,,,X win
+N,NE,SW,SE,S,W,C,,,X win
+N,W,E,SE,NE,NW,SW,C,,O win
+N,SE,E,SW,S,W,NE,C,NW,X win
+E,SW,NW,NE,C,SE,S,N,W,X win
+NW,SE,S,N,C,NE,W,E,,O win
+W,SE,S,N,NE,E,NW,C,SW,X win
+E,C,NW,S,SW,NE,W,,,X win
+E,NW,S,N,NE,C,SE,,,X win
+N,W,NW,E,SE,SW,S,C,,O win
+E,W,N,S,C,SW,NE,SE,,O win
+NW,S,E,C,N,W,SE,NE,SW,draw
+N,W,SW,C,NW,S,E,SE,NE,X win
+S,C,SW,NE,E,NW,N,SE,,O win
+NW,S,SE,SW,NE,C,W,E,N,X win
+S,N,NW,SE,SW,C,E,NE,W,X win
+S,E,C,N,SW,SE,NW,W,NE,X win
+SW,N,S,SE,E,NW,NE,W,C,X win
+NW,SE,W,E,S,SW,C,N,NE,draw
+NE,C,E,W,SW,S,NW,SE,N,X win
+W,NE,NW,C,N,E,S,SW,,O win
+NW,E,NE,W,S,SE,N,,,X win
+NW,W,SW,SE,C,NE,N,S,E,draw
+NW,NE,S,C,SW,E,N,SE,,O win
+S,C,NW,SE,E,NE,SW,W,N,draw
+W,NE,C,S,N,SE,NW,E,,O win
+N,NW,NE,SW,E,W,,,,O win
+N,S,NW,NE,SE,W,SW,E,C,X win
+S,W,N,SE,NE,SW,NW,,,X win
+NE,N,C,W,S,SW,SE,E,NW,X win
+N,S,NE,NW,E,C,W,SE,,O win
+C,N,S,NW,SW,SE,E,NE,,O win
+SW,SE,C,W,E,NW,N,S,NE,X win
+S,W,SE,SW,NE,C,E,,,X win
+N,NE,S,NW,W,C,SW,E,SE,X win
+C,SW,W,S,NW,NE,N,E,SE,X win
+W,N,E,NE,SE,C,S,SW,,O win
+N,W,SE,SW,C,E,S,,,X win
+C,NE,S,W,NW,N,SE,,,X win
+NE,NW,N,S,W,SW,C,E,SE,draw
+NW,E,NE,SW,C,W,N,,,X win
+NE,E,SE,W,SW,C,,,,O win
+E,S,N,W,SE,SW,C,NE,NW,X win
+S,SW,W,NW,SE,NE,N,E,C,X win
+SW,W,N,NE,E,NW,C,S,SE,draw
+N,E,SW,W,SE,NW,NE,C,,O win
+NW,S,NE,N,C,SW,E,W,SE,X win
+N,S,SE,SW,NW,E,W,C,NE,X win
+C,W,N,NW,NE,SE,S,,,X win
+SE,C,N,W,NE,S,SW,E,,O win
+E,SW,C,NE,N,S,W,,,X win
+W,N,NE,SW,S,E,NW,SE,C,draw
+W,NW,NE,N,C,SE,S,SW,E,X win
+E,N,NE,SW,S,W,SE,,,X win
+E,N,SE,S,C,W,SW,NW,NE,X win
+S,NW,E,N,NE,SE,SW,C,,O win
+NE,E,N,SW,S,C,SE,NW,W,draw
+C,SE,E,NE,S,NW,SW,W,N,X win
+S,W,NE,N,NW,SW,C,E,SE,X win
+N,NE,SE,E,SW,S,W,NW,C,draw
+NW,SE,C,S,N,E,W,NE,,O win
+N,NW,E,SE,NE,S,W,SW,,O win
+N,SE,NE,SW,E,NW,S,C,,O win
+NE,N,W,SE,SW,E,C,,,X win
+SW,NE,C,N,W,SE,E,,,X win
+C,W,S,N,E,NW,SW,NE,,O win
+S,NW,NE,W,SW,C,N,E,,O win
+N,SE,W,C,NW,NE,SW,,,X win
+C,E,N,SE,W,S,SW,NE,,O win
+NW,N,W,C,E,SW,NE,S,,O win
+SW,C,W,S,N,SE,E,NW,,O win
+C,E,SE,NW,SW,NE,W,N,,O win
+E,N,S,W,C,NE,SE,NW,,O win
+C,N,SE,W,SW,S,NE,,,X win
+E,C,S,NE,SW,SE,NW,W,N,draw
+NW,SW,W,SE,NE,C,E,S,,O win
+W,N,C,E,NW,NE,SE,,,X win
+SE,W,SW,NE,S,,,,,X win
+SW,NE,S,N,E,SE,C,W,NW,draw
+NW,NE,N,SE,S,W,SW,C,E,draw
+NE,SE,E,W,S,SW,NW,C,N,X win
+N,SW,E,C,W,SE,S,NE,,O win
+NW,E,N,C,S,NE,SW,SE,,O win
+SW,S,NW,W,SE,N,NE,E,C,X win
+S,W,NW,SE,E,SW,N,NE,C,X win
+NW,SE,E,NE,SW,W,C,S,N,draw
+SE,C,NE,SW,S,W,E,,,X win
+S,NE,E,W,N,NW,SW,SE,C,X win
+N,E,W,C,S,SE,NW,NE,,O win
+SE,E,C,W,SW,S,NW,,,X win
+E,C,S,SE,NE,SW,N,NW,,O win
+W,SW,C,NW,N,S,SE,NE,E,X win
+C,N,SW,E,S,NW,SE,,,X win
+SE,N,C,NW,E,W,SW,S,NE,X win
+W,E,NE,SW,NW,C,N,,,X win
+C,NE,NW,S,W,SE,N,E,,O win
+SE,E,N,NW,S,C,NE,W,,O win
+C,SW,W,S,N,NW,NE,SE,,O win
+N,E,NE,W,S,SE,C,,,X win
+SE,E,C,S,SW,NE,W,NW,N,draw
+SW,E,SE,C,W,N,NE,S,,O win
+W,SW,SE,S,E,NE,NW,N,C,X win
+SE,S,NW,E,W,SW,N,C,NE,X win
+S,NE,W,SE,E,NW,N,SW,C,X win
+NW,C,N,NE,SE,S,E,SW,,O win
+NW,S,C,SW,NE,SE,,,,O win
+NW,W,N,NE,C,S,E,SW,SE,X win
+S,E,C,NW,SE,NE,SW,,,X win
+C,N,SE,S,NE,W,SW,,,X win
+N,SW,SE,E,S,NE,NW,C,,O win
+S,E,SE,NW,NE,N,C,W,SW,X win
+S,NE,SW,NW,W,C,E,SE,,O win
+NE,W,NW,N,C,SW,E,SE,S,draw
+NW,N,W,S,SE,E,NE,C,,O win
+SE,N,W,NW,E,S,SW,NE,,O win
+NW,SW,SE,W,E,NE,N,C,,O win
+SW,E,SE,C,NE,S,NW,N,,O win
+SE,NE,W,N,NW,C,S,SW,,O win
+W,SW,N,E,C,S,SE,NE,NW,X win
+W,SW,S,SE,NE,C,NW,N,E,draw
+NE,NW,S,SE,SW,E,N,C,,O win
+NW,S,SW,SE,E,NE,N,W,C,draw
+S,NE,NW,W,E,SE,SW,N,C,draw
+C,N,S,NW,SW,SE,W,NE,,O win
+W,SE,N,E,C,S,NE,NW,SW,X win
+SW,E,SE,C,NE,S,N,NW,W,draw
+S,C,E,N,SE,NW,NE,,,X win
+E,SE,SW,NE,W,NW,N,C,,O win
+NE,S,W,N,SW,SE,E,NW,C,X win
+NW,E,W,N,S,SW,NE,SE,C,draw
+SE,N,SW,NE,E,S,W,NW,,O win
+SE,NW,E,SW,S,N,W,NE,,O win
+N,E,SW,C,NE,SE,W,S,NW,X win
+SE,W,SW,NE,N,NW,E,S,C,draw
+N,NW,SE,NE,W,SW,S,E,C,X win
+SW,N,E,SE,S,NE,W,NW,,O win
+C,S,NE,SE,E,NW,SW,,,X win
+SW,N,NE,NW,SE,W,S,,,X win
+SW,NW,N,S,NE,C,E,W,SE,X win
+NE,C,S,NW,N,SW,E,SE,,O win
+NW,S,C,SW,NE,E,N,,,X win
+SE,W,S,C,NE,NW,N,E,,O win
+E,S,N,SE,C,W,NW,SW,,O win
+S,W,SE,NE,C,E,SW,,,X win
+C,NE,N,S,SW,E,NW,SE,,O win
+W,NE,NW,SE,E,C,S,N,SW,X win
+C,W,S,SE,NW,N,NE,E,SW,X win
+C,N,NW,E,W,NE,SW,,,X win
+NW,SW,S,NE,E,N,C,W,SE,X win
+SE,NW,NE,SW,C,E,N,S,W,draw
+S,E,N,NW,NE,SE,SW,W,C,X win
+NE,SE,NW,W,S,C,SW,E,,O win
+N,C,S,E,NW,NE,SW,SE,,O win
+S,SW,NW,NE,C,E,W,N,SE,X win
+S,E,NE,SW,W,C,N,SE,NW,X win
+E,C,SE,NW,N,SW,NE,,,X win
+NW,E,N,SE,C,W,SW,NE,,O win
+N,NW,W,NE,C,SW,E,,,X win
+E,N,S,NE,C,W,NW,SE,SW,draw
+NW,NE,N,S,E,W,SE,C,SW,draw
+N,W,E,NW,S,C,NE,SW,,O win
+S,N,NW,SE,C,NE,W,E,,O win
+SW,W,C,S,N,NW,SE,NE,E,draw
+NW,SW,SE,N,E,S,C,,,X win
+W,E,N,NE,S,NW,SW,SE,,O win
+NE,N,C,NW,E,SE,S,W,SW,X win
+SW,W,S,SE,E,NW,NE,N,C,X win
+S,SW,SE,C,N,E,NW,NE,,O win
+NE,SE,SW,N,W,S,C,,,X win
+N,SE,W,NW,SW,E,S,C,,O win
+W,C,SW,S,N,SE,NE,NW,,O win
+W,SE,N,SW,C,E,NW,S,,O win
+C,S,SW,E,N,SE,NW,NE,,O win
+E,NE,SE,W,N,S,C,NW,SW,draw
+E,S,W,N,NE,C,,,,O win
+SW,NW,W,NE,SE,E,S,,,X win
+S,W,SE,E,N,SW,NW,C,,O win
+E,NW,SE,NE,S,C,W,SW,,O win
+E,NE,SE,SW,NW,S,N,W,C,X win
+S,N,W,NE,C,NW,,,,O win
+N,W,NE,SW,S,NW,,,,O win
+W,E,N,NW,S,SE,NE,C,,O win
+S,C,NE,N,NW,W,E,SW,SE,X win
+SW,S,SE,NE,N,C,E,NW,W,draw
+C,NE,N,SE,NW,W,SW,S,E,draw
+E,SE,C,NW,N,SW,NE,W,,O win
+SE,SW,NE,NW,S,W,,,,O win
+NW,N,C,SW,W,E,NE,S,SE,X win
+N,SE,NW,W,S,E,C,,,X win
+C,E,NW,S,W,N,NE,SE,SW,X win
+W,N,NE,NW,C,SW,E,,,X win
+N,S,E,SE,NW,W,SW,NE,C,draw
+N,W,SW,C,NE,E,,,,O win
+N,E,NW,C,W,SW,S,NE,,O win
+N,W,SW,S,SE,E,C,NE,NW,X win
+SW,N,C,NW,SE,S,E,NE,,O win
+SW,NW,S,E,N,W,C,,,X win
+W,SW,SE,E,C,NE,NW,,,X win
+SW,NE,N,NW,E,S,C,W,SE,draw
+N,S,E,NE,W,SW,NW,C,,O win
+S,NW,C,N,E,W,SE,SW,,O win
+S,NW,C,SE,NE,E,N,,,X win
+NE,S,SW,N,SE,NW,E,,,X win
+SE,NE,C,S,N,SW,E,W,NW,X win
+NE,NW,N,SE,W,C,,,,O win
+S,NE,NW,C,W,N,SE,E,SW,X win
+E,C,N,SE,SW,NW,,,,O win
+NW,C,SW,SE,S,NE,N,E,,O win
+S,W,E,SW,SE,N,C,NW,,O win
+S,C,SW,W,NW,E,,,,O win
+N,NW,SW,E,S,SE,NE,W,C,X win
+S,C,NE,NW,SE,N,E,,,X win
+NW,W,E,SW,S,C,SE,N,NE,X win
+W,C,S,NW,N,E,NE,SE,,O win
+N,SW,SE,E,W,C,NE,NW,S,draw
+NW,SW,C,NE,S,SE,N,,,X win
+W,S,E,SE,NW,C,N,SW,,O win
+W,SW,E,SE,NE,N,C,,,X win
+SW,SE,NE,N,S,NW,W,C,,O win
+N,NW,E,C,NE,SW,W,S,SE,X win
+NE,SW,S,NW,SE,W,,,,O win
+N,E,W,SE,NW,SW,NE,,,X win
+SE,W,N,C,S,NE,NW,SW,,O win
+E,NE,N,W,NW,SE,C,SW,S,X win
+E,SE,W,C,NW,S,NE,SW,,O win
+W,N,SE,S,SW,NW,C,NE,,O win
+SE,NW,N,C,W,SW,S,E,NE,draw
+S,W,SW,SE,NE,N,E,NW,C,X win
+N,S,NW,SW,SE,C,W,E,NE,X win
+NW,NE,SW,N,C,S,E,SE,W,X win
+E,C,N,NE,SE,NW,SW,S,W,draw
+NE,SE,E,NW,N,W,SW,C,,O win
+NE,SW,SE,C,N,S,NW,,,X win
+S,C,SE,N,NW,W,E,NE,SW,X win
+W,C,E,SW,N,NW,SE,NE,,O win
+E,S,W,SW,NE,N,NW,SE,,O win
+NE,NW,S,SE,C,W,SW,,,X win
+C,E,NE,NW,N,SE,S,,,X win
+N,SW,NW,W,S,C,NE,,,X win
+SE,N,C,E,W,S,NW,,,X win
+W,SW,N,NE,C,SE,NW,S,,O win
+W,SE,SW,NW,E,S,NE,C,,O win
+N,E,W,S,NW,NE,C,SE,,O win
+SW,SE,S,C,NW,NE,E,N,W,X win
+N,S,NW,SW,SE,C,E,NE,,O win
+C,SE,S,SW,N,,,,,X win
+E,W,NW,C,SW,N,S,NE,SE,X win
+NW,SE,SW,N,NE,C,W,,,X win
+SE,W,E,N,SW,C,NW,NE,S,X win
+NE,S,E,C,W,SW,NW,N,,O win
+N,SW,NE,NW,E,S,C,SE,,O win
+S,C,SE,N,W,E,NW,SW,NE,draw
+S,E,C,NW,NE,W,SW,,,X win
+E,SE,W,NW,N,SW,S,C,,O win
+NW,C,W,SW,NE,S,SE,E,N,X win
+C,SW,S,NW,SE,NE,W,E,N,X win
+N,S,NE,SE,SW,C,W,E,NW,X win
+N,W,NE,C,E,S,SE,,,X win
+W,SE,C,NW,SW,N,S,E,NE,X win
+NE,SW,N,E,S,C,NW,,,X win
+S,SW,NW,E,NE,C,W,N,SE,draw
+NE,SW,NW,C,E,W,S,SE,N,X win
+C,E,SW,N,W,SE,NE,,,X win
+NE,E,SE,N,S,SW,NW,W,C,X win
+NW,E,NE,C,S,SE,SW,N,W,X win
+N,C,NW,SW,S,E,NE,,,X win
+C,N,E,NW,SE,SW,NE,,,X win
+SE,E,N,S,NW,C,SW,NE,W,X win
+N,S,W,E,NW,C,SE,NE,SW,X win
+SW,SE,E,C,S,W,NE,NW,,O win
+C,W,E,SE,S,N,SW,NW,NE,X win
+W,S,SW,N,E,NW,C,,,X win
+S,W,NE,NW,SE,E,SW,,,X win
+W,E,NE,S,SE,N,SW,C,,O win
+C,SE,SW,NE,E,S,N,W,NW,draw
+NE,C,SW,NW,E,W,SE,,,X win
+SE,NW,N,C,E,NE,S,SW,,O win
+E,NW,S,W,NE,N,SW,SE,C,X win
+S,SW,NW,NE,W,SE,E,C,,O win
+E,N,S,C,NE,SW,SE,,,X win
+NE,E,SE,NW,N,S,SW,C,W,draw
+S,E,W,N,C,SE,SW,NW,NE,X win
+NE,SW,W,C,S,NW,E,N,SE,X win
+NE,N,E,SW,W,SE,NW,C,S,draw
+C,SW,NE,W,S,E,N,,,X win
+N,NE,E,SW,SE,S,C,W,NW,X win
+SE,E,S,W,NE,NW,C,SW,,O win
+S,NW,W,E,N,SW,C,,,X win
+SW,W,NW,S,SE,E,NE,N,C,X win
+SW,C,W,N,E,NW,SE,S,,O win
+SE,NE,E,NW,SW,W,C,S,N,draw
+W,NW,N,NE,E,SW,S,C,,O win
+E,W,C,N,SE,S,NW,,,X win
+S,SW,W,N,C,SE,NW,NE,E,X win
+NW,S,C,N,NE,SE,W,E,SW,X win
+NW,E,W,N,NE,S,SW,,,X win
+NE,SE,NW,N,W,S,E,SW,,O win
+SW,SE,W,C,NE,S,E,NW,,O win
+SW,NE,E,C,S,W,SE,,,X win
+W,S,NE,NW,C,E,N,SE,SW,X win
+NE,N,C,SW,SE,S,W,E,NW,X win
+NE,E,W,SE,C,SW,NW,N,S,draw
+SW,W,N,S,E,SE,NE,C,NW,X win
+N,SE,E,NW,NE,W,C,S,SW,X win
+NE,SE,W,E,C,SW,N,NW,S,X win
+C,S,NW,NE,SW,E,W,,,X win
+SW,W,C,SE,E,NE,N,NW,S,X win
+C,N,E,W,SE,S,SW,NW,NE,X win
+NW,C,E,SW,NE,S,W,SE,,O win
+NE,E,SE,N,SW,S,C,,,X win
+W,N,NE,SE,SW,S,E,NW,C,X win
+NW,S,SE,NE,N,E,W,C,SW,X win
+NE,E,N,SW,W,SE,C,NW,S,X win
+NE,NW,S,SE,N,E,SW,C,,O win
+NW,E,NE,W,N,,,,,X win
+SW,N,SE,E,C,S,NE,,,X win
+E,C,NW,SE,SW,S,W,,,X win
+W,E,NE,SE,NW,SW,S,N,C,draw
+W,N,NW,E,NE,SW,S,C,SE,draw
+N,SW,W,NW,E,S,SE,NE,C,X win
+W,NE,S,C,E,NW,SW,N,,O win
+SE,NE,SW,W,NW,N,E,C,S,X win
+N,NE,SE,NW,C,S,E,W,SW,draw
+NW,NE,SE,N,S,C,W,E,SW,X win
+S,NW,SW,E,NE,W,C,,,X win
+C,NE,SW,W,NW,N,E,S,SE,X win
+W,NE,S,N,C,SE,SW,E,,O win
+E,NE,W,N,S,SW,SE,C,,O win
+W,NE,SE,SW,E,N,S,NW,,O win
+SE,S,W,E,C,SW,NE,N,NW,X win
+NE,C,SE,N,W,E,S,NW,SW,X win
+W,NE,SE,C,S,E,NW,N,SW,X win
+SW,NW,E,S,W,N,SE,NE,,O win
+S,C,E,NW,W,SW,NE,SE,,O win
+SE,SW,E,N,W,NW,S,NE,,O win
+S,W,SW,SE,E,C,N,NE,NW,draw
+SW,S,W,NW,SE,C,E,NE,N,draw
+NE,E,W,C,SE,NW,S,SW,N,draw
+N,E,S,NE,C,,,,,X win
+E,SW,NW,C,SE,S,W,N,,O win
+N,SW,E,SE,S,NW,NE,W,,O win
+NE,C,S,N,SE,SW,NW,W,E,X win
+NW,W,C,NE,SW,SE,E,N,S,draw
+SW,NE,C,E,NW,W,SE,,,X win
+C,NE,W,S,N,SE,NW,E,,O win
+S,SE,NW,NE,E,N,C,W,SW,draw
+C,SW,NE,E,SE,N,W,S,NW,X win
+W,C,NE,SW,SE,E,S,N,NW,draw
+N,S,NE,W,SE,C,NW,,,X win
+E,N,NW,W,S,SW,NE,SE,C,draw
+NW,SW,W,SE,E,S,,,,O win
+C,E,SE,NW,S,NE,N,,,X win
+SW,S,SE,NW,E,C,NE,,,X win
+SE,S,N,E,SW,W,C,NE,NW,X win
+N,W,SE,SW,NW,C,E,NE,,O win
+S,W,E,C,N,NW,NE,SE,,O win
+NE,E,S,SW,NW,C,SE,N,W,draw
+S,SW,NE,N,E,SE,C,NW,W,X win
+N,C,NW,S,SW,W,SE,NE,E,draw
+N,C,SE,NW,S,E,NE,W,,O win
+C,S,E,NE,N,SE,SW,W,NW,draw
+SW,C,S,SE,W,NE,N,E,,O win
+SW,W,E,N,C,SE,NE,,,X win
+S,SW,C,SE,E,W,NW,N,NE,draw
+SW,NE,S,N,W,SE,C,NW,,O win
+SE,NW,SW,N,NE,E,S,,,X win
+C,SW,E,W,NW,N,SE,,,X win
+W,N,NE,SW,E,SE,S,C,NW,draw
+NW,SW,C,W,E,NE,S,SE,N,X win
+N,SE,NW,C,S,NE,SW,E,,O win
+E,NE,NW,SW,SE,S,W,C,,O win
+N,E,W,SE,NE,NW,S,SW,C,X win
+NE,E,NW,C,SW,SE,S,W,,O win
+C,W,SW,NE,NW,S,N,E,SE,X win
+C,S,NE,E,N,SE,SW,,,X win
+N,NW,E,W,C,NE,SW,SE,S,X win
+N,NE,E,S,W,SE,SW,NW,C,X win
+SW,NE,NW,S,E,C,N,W,SE,draw
+W,S,NW,E,SE,C,SW,,,X win
+C,NE,SE,SW,W,E,S,NW,N,X win
+N,SW,W,SE,NW,E,S,NE,,O win
+SW,SE,E,W,NW,N,NE,S,C,X win
+SW,NW,W,C,SE,E,N,S,NE,draw
+N,E,C,SE,W,SW,NE,S,,O win
+S,NW,W,C,N,E,NE,SW,SE,draw
+S,SE,NE,SW,N,W,E,C,NW,X win
+SW,W,N,SE,C,NW,S,,,X win
+C,N,SW,NE,NW,E,S,SE,,O win
+N,NW,C,SW,SE,E,W,NE,S,X win
+NW,SW,C,N,E,SE,S,W,NE,draw
+NE,W,E,N,SW,C,SE,,,X win
+SW,E,N,S,NW,C,SE,NE,W,X win
+S,NE,SE,SW,N,NW,C,,,X win
+E,SE,S,SW,C,N,NW,W,NE,draw
+NE,C,SE,S,N,E,NW,,,X win
+S,NE,SE,SW,W,NW,N,E,C,X win
+C,SW,W,E,NE,S,NW,N,SE,X win
+C,NE,S,E,NW,W,SW,SE,,O win
+W,N,SW,E,NE,C,S,NW,SE,X win
+W,SE,SW,NE,N,E,,,,O win
+E,SE,N,SW,C,NE,S,,,X win
+S,C,E,NE,W,SE,NW,N,SW,X win
+SW,N,E,NE,SE,S,NW,C,,O win
+NE,NW,E,SE,N,S,W,SW,,O win
+NE,SW,S,E,W,SE,NW,N,C,draw
+C,N,NW,SE,SW,NE,S,E,,O win
+E,NE,SW,C,N,SE,W,NW,,O win
+NW,E,SE,N,SW,W,S,,,X win
+C,SE,NW,E,N,W,SW,NE,,O win
+NW,C,NE,SW,W,E,S,SE,N,X win
+NE,E,W,SE,SW,S,NW,,,X win
+N,SE,W,NE,E,S,NW,SW,,O win
+N,C,NE,W,SW,S,E,NW,SE,X win
+SE,E,W,NE,S,NW,N,C,SW,X win
+S,E,N,NW,SW,NE,SE,,,X win
+S,E,SW,SE,NW,C,NE,W,,O win
+E,C,SW,S,SE,NE,W,NW,N,draw
+NE,NW,E,SE,C,SW,W,,,X win
+SW,SE,C,S,E,NW,N,NE,W,X win
+N,SE,S,SW,E,C,NW,NE,,O win
+SW,W,E,N,SE,NE,C,NW,,O win
+W,NE,SE,S,N,SW,C,NW,E,X win
+SW,SE,W,C,N,E,NW,,,X win
+C,N,S,SW,E,W,NE,NW,,O win
+S,C,E,NW,SW,NE,N,W,SE,X win
+NW,SW,S,W,SE,NE,N,E,C,X win
+W,SE,E,S,NW,NE,SW,,,X win
+NW,NE,S,W,SW,E,N,SE,,O win
+S,W,NE,NW,SE,E,C,SW,,O win
+E,N,SE,NE,C,W,SW,S,NW,X win
+NW,W,S,N,NE,E,SW,SE,C,X win
+SE,SW,W,NE,C,NW,N,S,E,X win
+NW,N,SW,E,SE,C,NE,W,,O win
+E,NE,W,SW,N,NW,SE,C,,O win
+NW,W,NE,SE,E,SW,N,,,X win
+W,SW,NW,SE,C,N,S,NE,E,X win
+SE,NE,C,S,W,N,NW,,,X win
+NE,SW,W,NW,SE,E,S,C,N,draw
+NW,SE,SW,W,NE,N,E,C,S,draw
+SW,N,NW,C,SE,NE,W,,,X win
+W,N,SW,NW,S,SE,C,NE,,O win
+N,E,W,S,SE,SW,NE,NW,C,draw
+NE,SW,SE,S,W,E,C,N,NW,X win
+S,SW,W,NW,E,N,SE,C,NE,X win
+NW,E,S,NE,SE,W,N,C,,O win
+SW,E,C,SE,NW,N,S,W,NE,X win
+NW,E,S,W,N,C,,,,O win
+NW,N,E,W,NE,C,S,SW,SE,X win
+NE,C,SW,SE,S,N,E,W,NW,draw
+SE,C,S,W,NW,NE,E,SW,,O win
+SW,NW,NE,W,N,E,S,SE,C,X win
+W,SW,SE,NE,C,N,NW,,,X win
+N,NE,E,C,SW,S,NW,W,SE,draw
+SE,NE,N,S,SW,W,E,NW,C,draw
+C,E,N,W,SE,NE,NW,,,X win
+E,C,S,W,SE,SW,NW,NE,,O win
+E,SE,N,C,W,S,NE,NW,,O win
+W,SW,NE,N,C,E,NW,S,SE,X win
+NW,S,SW,W,E,N,NE,SE,C,X win
+S,SW,NE,C,SE,W,N,NW,,O win
+NE,N,W,SE,C,E,SW,,,X win
+NW,S,NE,SW,SE,W,C,,,X win
+W,E,N,S,NE,NW,C,SE,SW,X win
+NE,W,N,SW,C,SE,S,,,X win
+SW,C,E,S,W,N,,,,O win
+E,NE,NW,S,SW,SE,W,,,X win
+SE,NE,NW,N,SW,E,C,,,X win
+N,E,C,S,NW,SE,W,NE,,O win
+C,E,SE,NW,N,S,SW,W,NE,X win
+SE,SW,C,E,W,NE,NW,,,X win
+N,E,S,NE,SE,C,SW,,,X win
+C,NE,SE,SW,N,NW,W,S,E,X win
+C,E,W,SW,N,NE,S,,,X win
+C,NW,E,SW,SE,W,,,,O win
+NE,W,C,N,S,SE,SW,,,X win
+S,SW,NW,W,N,E,C,,,X win
+E,NE,N,W,SE,SW,S,NW,,O win
+N,C,S,NE,SE,SW,,,,O win
+E,SE,N,C,S,NE,W,SW,,O win
+NE,SW,W,E,S,NW,C,N,SE,draw
+E,NE,NW,SE,SW,S,N,C,W,X win
+SW,N,NE,E,NW,W,SE,S,C,X win
+S,SW,NE,N,NW,C,SE,E,W,draw
+S,SW,NE,N,C,E,SE,W,NW,X win
+C,SW,N,S,NW,W,E,SE,,O win
+N,NW,C,NE,E,SW,SE,S,W,X win
+NW,E,SW,S,SE,W,N,C,,O win
+C,SW,E,S,NW,NE,N,W,SE,X win
+C,NE,E,S,NW,SE,SW,W,N,draw
