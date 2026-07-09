@@ -2,8 +2,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # ### --- Activity 1 --- ###
-# house_x = np.array([0, 10, 10, 11, 5, -1, 0, 0, np.nan, 4.3, 4.3, 5.7, 5.7, np.nan, 1.5, 3.5, 3.5, 1.5, 1.5, np.nan, 6.5, 8.5, 8.5, 6.5, 6.5])
-# house_y = np.array([0, 0, 10, 10, 15, 10, 10, 0, np.nan, 0, 4, 4, 0, np.nan, 5.5, 5.5, 7.5, 7.5, 5.5, np.nan, 5.5, 5.5, 7.5, 7.5, 5.5])
+# house_x = np.array([0, 10, 10, 11, 5, -1, 0, 0, np.nan, 4.3, 4.3, 5.7, 5.7, np.nan, 1.5, 3.5, 3.5, 1.5, 1.5, np.nan, 6.5, 8.5, 8.5, 6.5, 6.5,
+#                     np.nan, 1.5, 3.5, np.nan, 2.5, 2.5, np.nan, 7.5, 7.5, np.nan, 6.5, 8.5, np.nan, 8, 8, 7, 7])
+# house_y = np.array([0, 0, 10, 10, 15, 10, 10, 0, np.nan, 0, 4, 4, 0, np.nan, 5.5, 5.5, 7.5, 7.5, 5.5, np.nan, 5.5, 5.5, 7.5, 7.5, 5.5,
+#                     np.nan, 6.5, 6.5, np.nan, 5.5, 7.5, np.nan, 5.5, 7.5, np.nan, 6.5, 6.5, np.nan, 12.5, 14.5, 14.5, 13.4])
 
 # fig, ax = plt.subplots()
 # ax.plot(house_x, house_y)
@@ -17,6 +19,20 @@ import matplotlib.pyplot as plt
 # g = 9.8
 
 # def trajectory(x, v0, theta):
+#     ''' Calculates the height of a thrown javelin given horizontal position and speed/angle
+#     Parameters
+#     ----------
+#     x : np.array
+#         An array of horizontal positions of the javelin
+#     v0 : float
+#         The initial speed (in m/s) of the thrown javelin
+#     theta : float
+#         The angle (in radians) that the javelin was thrown relative to the positive x-axis
+#     Returns
+#     -------
+#     y_vals : np.array
+#         The calculated heights at each x-position 
+#     '''
 #     y_vals = x * np.tan(theta) - (0.5 / (v0**2)) * g*x**2 / (np.cos(theta)**2)
 #     return y_vals
 
@@ -64,45 +80,52 @@ import matplotlib.pyplot as plt
 # population = arr[:, 2]
 # price = arr[:, 3]
 
-# fig, ax = plt.subplots(figsize=(10, 10))
+# # fig, ax = plt.subplots(figsize=(10, 10))
 
-# plot = ax.scatter(long, lat, c=price, s=0.03 * population, alpha=0.3, cmap='plasma')
-# ax.set(xlabel='Longitude (deg)', ylabel='Latitude (deg)', aspect='equal')
+# # plot = ax.scatter(long, lat, c=price, s=0.03 * population, alpha=0.3, cmap='plasma')
+# # ax.set(xlabel='Longitude (deg)', ylabel='Latitude (deg)', aspect='equal')
 
-# fig.colorbar(plot, label='Median House Price (USD)')
+# # fig.colorbar(plot, label='Median House Price (USD)')
+
+# plt.scatter(long, lat, c=price, s=0.03 * population, alpha=0.3, cmap='plasma')
+# plt.xlabel('Longitude (deg)')
+# plt.ylabel('Latitude (deg)') 
+# plt.axis('equal')
+
+# plt.colorbar(label='Median House Price (USD)')
 
 # plt.show()
 
 
 
-### --- Activity 4 --- ###
-arr = np.load("Penguin_Info.npy")
+# ### --- Activity 4 --- ###
+# arr = np.load("Penguin_Info.npy")
 
-fig, axes = plt.subplots(figsize=(12, 12), nrows=2, ncols=2)
+# fig, axes = plt.subplots(figsize=(12, 12), nrows=2, ncols=2)
 
-fig2, ax2 = plt.subplots(figsize=(8, 8))
+# fig2, ax2 = plt.subplots(figsize=(8, 8))
 
-colours = ['tab:purple', 'tab:green', 'tab:blue']
-labels = ['Adelie', 'Chinstrap', 'Gentoo']
+# colours = ['tab:purple', 'tab:green', 'tab:blue']
+# labels = ['Adelie', 'Chinstrap', 'Gentoo']
 
 
-for i in range(3):
-    species_mask = arr[:, 0] == i
-    axes[0][0].hist(arr[species_mask][:, 1], alpha=0.3, color=colours[i], label=labels[i])
-    axes[0][1].hist(arr[species_mask][:, 2], alpha=0.3, color=colours[i], label=labels[i])
-    axes[1][0].hist(arr[species_mask][:, 3], alpha=0.3, color=colours[i], label=labels[i])
-    axes[1][1].hist(arr[species_mask][:, 4], alpha=0.3, color=colours[i], label=labels[i])
+# for i in range(3):
+#     species_mask = arr[:, 0] == i
+#     axes[0, 0].hist(arr[species_mask][:, 1], alpha=0.3, color=colours[i], label=labels[i])
+#     axes[0, 1].hist(arr[species_mask][:, 2], alpha=0.3, color=colours[i], label=labels[i])
+#     axes[1, 0].hist(arr[species_mask][:, 3], alpha=0.3, color=colours[i], label=labels[i])
+#     axes[1, 1].hist(arr[species_mask][:, 4], alpha=0.3, color=colours[i], label=labels[i])
 
-    ax2.scatter(arr[species_mask][:, 1], arr[species_mask][:, 2], color=colours[i], label=labels[i])
+#     ax2.scatter(arr[species_mask][:, 1], arr[species_mask][:, 2], color=colours[i], label=labels[i])
 
-axes[0][0].set(xlabel='Beak Length (mm)')
-axes[0][1].set(xlabel='Beak Depth (mm)')
-axes[1][0].set(xlabel='Flipper Length (mm)')
-axes[1][1].set(xlabel='Mass (g)')
+# axes[0, 0].set(xlabel='Beak Length (mm)')
+# axes[0, 1].set(xlabel='Beak Depth (mm)')
+# axes[1, 0].set(xlabel='Flipper Length (mm)')
+# axes[1, 1].set(xlabel='Mass (g)')
 
-axes[0][1].legend()
+# axes[0, 1].legend()
 
-ax2.set(xlabel='Beak Length (mm)', ylabel='Beak Depth (mm)')
-ax2.legend()
+# ax2.set(xlabel='Beak Length (mm)', ylabel='Beak Depth (mm)')
+# ax2.legend()
 
-plt.show()
+# plt.show()

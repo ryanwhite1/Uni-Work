@@ -1,0 +1,534 @@
+Date,Product_ID,Product_Name,Category,Price,Quantity,Total_Revenue
+2024-01-01,P001,Coffee Maker,Kitchen Appliances,89.99,12,1079.88
+2024-01-01,P002,Blender,Kitchen Appliances,59.99,8,479.92
+2024-01-01,P003,Toaster,Kitchen Appliances,39.99,15,599.85
+2024-01-01,P004,Laptop,Electronics,999.99,5,4999.95
+2024-01-01,P005,Smartphone,Electronics,699.99,10,6999.90
+2024-01-02,P001,Coffee Maker,Kitchen Appliances,89.99,8,719.92
+2024-01-02,P002,Blender,Kitchen Appliances,59.99,5,299.95
+2024-01-02,P003,Toaster,Kitchen Appliances,39.99,10,399.90
+2024-01-02,P006,Headphones,Electronics,149.99,18,2699.82
+2024-01-03,P004,Laptop,Electronics,999.99,3,2999.97
+2024-01-03,P005,Smartphone,Electronics,699.99,7,4899.93
+2024-01-03,P007,Desk Chair,Furniture,199.99,4,799.96
+2024-01-04,P008,Office Desk,Furniture,299.99,3,899.97
+2024-01-04,P009,Bookshelf,Furniture,149.99,6,899.94
+2024-01-04,P010,Table Lamp,Home Decor,49.99,12,599.88
+2024-01-05,P011,Rug,Home Decor,129.99,5,649.95
+2024-01-05,P012,Curtains,Home Decor,79.99,8,639.92
+2024-01-05,P013,Wall Art,Home Decor,89.99,7,629.93
+2024-01-06,P014,Bath Towels,Home Essentials,29.99,20,599.80
+2024-01-06,P015,Bed Sheets,Home Essentials,59.99,15,899.85
+2024-01-07,P016,Pillow,Home Essentials,19.99,25,499.75
+2024-01-07,P017,Blanket,Home Essentials,49.99,12,599.88
+2024-01-08,P018,Cookware Set,Kitchen Appliances,199.99,6,1199.94
+2024-01-08,P019,Dinnerware Set,Kitchen Appliances,89.99,10,899.90
+2024-01-09,P020,Utensil Set,Kitchen Appliances,39.99,18,719.82
+2024-01-09,P021,Water Bottle,Kitchen Accessories,24.99,30,749.70
+2024-01-10,P022,Travel Mug,Kitchen Accessories,19.99,25,499.75
+2024-01-10,P023,Cutting Board,Kitchen Accessories,34.99,15,524.85
+2024-01-11,P024,Knife Set,Kitchen Accessories,79.99,8,639.92
+2024-01-11,P025,Food Storage,Kitchen Accessories,29.99,22,659.78
+2024-01-12,P026,Backpack,Fashion,69.99,14,979.86
+2024-01-12,P027,Handbag,Fashion,129.99,7,909.93
+2024-01-13,P028,Wallet,Fashion,49.99,18,899.82
+2024-01-13,P029,Watch,Fashion,199.99,5,999.95
+2024-01-14,P030,Sunglasses,Fashion,89.99,12,1079.88
+2024-01-14,P031,Fitness Tracker,Electronics,129.99,9,1169.91
+2024-01-15,P032,Wireless Earbuds,Electronics,79.99,20,1599.80
+2024-01-15,P033,Portable Charger,Electronics,39.99,30,1199.70
+2024-01-16,P005,Smartphone,Electronics,699.99,6,4199.94
+2024-01-16,P006,Headphones,Electronics,149.99,11,1649.89
+2024-01-17,P004,Laptop,Electronics,999.99,4,3999.96
+2024-01-17,P034,Tablet,Electronics,549.99,7,3849.93
+2024-01-18,P035,Smart Watch,Electronics,249.99,8,1999.92
+2024-01-18,P036,Game Console,Electronics,399.99,5,1999.95
+2024-01-19,P037,Video Game,Entertainment,59.99,15,899.85
+2024-01-19,P038,Board Game,Entertainment,39.99,12,479.88
+2024-01-20,P039,Yoga Mat,Fitness,29.99,18,539.82
+2024-01-20,P040,Dumbbells,Fitness,49.99,10,499.90
+2024-01-21,P041,Resistance Bands,Fitness,19.99,25,499.75
+2024-01-21,P042,Running Shoes,Footwear,89.99,8,719.92
+2024-02-01,P001,Coffee Maker,Kitchen Appliances,89.99,10,899.90
+2024-02-01,P002,Blender,Kitchen Appliances,59.99,12,719.88
+2024-02-02,P003,Toaster,Kitchen Appliances,39.99,17,679.83
+2024-02-02,P004,Laptop,Electronics,999.99,6,5999.94
+2024-02-03,P005,Smartphone,Electronics,699.99,9,6299.91
+2024-02-03,P006,Headphones,Electronics,149.99,14,2099.86
+2024-02-04,P007,Desk Chair,Furniture,199.99,5,999.95
+2024-02-04,P008,Office Desk,Furniture,299.99,4,1199.96
+2024-02-05,P009,Bookshelf,Furniture,149.99,7,1049.93
+2024-02-05,P010,Table Lamp,Home Decor,49.99,15,749.85
+2024-02-06,P011,Rug,Home Decor,129.99,6,779.94
+2024-02-06,P012,Curtains,Home Decor,79.99,10,799.90
+2024-02-07,P013,Wall Art,Home Decor,89.99,8,719.92
+2024-02-07,P014,Bath Towels,Home Essentials,29.99,22,659.78
+2024-02-08,P015,Bed Sheets,Home Essentials,59.99,18,1079.82
+2024-02-08,P016,Pillow,Home Essentials,19.99,30,599.70
+2024-02-09,P017,Blanket,Home Essentials,49.99,14,699.86
+2024-02-09,P018,Cookware Set,Kitchen Appliances,199.99,5,999.95
+2024-02-10,P019,Dinnerware Set,Kitchen Appliances,89.99,9,809.91
+2024-02-10,P020,Utensil Set,Kitchen Appliances,39.99,20,799.80
+2024-02-11,P021,Water Bottle,Kitchen Accessories,24.99,25,624.75
+2024-02-11,P022,Travel Mug,Kitchen Accessories,19.99,30,599.70
+2024-02-12,P023,Cutting Board,Kitchen Accessories,34.99,12,419.88
+2024-02-12,P024,Knife Set,Kitchen Accessories,79.99,7,559.93
+2024-02-13,P025,Food Storage,Kitchen Accessories,29.99,18,539.82
+2024-02-13,P026,Backpack,Fashion,69.99,10,699.90
+2024-02-14,P027,Handbag,Fashion,129.99,15,1949.85
+2024-02-14,P029,Watch,Fashion,199.99,8,1599.92
+2024-02-15,P028,Wallet,Fashion,49.99,22,1099.78
+2024-02-15,P030,Sunglasses,Fashion,89.99,9,809.91
+2024-02-16,P031,Fitness Tracker,Electronics,129.99,12,1559.88
+2024-02-16,P032,Wireless Earbuds,Electronics,79.99,18,1439.82
+2024-02-17,P033,Portable Charger,Electronics,39.99,25,999.75
+2024-02-17,P034,Tablet,Electronics,549.99,5,2749.95
+2024-02-18,P035,Smart Watch,Electronics,249.99,7,1749.93
+2024-02-18,P036,Game Console,Electronics,399.99,4,1599.96
+2024-02-19,P037,Video Game,Entertainment,59.99,18,1079.82
+2024-02-19,P038,Board Game,Entertainment,39.99,15,599.85
+2024-02-20,P039,Yoga Mat,Fitness,29.99,20,599.80
+2024-02-20,P040,Dumbbells,Fitness,49.99,12,599.88
+2024-02-21,P041,Resistance Bands,Fitness,19.99,30,599.70
+2024-02-21,P042,Running Shoes,Footwear,89.99,9,809.91
+2024-03-01,P001,Coffee Maker,Kitchen Appliances,89.99,9,809.91
+2024-03-01,P002,Blender,Kitchen Appliances,59.99,10,599.90
+2024-03-02,P003,Toaster,Kitchen Appliances,39.99,14,559.86
+2024-03-02,P004,Laptop,Electronics,999.99,5,4999.95
+2024-03-03,P005,Smartphone,Electronics,699.99,8,5599.92
+2024-03-03,P006,Headphones,Electronics,149.99,15,2249.85
+2024-03-04,P007,Desk Chair,Furniture,199.99,6,1199.94
+2024-03-04,P008,Office Desk,Furniture,299.99,4,1199.96
+2024-03-05,P009,Bookshelf,Furniture,149.99,9,1349.91
+2024-03-05,P010,Table Lamp,Home Decor,49.99,16,799.84
+2024-03-06,P011,Rug,Home Decor,129.99,5,649.95
+2024-03-06,P012,Curtains,Home Decor,79.99,12,959.88
+2024-03-07,P013,Wall Art,Home Decor,89.99,7,629.93
+2024-03-07,P014,Bath Towels,Home Essentials,29.99,24,719.76
+2024-03-08,P015,Bed Sheets,Home Essentials,59.99,14,839.86
+2024-03-08,P016,Pillow,Home Essentials,19.99,32,639.68
+2024-03-09,P017,Blanket,Home Essentials,49.99,11,549.89
+2024-03-09,P018,Cookware Set,Kitchen Appliances,199.99,4,799.96
+2024-03-10,P019,Dinnerware Set,Kitchen Appliances,89.99,8,719.92
+2024-03-10,P020,Utensil Set,Kitchen Appliances,39.99,22,879.78
+2024-03-11,P021,Water Bottle,Kitchen Accessories,24.99,28,699.72
+2024-03-11,P022,Travel Mug,Kitchen Accessories,19.99,35,699.65
+2024-03-12,P023,Cutting Board,Kitchen Accessories,34.99,14,489.86
+2024-03-12,P024,Knife Set,Kitchen Accessories,79.99,6,479.94
+2024-03-13,P025,Food Storage,Kitchen Accessories,29.99,20,599.80
+2024-03-13,P026,Backpack,Fashion,69.99,8,559.92
+2024-03-14,P027,Handbag,Fashion,129.99,12,1559.88
+2024-03-14,P029,Watch,Fashion,199.99,7,1399.93
+2024-03-15,P028,Wallet,Fashion,49.99,19,949.81
+2024-03-15,P030,Sunglasses,Fashion,89.99,11,989.89
+2024-03-16,P031,Fitness Tracker,Electronics,129.99,10,1299.90
+2024-03-16,P032,Wireless Earbuds,Electronics,79.99,16,1279.84
+2024-03-17,P033,Portable Charger,Electronics,39.99,28,1119.72
+2024-03-17,P034,Tablet,Electronics,549.99,6,3299.94
+2024-03-18,P035,Smart Watch,Electronics,249.99,9,2249.91
+2024-03-18,P036,Game Console,Electronics,399.99,5,1999.95
+2024-03-19,P037,Video Game,Entertainment,59.99,20,1199.80
+2024-03-19,P038,Board Game,Entertainment,39.99,18,719.82
+2024-03-20,P039,Yoga Mat,Fitness,29.99,22,659.78
+2024-03-20,P040,Dumbbells,Fitness,49.99,15,749.85
+2024-03-21,P041,Resistance Bands,Fitness,19.99,32,639.68
+2024-03-21,P042,Running Shoes,Footwear,89.99,10,899.90
+2024-04-01,P001,Coffee Maker,Kitchen Appliances,89.99,11,989.89
+2024-04-01,P002,Blender,Kitchen Appliances,59.99,13,779.87
+2024-04-02,P003,Toaster,Kitchen Appliances,39.99,18,719.82
+2024-04-02,P004,Laptop,Electronics,999.99,7,6999.93
+2024-04-03,P005,Smartphone,Electronics,699.99,9,6299.91
+2024-04-03,P006,Headphones,Electronics,149.99,17,2549.83
+2024-04-04,P007,Desk Chair,Furniture,199.99,5,999.95
+2024-04-04,P008,Office Desk,Furniture,299.99,3,899.97
+2024-04-05,P009,Bookshelf,Furniture,149.99,6,899.94
+2024-04-05,P010,Table Lamp,Home Decor,49.99,14,699.86
+2024-04-06,P011,Rug,Home Decor,129.99,4,519.96
+2024-04-06,P012,Curtains,Home Decor,79.99,9,719.91
+2024-04-07,P013,Wall Art,Home Decor,89.99,6,539.94
+2024-04-07,P014,Bath Towels,Home Essentials,29.99,21,629.79
+2024-04-08,P015,Bed Sheets,Home Essentials,59.99,16,959.84
+2024-04-08,P016,Pillow,Home Essentials,19.99,28,559.72
+2024-04-09,P017,Blanket,Home Essentials,49.99,13,649.87
+2024-04-09,P018,Cookware Set,Kitchen Appliances,199.99,5,999.95
+2024-04-10,P019,Dinnerware Set,Kitchen Appliances,89.99,11,989.89
+2024-04-10,P020,Utensil Set,Kitchen Appliances,39.99,24,959.76
+2024-04-11,P021,Water Bottle,Kitchen Accessories,24.99,32,799.68
+2024-04-11,P022,Travel Mug,Kitchen Accessories,19.99,38,759.62
+2024-04-12,P023,Cutting Board,Kitchen Accessories,34.99,17,594.83
+2024-04-12,P024,Knife Set,Kitchen Accessories,79.99,9,719.91
+2024-04-13,P025,Food Storage,Kitchen Accessories,29.99,25,749.75
+2024-04-13,P026,Backpack,Fashion,69.99,12,839.88
+2024-04-14,P027,Handbag,Fashion,129.99,10,1299.90
+2024-04-14,P029,Watch,Fashion,199.99,6,1199.94
+2024-04-15,P028,Wallet,Fashion,49.99,24,1199.76
+2024-04-15,P030,Sunglasses,Fashion,89.99,15,1349.85
+2024-04-16,P031,Fitness Tracker,Electronics,129.99,13,1689.87
+2024-04-16,P032,Wireless Earbuds,Electronics,79.99,22,1759.78
+2024-04-17,P033,Portable Charger,Electronics,39.99,33,1319.67
+2024-04-17,P034,Tablet,Electronics,549.99,8,4399.92
+2024-04-18,P035,Smart Watch,Electronics,249.99,10,2499.90
+2024-04-18,P036,Game Console,Electronics,399.99,6,2399.94
+2024-04-19,P037,Video Game,Entertainment,59.99,23,1379.77
+2024-04-19,P038,Board Game,Entertainment,39.99,19,759.81
+2024-04-20,P039,Yoga Mat,Fitness,29.99,26,779.74
+2024-04-20,P040,Dumbbells,Fitness,49.99,18,899.82
+2024-04-21,P041,Resistance Bands,Fitness,19.99,35,699.65
+2024-04-21,P042,Running Shoes,Footwear,89.99,11,989.89
+2024-05-01,P001,Coffee Maker,Kitchen Appliances,89.99,14,1259.86
+2024-05-01,P002,Blender,Kitchen Appliances,59.99,16,959.84
+2024-05-02,P003,Toaster,Kitchen Appliances,39.99,20,799.80
+2024-05-02,P004,Laptop,Electronics,999.99,8,7999.92
+2024-05-03,P005,Smartphone,Electronics,699.99,11,7699.89
+2024-05-03,P006,Headphones,Electronics,149.99,19,2849.81
+2024-05-04,P007,Desk Chair,Furniture,199.99,7,1399.93
+2024-05-04,P008,Office Desk,Furniture,299.99,5,1499.95
+2024-05-05,P009,Bookshelf,Furniture,149.99,8,1199.92
+2024-05-05,P010,Table Lamp,Home Decor,49.99,18,899.82
+2024-05-06,P011,Rug,Home Decor,129.99,7,909.93
+2024-05-06,P012,Curtains,Home Decor,79.99,14,1119.86
+2024-05-07,P013,Wall Art,Home Decor,89.99,9,809.91
+2024-05-07,P014,Bath Towels,Home Essentials,29.99,26,779.74
+2024-05-08,P015,Bed Sheets,Home Essentials,59.99,19,1139.81
+2024-05-08,P016,Pillow,Home Essentials,19.99,34,679.66
+2024-05-09,P017,Blanket,Home Essentials,49.99,15,749.85
+2024-05-09,P018,Cookware Set,Kitchen Appliances,199.99,8,1599.92
+2024-05-10,P019,Dinnerware Set,Kitchen Appliances,89.99,13,1169.87
+2024-05-10,P020,Utensil Set,Kitchen Appliances,39.99,27,1079.73
+2024-05-11,P021,Water Bottle,Kitchen Accessories,24.99,35,874.65
+2024-05-11,P022,Travel Mug,Kitchen Accessories,19.99,40,799.60
+2024-05-12,P023,Cutting Board,Kitchen Accessories,34.99,18,629.82
+2024-05-12,P024,Knife Set,Kitchen Accessories,79.99,11,879.89
+2024-05-13,P025,Food Storage,Kitchen Accessories,29.99,28,839.72
+2024-05-13,P026,Backpack,Fashion,69.99,15,1049.85
+2024-05-14,P027,Handbag,Fashion,129.99,12,1559.88
+2024-05-14,P029,Watch,Fashion,199.99,8,1599.92
+2024-05-15,P028,Wallet,Fashion,49.99,26,1299.74
+2024-05-15,P030,Sunglasses,Fashion,89.99,18,1619.82
+2024-05-16,P031,Fitness Tracker,Electronics,129.99,16,2079.84
+2024-05-16,P032,Wireless Earbuds,Electronics,79.99,25,1999.75
+2024-05-17,P033,Portable Charger,Electronics,39.99,36,1439.64
+2024-05-17,P034,Tablet,Electronics,549.99,9,4949.91
+2024-05-18,P035,Smart Watch,Electronics,249.99,12,2999.88
+2024-05-18,P036,Game Console,Electronics,399.99,7,2799.93
+2024-05-19,P037,Video Game,Entertainment,59.99,25,1499.75
+2024-05-19,P038,Board Game,Entertainment,39.99,22,879.78
+2024-05-20,P039,Yoga Mat,Fitness,29.99,30,899.70
+2024-05-20,P040,Dumbbells,Fitness,49.99,20,999.80
+2024-05-21,P041,Resistance Bands,Fitness,19.99,38,759.62
+2024-05-21,P042,Running Shoes,Footwear,89.99,14,1259.86
+2024-06-01,P001,Coffee Maker,Kitchen Appliances,89.99,12,1079.88
+2024-06-01,P002,Blender,Kitchen Appliances,59.99,14,839.86
+2024-06-02,P003,Toaster,Kitchen Appliances,39.99,19,759.81
+2024-06-02,P004,Laptop,Electronics,999.99,6,5999.94
+2024-06-03,P005,Smartphone,Electronics,699.99,10,6999.90
+2024-06-03,P006,Headphones,Electronics,149.99,16,2399.84
+2024-06-04,P007,Desk Chair,Furniture,199.99,8,1599.92
+2024-06-04,P008,Office Desk,Furniture,299.99,4,1199.96
+2024-06-05,P009,Bookshelf,Furniture,149.99,7,1049.93
+2024-06-05,P010,Table Lamp,Home Decor,49.99,17,849.83
+2024-06-06,P011,Rug,Home Decor,129.99,5,649.95
+2024-06-06,P012,Curtains,Home Decor,79.99,11,879.89
+2024-06-07,P013,Wall Art,Home Decor,89.99,8,719.92
+2024-06-07,P014,Bath Towels,Home Essentials,29.99,22,659.78
+2024-06-08,P015,Bed Sheets,Home Essentials,59.99,15,899.85
+2024-06-08,P016,Pillow,Home Essentials,19.99,30,599.70
+2024-06-09,P017,Blanket,Home Essentials,49.99,12,599.88
+2024-06-09,P018,Cookware Set,Kitchen Appliances,199.99,6,1199.94
+2024-06-10,P019,Dinnerware Set,Kitchen Appliances,89.99,10,899.90
+2024-06-10,P020,Utensil Set,Kitchen Appliances,39.99,25,999.75
+2024-06-11,P021,Water Bottle,Kitchen Accessories,24.99,33,824.67
+2024-06-11,P022,Travel Mug,Kitchen Accessories,19.99,36,719.64
+2024-06-12,P023,Cutting Board,Kitchen Accessories,34.99,16,559.84
+2024-06-12,P024,Knife Set,Kitchen Accessories,79.99,9,719.91
+2024-06-13,P025,Food Storage,Kitchen Accessories,29.99,26,779.74
+2024-06-13,P026,Backpack,Fashion,69.99,13,909.87
+2024-06-14,P027,Handbag,Fashion,129.99,11,1429.89
+2024-06-14,P029,Watch,Fashion,199.99,7,1399.93
+2024-06-15,P028,Wallet,Fashion,49.99,23,1149.77
+2024-06-15,P030,Sunglasses,Fashion,89.99,20,1799.80
+2024-06-16,P031,Fitness Tracker,Electronics,129.99,14,1819.86
+2024-06-16,P032,Wireless Earbuds,Electronics,79.99,23,1839.77
+2024-06-17,P033,Portable Charger,Electronics,39.99,34,1359.66
+2024-06-17,P034,Tablet,Electronics,549.99,7,3849.93
+2024-06-18,P035,Smart Watch,Electronics,249.99,11,2749.89
+2024-06-18,P036,Game Console,Electronics,399.99,8,3199.92
+2024-06-19,P037,Video Game,Entertainment,59.99,27,1619.73
+2024-06-19,P038,Board Game,Entertainment,39.99,24,959.76
+2024-06-20,P039,Yoga Mat,Fitness,29.99,32,959.68
+2024-06-20,P040,Dumbbells,Fitness,49.99,24,1199.76
+2024-06-21,P041,Resistance Bands,Fitness,19.99,40,799.60
+2024-06-21,P042,Running Shoes,Footwear,89.99,16,1439.84
+2024-07-01,P001,Coffee Maker,Kitchen Appliances,89.99,10,899.90
+2024-07-01,P002,Blender,Kitchen Appliances,59.99,12,719.88
+2024-07-02,P003,Toaster,Kitchen Appliances,39.99,16,639.84
+2024-07-02,P004,Laptop,Electronics,999.99,9,8999.91
+2024-07-03,P005,Smartphone,Electronics,699.99,12,8399.88
+2024-07-03,P006,Headphones,Electronics,149.99,20,2999.80
+2024-07-04,P007,Desk Chair,Furniture,199.99,9,1799.91
+2024-07-04,P008,Office Desk,Furniture,299.99,6,1799.94
+2024-07-05,P009,Bookshelf,Furniture,149.99,10,1499.90
+2024-07-05,P010,Table Lamp,Home Decor,49.99,20,999.80
+2024-07-06,P011,Rug,Home Decor,129.99,8,1039.92
+2024-07-06,P012,Curtains,Home Decor,79.99,16,1279.84
+2024-07-07,P013,Wall Art,Home Decor,89.99,11,989.89
+2024-07-07,P014,Bath Towels,Home Essentials,29.99,28,839.72
+2024-07-08,P015,Bed Sheets,Home Essentials,59.99,22,1319.78
+2024-07-08,P016,Pillow,Home Essentials,19.99,36,719.64
+2024-07-09,P017,Blanket,Home Essentials,49.99,14,699.86
+2024-07-09,P018,Cookware Set,Kitchen Appliances,199.99,9,1799.91
+2024-07-10,P019,Dinnerware Set,Kitchen Appliances,89.99,14,1259.86
+2024-07-10,P020,Utensil Set,Kitchen Appliances,39.99,30,1199.70
+2024-07-11,P021,Water Bottle,Kitchen Accessories,24.99,38,949.62
+2024-07-11,P022,Travel Mug,Kitchen Accessories,19.99,45,899.55
+2024-07-12,P023,Cutting Board,Kitchen Accessories,34.99,20,699.80
+2024-07-12,P024,Knife Set,Kitchen Accessories,79.99,12,959.88
+2024-07-13,P025,Food Storage,Kitchen Accessories,29.99,32,959.68
+2024-07-13,P026,Backpack,Fashion,69.99,18,1259.82
+2024-07-14,P027,Handbag,Fashion,129.99,14,1819.86
+2024-07-14,P029,Watch,Fashion,199.99,9,1799.91
+2024-07-15,P028,Wallet,Fashion,49.99,29,1449.71
+2024-07-15,P030,Sunglasses,Fashion,89.99,26,2339.74
+2024-07-16,P031,Fitness Tracker,Electronics,129.99,19,2469.81
+2024-07-16,P032,Wireless Earbuds,Electronics,79.99,28,2239.72
+2024-07-17,P033,Portable Charger,Electronics,39.99,42,1679.58
+2024-07-17,P034,Tablet,Electronics,549.99,10,5499.90
+2024-07-18,P035,Smart Watch,Electronics,249.99,15,3749.85
+2024-07-18,P036,Game Console,Electronics,399.99,10,3999.90
+2024-07-19,P037,Video Game,Entertainment,59.99,30,1799.70
+2024-07-19,P038,Board Game,Entertainment,39.99,28,1119.72
+2024-07-20,P039,Yoga Mat,Fitness,29.99,35,1049.65
+2024-07-20,P040,Dumbbells,Fitness,49.99,28,1399.72
+2024-07-21,P041,Resistance Bands,Fitness,19.99,45,899.55
+2024-07-21,P042,Running Shoes,Footwear,89.99,18,1619.82
+2024-08-01,P001,Coffee Maker,Kitchen Appliances,89.99,8,719.92
+2024-08-01,P002,Blender,Kitchen Appliances,59.99,10,599.90
+2024-08-02,P003,Toaster,Kitchen Appliances,39.99,14,559.86
+2024-08-02,P004,Laptop,Electronics,999.99,7,6999.93
+2024-08-03,P005,Smartphone,Electronics,699.99,11,7699.89
+2024-08-03,P006,Headphones,Electronics,149.99,18,2699.82
+2024-08-04,P007,Desk Chair,Furniture,199.99,7,1399.93
+2024-08-04,P008,Office Desk,Furniture,299.99,5,1499.95
+2024-08-05,P009,Bookshelf,Furniture,149.99,8,1199.92
+2024-08-05,P010,Table Lamp,Home Decor,49.99,16,799.84
+2024-08-06,P011,Rug,Home Decor,129.99,6,779.94
+2024-08-06,P012,Curtains,Home Decor,79.99,13,1039.87
+2024-08-07,P013,Wall Art,Home Decor,89.99,9,809.91
+2024-08-07,P014,Bath Towels,Home Essentials,29.99,24,719.76
+2024-08-08,P015,Bed Sheets,Home Essentials,59.99,18,1079.82
+2024-08-08,P016,Pillow,Home Essentials,19.99,32,639.68
+2024-08-09,P017,Blanket,Home Essentials,49.99,11,549.89
+2024-08-09,P018,Cookware Set,Kitchen Appliances,199.99,7,1399.93
+2024-08-10,P019,Dinnerware Set,Kitchen Appliances,89.99,12,1079.88
+2024-08-10,P020,Utensil Set,Kitchen Appliances,39.99,28,1119.72
+2024-08-11,P021,Water Bottle,Kitchen Accessories,24.99,34,849.66
+2024-08-11,P022,Travel Mug,Kitchen Accessories,19.99,40,799.60
+2024-08-12,P023,Cutting Board,Kitchen Accessories,34.99,18,629.82
+2024-08-12,P024,Knife Set,Kitchen Accessories,79.99,10,799.90
+2024-08-13,P025,Food Storage,Kitchen Accessories,29.99,30,899.70
+2024-08-13,P026,Backpack,Fashion,69.99,20,1399.80
+2024-08-14,P027,Handbag,Fashion,129.99,13,1689.87
+2024-08-14,P029,Watch,Fashion,199.99,8,1599.92
+2024-08-15,P028,Wallet,Fashion,49.99,27,1349.73
+2024-08-15,P030,Sunglasses,Fashion,89.99,24,2159.76
+2024-08-16,P031,Fitness Tracker,Electronics,129.99,17,2209.83
+2024-08-16,P032,Wireless Earbuds,Electronics,79.99,26,2079.74
+2024-08-17,P033,Portable Charger,Electronics,39.99,38,1519.62
+2024-08-17,P034,Tablet,Electronics,549.99,9,4949.91
+2024-08-18,P035,Smart Watch,Electronics,249.99,13,3249.87
+2024-08-18,P036,Game Console,Electronics,399.99,9,3599.91
+2024-08-19,P037,Video Game,Entertainment,59.99,28,1679.72
+2024-08-19,P038,Board Game,Entertainment,39.99,25,999.75
+2024-08-20,P039,Yoga Mat,Fitness,29.99,33,989.67
+2024-08-20,P040,Dumbbells,Fitness,49.99,26,1299.74
+2024-08-21,P041,Resistance Bands,Fitness,19.99,42,839.58
+2024-08-21,P042,Running Shoes,Footwear,89.99,15,1349.85
+2024-09-01,P001,Coffee Maker,Kitchen Appliances,89.99,15,1349.85
+2024-09-01,P002,Blender,Kitchen Appliances,59.99,18,1079.82
+2024-09-02,P003,Toaster,Kitchen Appliances,39.99,22,879.78
+2024-09-02,P004,Laptop,Electronics,999.99,10,9999.90
+2024-09-03,P005,Smartphone,Electronics,699.99,14,9799.86
+2024-09-03,P006,Headphones,Electronics,149.99,22,3299.78
+2024-09-04,P007,Desk Chair,Furniture,199.99,10,1999.90
+2024-09-04,P008,Office Desk,Furniture,299.99,7,2099.93
+2024-09-05,P009,Bookshelf,Furniture,149.99,12,1799.88
+2024-09-05,P010,Table Lamp,Home Decor,49.99,22,1099.78
+2024-09-06,P011,Rug,Home Decor,129.99,9,1169.91
+2024-09-06,P012,Curtains,Home Decor,79.99,18,1439.82
+2024-09-07,P013,Wall Art,Home Decor,89.99,12,1079.88
+2024-09-07,P014,Bath Towels,Home Essentials,29.99,30,899.70
+2024-09-08,P015,Bed Sheets,Home Essentials,59.99,24,1439.76
+2024-09-08,P016,Pillow,Home Essentials,19.99,38,759.62
+2024-09-09,P017,Blanket,Home Essentials,49.99,16,799.84
+2024-09-09,P018,Cookware Set,Kitchen Appliances,199.99,10,1999.90
+2024-09-10,P019,Dinnerware Set,Kitchen Appliances,89.99,15,1349.85
+2024-09-10,P020,Utensil Set,Kitchen Appliances,39.99,32,1279.68
+2024-09-11,P021,Water Bottle,Kitchen Accessories,24.99,40,999.60
+2024-09-11,P022,Travel Mug,Kitchen Accessories,19.99,48,959.52
+2024-09-12,P023,Cutting Board,Kitchen Accessories,34.99,22,769.78
+2024-09-12,P024,Knife Set,Kitchen Accessories,79.99,14,1119.86
+2024-09-13,P025,Food Storage,Kitchen Accessories,29.99,35,1049.65
+2024-09-13,P026,Backpack,Fashion,69.99,24,1679.76
+2024-09-14,P027,Handbag,Fashion,129.99,16,2079.84
+2024-09-14,P029,Watch,Fashion,199.99,10,1999.90
+2024-09-15,P028,Wallet,Fashion,49.99,32,1599.68
+2024-09-15,P030,Sunglasses,Fashion,89.99,18,1619.82
+2024-09-16,P031,Fitness Tracker,Electronics,129.99,20,2599.80
+2024-09-16,P032,Wireless Earbuds,Electronics,79.99,30,2399.70
+2024-09-17,P033,Portable Charger,Electronics,39.99,45,1799.55
+2024-09-17,P034,Tablet,Electronics,549.99,12,6599.88
+2024-09-18,P035,Smart Watch,Electronics,249.99,16,3999.84
+2024-09-18,P036,Game Console,Electronics,399.99,11,4399.89
+2024-09-19,P037,Video Game,Entertainment,59.99,32,1919.68
+2024-09-19,P038,Board Game,Entertainment,39.99,30,1199.70
+2024-09-20,P039,Yoga Mat,Fitness,29.99,38,1139.62
+2024-09-20,P040,Dumbbells,Fitness,49.99,30,1499.70
+2024-09-21,P041,Resistance Bands,Fitness,19.99,48,959.52
+2024-09-21,P042,Running Shoes,Footwear,89.99,20,1799.80
+2024-10-01,P001,Coffee Maker,Kitchen Appliances,89.99,13,1169.87
+2024-10-01,P002,Blender,Kitchen Appliances,59.99,15,899.85
+2024-10-02,P003,Toaster,Kitchen Appliances,39.99,19,759.81
+2024-10-02,P004,Laptop,Electronics,999.99,8,7999.92
+2024-10-03,P005,Smartphone,Electronics,699.99,13,9099.87
+2024-10-03,P006,Headphones,Electronics,149.99,21,3149.79
+2024-10-04,P007,Desk Chair,Furniture,199.99,9,1799.91
+2024-10-04,P008,Office Desk,Furniture,299.99,6,1799.94
+2024-10-05,P009,Bookshelf,Furniture,149.99,11,1649.89
+2024-10-05,P010,Table Lamp,Home Decor,49.99,20,999.80
+2024-10-06,P011,Rug,Home Decor,129.99,8,1039.92
+2024-10-06,P012,Curtains,Home Decor,79.99,17,1359.83
+2024-10-07,P013,Wall Art,Home Decor,89.99,11,989.89
+2024-10-07,P014,Bath Towels,Home Essentials,29.99,28,839.72
+2024-10-08,P015,Bed Sheets,Home Essentials,59.99,22,1319.78
+2024-10-08,P016,Pillow,Home Essentials,19.99,36,719.64
+2024-10-09,P017,Blanket,Home Essentials,49.99,18,899.82
+2024-10-09,P018,Cookware Set,Kitchen Appliances,199.99,9,1799.91
+2024-10-10,P019,Dinnerware Set,Kitchen Appliances,89.99,14,1259.86
+2024-10-10,P020,Utensil Set,Kitchen Appliances,39.99,30,1199.70
+2024-10-11,P021,Water Bottle,Kitchen Accessories,24.99,38,949.62
+2024-10-11,P022,Travel Mug,Kitchen Accessories,19.99,45,899.55
+2024-10-12,P023,Cutting Board,Kitchen Accessories,34.99,20,699.80
+2024-10-12,P024,Knife Set,Kitchen Accessories,79.99,13,1039.87
+2024-10-13,P025,Food Storage,Kitchen Accessories,29.99,32,959.68
+2024-10-13,P026,Backpack,Fashion,69.99,22,1539.78
+2024-10-14,P027,Handbag,Fashion,129.99,15,1949.85
+2024-10-14,P029,Watch,Fashion,199.99,9,1799.91
+2024-10-15,P028,Wallet,Fashion,49.99,30,1499.70
+2024-10-15,P030,Sunglasses,Fashion,89.99,12,1079.88
+2024-10-16,P031,Fitness Tracker,Electronics,129.99,18,2339.82
+2024-10-16,P032,Wireless Earbuds,Electronics,79.99,27,2159.73
+2024-10-17,P033,Portable Charger,Electronics,39.99,42,1679.58
+2024-10-17,P034,Tablet,Electronics,549.99,11,6049.89
+2024-10-18,P035,Smart Watch,Electronics,249.99,14,3499.86
+2024-10-18,P036,Game Console,Electronics,399.99,10,3999.90
+2024-10-19,P037,Video Game,Entertainment,59.99,30,1799.70
+2024-10-19,P038,Board Game,Entertainment,39.99,28,1119.72
+2024-10-20,P039,Yoga Mat,Fitness,29.99,36,1079.64
+2024-10-20,P040,Dumbbells,Fitness,49.99,28,1399.72
+2024-10-21,P041,Resistance Bands,Fitness,19.99,45,899.55
+2024-10-21,P042,Running Shoes,Footwear,89.99,18,1619.82
+2024-11-01,P001,Coffee Maker,Kitchen Appliances,89.99,16,1439.84
+2024-11-01,P002,Blender,Kitchen Appliances,59.99,20,1199.80
+2024-11-02,P003,Toaster,Kitchen Appliances,39.99,24,959.76
+2024-11-02,P004,Laptop,Electronics,999.99,12,11999.88
+2024-11-03,P005,Smartphone,Electronics,699.99,16,11199.84
+2024-11-03,P006,Headphones,Electronics,149.99,24,3599.76
+2024-11-04,P007,Desk Chair,Furniture,199.99,11,2199.89
+2024-11-04,P008,Office Desk,Furniture,299.99,8,2399.92
+2024-11-05,P009,Bookshelf,Furniture,149.99,14,2099.86
+2024-11-05,P010,Table Lamp,Home Decor,49.99,25,1249.75
+2024-11-06,P011,Rug,Home Decor,129.99,10,1299.90
+2024-11-06,P012,Curtains,Home Decor,79.99,20,1599.80
+2024-11-07,P013,Wall Art,Home Decor,89.99,14,1259.86
+2024-11-07,P014,Bath Towels,Home Essentials,29.99,32,959.68
+2024-11-08,P015,Bed Sheets,Home Essentials,59.99,26,1559.74
+2024-11-08,P016,Pillow,Home Essentials,19.99,42,839.58
+2024-11-09,P017,Blanket,Home Essentials,49.99,24,1199.76
+2024-11-09,P018,Cookware Set,Kitchen Appliances,199.99,12,2399.88
+2024-11-10,P019,Dinnerware Set,Kitchen Appliances,89.99,16,1439.84
+2024-11-10,P020,Utensil Set,Kitchen Appliances,39.99,35,1399.65
+2024-11-11,P021,Water Bottle,Kitchen Accessories,24.99,45,1124.55
+2024-11-11,P022,Travel Mug,Kitchen Accessories,19.99,52,1039.48
+2024-11-12,P023,Cutting Board,Kitchen Accessories,34.99,25,874.75
+2024-11-12,P024,Knife Set,Kitchen Accessories,79.99,16,1279.84
+2024-11-13,P025,Food Storage,Kitchen Accessories,29.99,38,1139.62
+2024-11-13,P026,Backpack,Fashion,69.99,26,1819.74
+2024-11-14,P027,Handbag,Fashion,129.99,18,2339.82
+2024-11-14,P029,Watch,Fashion,199.99,12,2399.88
+2024-11-15,P028,Wallet,Fashion,49.99,35,1749.65
+2024-11-15,P030,Sunglasses,Fashion,89.99,10,899.90
+2024-11-16,P031,Fitness Tracker,Electronics,129.99,16,2079.84
+2024-11-16,P032,Wireless Earbuds,Electronics,79.99,25,1999.75
+2024-11-17,P033,Portable Charger,Electronics,39.99,40,1599.60
+2024-11-17,P034,Tablet,Electronics,549.99,10,5499.90
+2024-11-18,P035,Smart Watch,Electronics,249.99,18,4499.82
+2024-11-18,P036,Game Console,Electronics,399.99,14,5599.86
+2024-11-19,P037,Video Game,Entertainment,59.99,35,2099.65
+2024-11-19,P038,Board Game,Entertainment,39.99,32,1279.68
+2024-11-20,P039,Yoga Mat,Fitness,29.99,30,899.70
+2024-11-20,P040,Dumbbells,Fitness,49.99,22,1099.78
+2024-11-21,P041,Resistance Bands,Fitness,19.99,48,959.52
+2024-11-21,P042,Running Shoes,Footwear,89.99,16,1439.84
+2024-12-01,P001,Coffee Maker,Kitchen Appliances,89.99,20,1799.80
+2024-12-01,P002,Blender,Kitchen Appliances,59.99,25,1499.75
+2024-12-02,P003,Toaster,Kitchen Appliances,39.99,30,1199.70
+2024-12-02,P004,Laptop,Electronics,999.99,15,14999.85
+2024-12-03,P005,Smartphone,Electronics,699.99,20,13999.80
+2024-12-03,P006,Headphones,Electronics,149.99,28,4199.72
+2024-12-04,P007,Desk Chair,Furniture,199.99,12,2399.88
+2024-12-04,P008,Office Desk,Furniture,299.99,9,2699.91
+2024-12-05,P009,Bookshelf,Furniture,149.99,16,2399.84
+2024-12-05,P010,Table Lamp,Home Decor,49.99,28,1399.72
+2024-12-06,P011,Rug,Home Decor,129.99,14,1819.86
+2024-12-06,P012,Curtains,Home Decor,79.99,24,1919.76
+2024-12-07,P013,Wall Art,Home Decor,89.99,18,1619.82
+2024-12-07,P014,Bath Towels,Home Essentials,29.99,38,1139.62
+2024-12-08,P015,Bed Sheets,Home Essentials,59.99,30,1799.70
+2024-12-08,P016,Pillow,Home Essentials,19.99,50,999.50
+2024-12-09,P017,Blanket,Home Essentials,49.99,32,1599.68
+2024-12-09,P018,Cookware Set,Kitchen Appliances,199.99,15,2999.85
+2024-12-10,P019,Dinnerware Set,Kitchen Appliances,89.99,20,1799.80
+2024-12-10,P020,Utensil Set,Kitchen Appliances,39.99,40,1599.60
+2024-12-11,P021,Water Bottle,Kitchen Accessories,24.99,48,1199.52
+2024-12-11,P022,Travel Mug,Kitchen Accessories,19.99,60,1199.40
+2024-12-12,P023,Cutting Board,Kitchen Accessories,34.99,28,979.72
+2024-12-12,P024,Knife Set,Kitchen Accessories,79.99,20,1599.80
+2024-12-13,P025,Food Storage,Kitchen Accessories,29.99,42,1259.58
+2024-12-13,P026,Backpack,Fashion,69.99,30,2099.70
+2024-12-14,P027,Handbag,Fashion,129.99,22,2859.78
+2024-12-14,P029,Watch,Fashion,199.99,15,2999.85
+2024-12-15,P028,Wallet,Fashion,49.99,40,1999.60
+2024-12-15,P030,Sunglasses,Fashion,89.99,14,1259.86
+2024-12-16,P031,Fitness Tracker,Electronics,129.99,12,1559.88
+2024-12-16,P032,Wireless Earbuds,Electronics,79.99,22,1759.78
+2024-12-17,P033,Portable Charger,Electronics,39.99,38,1519.62
+2024-12-17,P034,Tablet,Electronics,549.99,14,7699.86
+2024-12-18,P035,Smart Watch,Electronics,249.99,20,4999.80
+2024-12-18,P036,Game Console,Electronics,399.99,18,7199.82
+2024-12-19,P037,Video Game,Entertainment,59.99,45,2699.55
+2024-12-19,P038,Board Game,Entertainment,39.99,38,1519.62
+2024-12-20,P039,Yoga Mat,Fitness,29.99,25,749.75
+2024-12-20,P040,Dumbbells,Fitness,49.99,18,899.82
+2024-12-21,P041,Resistance Bands,Fitness,19.99,45,899.55
+2024-12-21,P042,Running Shoes,Footwear,89.99,14,1259.86
+2024-12-22,P001,Coffee Maker,Kitchen Appliances,89.99,22,1979.78
+2024-12-22,P002,Blender,Kitchen Appliances,59.99,28,1679.72
+2024-12-23,P003,Toaster,Kitchen Appliances,39.99,32,1279.68
+2024-12-23,P004,Laptop,Electronics,999.99,16,15999.84
+2024-12-24,P005,Smartphone,Electronics,699.99,22,15399.78
+2024-12-24,P006,Headphones,Electronics,149.99,30,4499.70
+2024-12-25,P015,Bed Sheets,Home Essentials,59.99,10,599.90
+2024-12-25,P032,Wireless Earbuds,Electronics,79.99,35,2799.65
+2024-12-26,P036,Game Console,Electronics,399.99,16,6399.84
+2024-12-26,P037,Video Game,Entertainment,59.99,48,2879.52
+2024-12-27,P001,Coffee Maker,Kitchen Appliances,89.99,15,1349.85
+2024-12-27,P006,Headphones,Electronics,149.99,20,2999.80
+2024-12-28,P028,Wallet,Fashion,49.99,32,1599.68
+2024-12-28,P030,Sunglasses,Fashion,89.99,18,1619.82
+2024-12-29,P034,Tablet,Electronics,549.99,11,6049.89
+2024-12-29,P035,Smart Watch,Electronics,249.99,15,3749.85
+2024-12-30,P038,Board Game,Entertainment,39.99,28,1119.72
+2024-12-30,P041,Resistance Bands,Fitness,19.99,35,699.65
+2024-12-31,P001,Coffee Maker,Kitchen Appliances,89.99,18,1619.82
+2024-12-31,P004,Laptop,Electronics,999.99,7,6999.93
+2024-12-31,P005,Smartphone,Electronics,699.99,12,8399.88
